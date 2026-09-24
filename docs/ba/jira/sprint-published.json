@@ -1,0 +1,419 @@
+{
+  "date": "2026-09-25",
+  "boardId": 1,
+  "boardUrl": "https://phucnguyen31work.atlassian.net/jira/software/projects/SCRUM/boards/1",
+  "status": "published-future-not-started",
+  "sprints": [
+    {
+      "number": 1,
+      "name": "FA-01 · UI/UX · Booth, tài khoản và giao ảnh",
+      "phase": "UI/UX",
+      "goal": "Duyệt luồng và xây dựng giao diện dữ liệu giả cho kích hoạt, phiên chụp offline và nhận ảnh qua QR.",
+      "existingBaIds": [],
+      "newTaskIds": [
+        "UX-01",
+        "UX-02",
+        "UX-07"
+      ],
+      "jiraName": "FA-01 UI Booth & tài khoản",
+      "id": 1,
+      "issueKeys": [
+        "SCRUM-68",
+        "SCRUM-63",
+        "SCRUM-62"
+      ]
+    },
+    {
+      "number": 2,
+      "name": "FA-02 · UI/UX · Cổng thương mại và vận hành",
+      "phase": "UI/UX",
+      "goal": "Hoàn thành 40 màn hình; duyệt trạng thái, quyền, dữ liệu và hợp đồng tích hợp để bàn giao Backend.",
+      "existingBaIds": [],
+      "newTaskIds": [
+        "UX-03",
+        "UX-04",
+        "UX-05",
+        "UX-06"
+      ],
+      "jiraName": "FA-02 UI Quản trị & dịch vụ",
+      "id": 3,
+      "issueKeys": [
+        "SCRUM-67",
+        "SCRUM-66",
+        "SCRUM-65",
+        "SCRUM-64"
+      ]
+    },
+    {
+      "number": 3,
+      "name": "FA-03 · Backend · Tài khoản và cách ly dữ liệu",
+      "phase": "Backend",
+      "goal": "Tích hợp đăng nhập, tổ chức, phân quyền và audit để dữ liệu chỉ được truy cập đúng phạm vi.",
+      "existingBaIds": [
+        "CUS-01",
+        "CUS-02",
+        "CUS-17",
+        "OPS-08",
+        "SVC-10"
+      ],
+      "newTaskIds": [],
+      "jiraName": "FA-03 BE Tài khoản & quyền",
+      "id": 4,
+      "issueKeys": [
+        "SCRUM-61",
+        "SCRUM-49",
+        "SCRUM-40",
+        "SCRUM-25",
+        "SCRUM-24"
+      ]
+    },
+    {
+      "number": 4,
+      "name": "FA-04 · Backend · Giấy phép, thanh toán và kích hoạt",
+      "phase": "Backend",
+      "goal": "Cấp đúng quyền thuê/vĩnh viễn; đối soát thanh toán và kích hoạt booth không trùng seat.",
+      "existingBaIds": [
+        "BTH-01",
+        "CUS-06",
+        "CUS-07",
+        "CUS-08",
+        "CUS-09",
+        "CUS-10",
+        "CUS-11",
+        "OPS-02",
+        "OPS-03",
+        "OPS-07",
+        "SVC-01",
+        "SVC-02",
+        "SVC-03"
+      ],
+      "newTaskIds": [],
+      "jiraName": "FA-04 BE Billing & kích hoạt",
+      "id": 5,
+      "issueKeys": [
+        "SCRUM-48",
+        "SCRUM-44",
+        "SCRUM-43",
+        "SCRUM-34",
+        "SCRUM-33",
+        "SCRUM-32",
+        "SCRUM-31",
+        "SCRUM-30",
+        "SCRUM-54",
+        "SCRUM-53",
+        "SCRUM-29",
+        "SCRUM-12",
+        "SCRUM-52"
+      ]
+    },
+    {
+      "number": 5,
+      "name": "FA-05 · Backend · Phiên chụp và thiết bị tại booth",
+      "phase": "Backend",
+      "goal": "Hoàn thành nhận tiền, chụp, xử lý, in offline và phục hồi phiên; không tự in lại khi kết quả chưa xác định.",
+      "existingBaIds": [
+        "BTH-02",
+        "BTH-03",
+        "BTH-04",
+        "BTH-05",
+        "BTH-06",
+        "BTH-07",
+        "BTH-08",
+        "BTH-09",
+        "BTH-10",
+        "BTH-12",
+        "SVC-09"
+      ],
+      "newTaskIds": [],
+      "jiraName": "FA-05 BE Phiên chụp offline",
+      "id": 6,
+      "issueKeys": [
+        "SCRUM-23",
+        "SCRUM-21",
+        "SCRUM-20",
+        "SCRUM-19",
+        "SCRUM-18",
+        "SCRUM-17",
+        "SCRUM-16",
+        "SCRUM-15",
+        "SCRUM-14",
+        "SCRUM-13",
+        "SCRUM-60"
+      ]
+    },
+    {
+      "number": 6,
+      "name": "FA-06 · Backend · AI, công thức màu và nội dung",
+      "phase": "Backend",
+      "goal": "Tạo, duyệt và đồng bộ công thức màu/khung có phiên bản; ghi nhận usage dịch vụ AI.",
+      "existingBaIds": [
+        "CUS-12",
+        "CUS-13",
+        "CUS-14",
+        "CUS-15",
+        "SVC-05",
+        "SVC-08"
+      ],
+      "newTaskIds": [],
+      "jiraName": "FA-06 BE AI & nội dung",
+      "id": 7,
+      "issueKeys": [
+        "SCRUM-59",
+        "SCRUM-56",
+        "SCRUM-38",
+        "SCRUM-37",
+        "SCRUM-36",
+        "SCRUM-35"
+      ]
+    },
+    {
+      "number": 7,
+      "name": "FA-07 · Backend · Giao ảnh qua QR",
+      "phase": "Backend",
+      "goal": "Xếp hàng upload khi offline và giao đúng ảnh cho người có quyền; xử lý link hết hạn hoặc bị thu hồi.",
+      "existingBaIds": [
+        "BTH-11",
+        "DL-01",
+        "DL-02",
+        "SVC-07"
+      ],
+      "newTaskIds": [],
+      "jiraName": "FA-07 BE Giao ảnh QR",
+      "id": 8,
+      "issueKeys": [
+        "SCRUM-58",
+        "SCRUM-51",
+        "SCRUM-50",
+        "SCRUM-22"
+      ]
+    },
+    {
+      "number": 8,
+      "name": "FA-08 · Backend · Giám sát fleet và hỗ trợ",
+      "phase": "Backend",
+      "goal": "Máy chủ nắm trạng thái booth, phiên chụp và lệnh từ xa; phân biệt dữ liệu cũ và kết quả chưa xác định.",
+      "existingBaIds": [
+        "CUS-03",
+        "CUS-04",
+        "CUS-05",
+        "CUS-16",
+        "CUS-18",
+        "OPS-01",
+        "OPS-06",
+        "SVC-04"
+      ],
+      "newTaskIds": [],
+      "jiraName": "FA-08 BE Giám sát fleet",
+      "id": 9,
+      "issueKeys": [
+        "SCRUM-55",
+        "SCRUM-47",
+        "SCRUM-42",
+        "SCRUM-41",
+        "SCRUM-39",
+        "SCRUM-28",
+        "SCRUM-27",
+        "SCRUM-26"
+      ]
+    },
+    {
+      "number": 9,
+      "name": "FA-09 · Backend · Phân phối phiên bản và cập nhật",
+      "phase": "Backend",
+      "goal": "Tích hợp release, rollout theo nhóm và rollback tương thích; không gián đoạn phiên trả tiền.",
+      "existingBaIds": [
+        "OPS-04",
+        "OPS-05",
+        "SVC-06"
+      ],
+      "newTaskIds": [],
+      "jiraName": "FA-09 BE Cập nhật booth",
+      "id": 10,
+      "issueKeys": [
+        "SCRUM-57",
+        "SCRUM-46",
+        "SCRUM-45"
+      ]
+    },
+    {
+      "number": 10,
+      "name": "FA-10 · Test, CI/CD · Hồi quy và chất lượng",
+      "phase": "Test, CI/CD",
+      "goal": "Kiểm chứng luồng khách hàng, tiền/quyền, offline, cách ly dữ liệu và pipeline build/test có bằng chứng.",
+      "existingBaIds": [],
+      "newTaskIds": [
+        "QA-01",
+        "QA-02",
+        "QA-04",
+        "QA-05",
+        "QA-07",
+        "CICD-01"
+      ],
+      "jiraName": "FA-10 QA Hồi quy & CI",
+      "id": 11,
+      "issueKeys": [
+        "SCRUM-76",
+        "SCRUM-75",
+        "SCRUM-73",
+        "SCRUM-72",
+        "SCRUM-70",
+        "SCRUM-69"
+      ]
+    },
+    {
+      "number": 11,
+      "name": "FA-11 · Test, CI/CD · Fleet và phát hành thử nghiệm",
+      "phase": "Test, CI/CD",
+      "goal": "Kiểm chứng giám sát nhiều booth, tải mục tiêu, cập nhật, phục hồi và phát hành có kiểm soát trước pilot.",
+      "existingBaIds": [],
+      "newTaskIds": [
+        "QA-03",
+        "QA-06",
+        "CICD-02"
+      ],
+      "jiraName": "FA-11 QA Rollout & CD",
+      "id": 12,
+      "issueKeys": [
+        "SCRUM-77",
+        "SCRUM-74",
+        "SCRUM-71"
+      ]
+    }
+  ],
+  "newTasks": [
+    {
+      "planId": "UX-01",
+      "key": "SCRUM-62",
+      "id": "10062",
+      "parentKey": "SCRUM-5",
+      "sprintNumber": 1,
+      "url": "https://phucnguyen31work.atlassian.net/browse/SCRUM-62"
+    },
+    {
+      "planId": "UX-02",
+      "key": "SCRUM-63",
+      "id": "10063",
+      "parentKey": "SCRUM-6",
+      "sprintNumber": 1,
+      "url": "https://phucnguyen31work.atlassian.net/browse/SCRUM-63"
+    },
+    {
+      "planId": "UX-03",
+      "key": "SCRUM-64",
+      "id": "10064",
+      "parentKey": "SCRUM-7",
+      "sprintNumber": 2,
+      "url": "https://phucnguyen31work.atlassian.net/browse/SCRUM-64"
+    },
+    {
+      "planId": "UX-04",
+      "key": "SCRUM-65",
+      "id": "10065",
+      "parentKey": "SCRUM-8",
+      "sprintNumber": 2,
+      "url": "https://phucnguyen31work.atlassian.net/browse/SCRUM-65"
+    },
+    {
+      "planId": "UX-05",
+      "key": "SCRUM-66",
+      "id": "10066",
+      "parentKey": "SCRUM-9",
+      "sprintNumber": 2,
+      "url": "https://phucnguyen31work.atlassian.net/browse/SCRUM-66"
+    },
+    {
+      "planId": "UX-06",
+      "key": "SCRUM-67",
+      "id": "10067",
+      "parentKey": "SCRUM-10",
+      "sprintNumber": 2,
+      "url": "https://phucnguyen31work.atlassian.net/browse/SCRUM-67"
+    },
+    {
+      "planId": "UX-07",
+      "key": "SCRUM-68",
+      "id": "10068",
+      "parentKey": "SCRUM-11",
+      "sprintNumber": 1,
+      "url": "https://phucnguyen31work.atlassian.net/browse/SCRUM-68"
+    },
+    {
+      "planId": "QA-01",
+      "key": "SCRUM-69",
+      "id": "10069",
+      "parentKey": "SCRUM-5",
+      "sprintNumber": 10,
+      "url": "https://phucnguyen31work.atlassian.net/browse/SCRUM-69"
+    },
+    {
+      "planId": "QA-02",
+      "key": "SCRUM-70",
+      "id": "10070",
+      "parentKey": "SCRUM-6",
+      "sprintNumber": 10,
+      "url": "https://phucnguyen31work.atlassian.net/browse/SCRUM-70"
+    },
+    {
+      "planId": "QA-03",
+      "key": "SCRUM-71",
+      "id": "10071",
+      "parentKey": "SCRUM-7",
+      "sprintNumber": 11,
+      "url": "https://phucnguyen31work.atlassian.net/browse/SCRUM-71"
+    },
+    {
+      "planId": "QA-04",
+      "key": "SCRUM-72",
+      "id": "10072",
+      "parentKey": "SCRUM-8",
+      "sprintNumber": 10,
+      "url": "https://phucnguyen31work.atlassian.net/browse/SCRUM-72"
+    },
+    {
+      "planId": "QA-05",
+      "key": "SCRUM-73",
+      "id": "10073",
+      "parentKey": "SCRUM-9",
+      "sprintNumber": 10,
+      "url": "https://phucnguyen31work.atlassian.net/browse/SCRUM-73"
+    },
+    {
+      "planId": "QA-06",
+      "key": "SCRUM-74",
+      "id": "10074",
+      "parentKey": "SCRUM-10",
+      "sprintNumber": 11,
+      "url": "https://phucnguyen31work.atlassian.net/browse/SCRUM-74"
+    },
+    {
+      "planId": "QA-07",
+      "key": "SCRUM-75",
+      "id": "10075",
+      "parentKey": "SCRUM-11",
+      "sprintNumber": 10,
+      "url": "https://phucnguyen31work.atlassian.net/browse/SCRUM-75"
+    },
+    {
+      "planId": "CICD-01",
+      "key": "SCRUM-76",
+      "id": "10076",
+      "parentKey": "SCRUM-10",
+      "sprintNumber": 10,
+      "url": "https://phucnguyen31work.atlassian.net/browse/SCRUM-76"
+    },
+    {
+      "planId": "CICD-02",
+      "key": "SCRUM-77",
+      "id": "10077",
+      "parentKey": "SCRUM-10",
+      "sprintNumber": 11,
+      "url": "https://phucnguyen31work.atlassian.net/browse/SCRUM-77"
+    }
+  ],
+  "verification": {
+    "sprintCount": 11,
+    "issueAssignments": 66,
+    "newTasksReadBack": 16,
+    "epicsUpdated": 7
+  }
+}

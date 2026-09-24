@@ -1,0 +1,29 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Local logs
+*.log
+
+# .NET and local tooling
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+.tools/
+artifacts/
+TestResults/
+
+# Local booth data and vendor SDKs
+.local/
+*.db
+*.db-shm
+*.db-wal
+vendor/

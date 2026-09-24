@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="src/FotoAutomat.Core/FotoAutomat.Core.csproj" />
+  <Project Path="src/FotoAutomat.Infrastructure/FotoAutomat.Infrastructure.csproj" />
+  <Project Path="tests/FotoAutomat.Tests/FotoAutomat.Tests.csproj" />
+  <Project Path="tools/FotoAutomat.Harness/FotoAutomat.Harness.csproj" />
+</Solution>

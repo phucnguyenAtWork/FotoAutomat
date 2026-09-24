@@ -1,0 +1,577 @@
+{
+  "projectKey": "SCRUM",
+  "site": "https://phucnguyen31work.atlassian.net",
+  "status": "published",
+  "items": [
+    {
+      "id": "EP-01",
+      "type": "Epic",
+      "parent": null,
+      "title": "Vận hành phiên chụp tại booth khi mất mạng",
+      "description": "Mục tiêu: Đảm bảo khách thanh toán, chụp, xử lý và in tại booth; bảo toàn phiên khi thiết bị hoặc kết nối gặp lỗi.\n\nPhạm vi BA draft. Chính sách chưa chốt cần được duyệt trước triển khai thương mại.\n\nNguồn: docs/ba/README.md",
+      "path": "docs/ba/README.md",
+      "jiraKey": "SCRUM-5",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-5"
+    },
+    {
+      "id": "EP-02",
+      "type": "Epic",
+      "parent": null,
+      "title": "Quản lý tài khoản và kích hoạt thiết bị theo tổ chức",
+      "description": "Mục tiêu: Phân tách khách hàng thương mại, đăng ký booth đúng chủ sở hữu và kiểm soát quyền truy cập.\n\nPhạm vi BA draft. Chính sách chưa chốt cần được duyệt trước triển khai thương mại.\n\nNguồn: docs/ba/README.md",
+      "path": "docs/ba/README.md",
+      "jiraKey": "SCRUM-6",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-6"
+    },
+    {
+      "id": "EP-03",
+      "type": "Epic",
+      "parent": null,
+      "title": "Giám sát booth và xử lý sự cố từ xa",
+      "description": "Mục tiêu: Theo dõi trạng thái, phiên bản thực tế và lịch sử thao tác của từng booth với dữ liệu có thời điểm xác minh.\n\nPhạm vi BA draft. Chính sách chưa chốt cần được duyệt trước triển khai thương mại.\n\nNguồn: docs/ba/README.md",
+      "path": "docs/ba/README.md",
+      "jiraKey": "SCRUM-7",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-7"
+    },
+    {
+      "id": "EP-04",
+      "type": "Epic",
+      "parent": null,
+      "title": "Kinh doanh bản quyền và dịch vụ trả phí",
+      "description": "Mục tiêu: Hỗ trợ thuê, mua vĩnh viễn và dịch vụ bổ sung; đối soát thanh toán và quyền sử dụng rõ ràng.\n\nPhạm vi BA draft. Chính sách chưa chốt cần được duyệt trước triển khai thương mại.\n\nNguồn: docs/ba/README.md",
+      "path": "docs/ba/README.md",
+      "jiraKey": "SCRUM-8",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-8"
+    },
+    {
+      "id": "EP-05",
+      "type": "Epic",
+      "parent": null,
+      "title": "Tạo và phân phối công thức màu, khung ảnh",
+      "description": "Mục tiêu: Cho phép tạo màu bằng AI, tinh chỉnh và phát hành nội dung tương thích tới đúng booth.\n\nPhạm vi BA draft. Chính sách chưa chốt cần được duyệt trước triển khai thương mại.\n\nNguồn: docs/ba/README.md",
+      "path": "docs/ba/README.md",
+      "jiraKey": "SCRUM-9",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-9"
+    },
+    {
+      "id": "EP-06",
+      "type": "Epic",
+      "parent": null,
+      "title": "Phân phối và cập nhật phần mềm booth có kiểm soát",
+      "description": "Mục tiêu: Quản lý bộ cài, phiên bản, rollout và khôi phục mà không gián đoạn phiên đã trả tiền.\n\nPhạm vi BA draft. Chính sách chưa chốt cần được duyệt trước triển khai thương mại.\n\nNguồn: docs/ba/README.md",
+      "path": "docs/ba/README.md",
+      "jiraKey": "SCRUM-10",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-10"
+    },
+    {
+      "id": "EP-07",
+      "type": "Epic",
+      "parent": null,
+      "title": "Giao ảnh qua QR và bảo vệ quyền truy cập",
+      "description": "Mục tiêu: Cung cấp file đúng phiên, hiển thị tình trạng giao file và giới hạn truy cập theo chính sách.\n\nPhạm vi BA draft. Chính sách chưa chốt cần được duyệt trước triển khai thương mại.\n\nNguồn: docs/ba/README.md",
+      "path": "docs/ba/README.md",
+      "jiraKey": "SCRUM-11",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-11"
+    },
+    {
+      "id": "BTH-01",
+      "type": "Story",
+      "parent": "EP-02",
+      "title": "Kích hoạt booth để gắn thiết bị với giấy phép",
+      "description": "**Mục tiêu:** Gắn bản cài Windows với đúng tổ chức và một quyền sử dụng còn khả dụng.\n\n**Phạm vi:**\n* Xác minh mã: Hiển thị đúng tổ chức, sản phẩm và khả năng cấp seat.\n* Kích hoạt: Ràng buộc thiết bị; tải quyền đã ký; mở BTH-02.\n\n**Nghiệm thu:**\n* Given mã hợp lệ và còn seat; When xác nhận kích hoạt; Then portal thấy một booth mới cùng Device ID và booth chuyển sang cấu hình.\n* Given máy chủ đã cấp thiết bị nhưng phản hồi bị mất; When gửi lại request ID; Then không tạo booth hoặc chiếm seat lần hai.\n* Given máy chưa kích hoạt và mất mạng; When mở ứng dụng; Then UI không cho vào luồng nhận tiền.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-02, D-03.\n**Phụ thuộc:** SVC-01, SVC-02.\n**BA:** docs/ba/screens/bth-01.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/bth-01.md",
+      "jiraKey": "SCRUM-12",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-12"
+    },
+    {
+      "id": "BTH-02",
+      "type": "Story",
+      "parent": "EP-01",
+      "title": "Kiểm tra thiết bị để xác nhận booth sẵn sàng phục vụ",
+      "description": "**Mục tiêu:** Chọn camera, máy in, bộ nhận tiền và xác minh khả năng phục vụ trước khi mở bán.\n\n**Phạm vi:**\n* Chụp thử / in thử: Tạo ảnh/test job riêng, không tính là doanh thu.\n* Mở booth: Chuyển sang BTH-03.\n\n**Nghiệm thu:**\n* Given camera không sẵn sàng; When chọn mở booth; Then UI giải thích điều kiện bị thiếu và không cho nhận tiền.\n* Given có phiên trả tiền đang chạy; When đổi queue máy in; Then thao tác bị chặn đến khi kết thúc hoặc xử lý phiên.\n* Given test in đã gửi nhưng chưa rõ kết quả; When mở lại trang; Then trạng thái giữ là cần kiểm tra, không tự gửi lại.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-07, D-08, D-11.\n**Phụ thuộc:** SVC-09.\n**BA:** docs/ba/screens/bth-02.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/bth-02.md",
+      "jiraKey": "SCRUM-13",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-13"
+    },
+    {
+      "id": "BTH-03",
+      "type": "Story",
+      "parent": "EP-01",
+      "title": "Hiển thị màn hình chào để bắt đầu phiên chụp",
+      "description": "**Mục tiêu:** Cho khách biết booth có thể phục vụ và bắt đầu một phiên mới.\n\n**Phạm vi:**\n* Bắt đầu chụp: Tạo phiên mới và mở BTH-04.\n* Hỗ trợ: Hiện cách liên hệ phù hợp tại booth.\n\n**Nghiệm thu:**\n* Given phiên trước đã kết thúc; When màn hình chào xuất hiện; Then không hiển thị ảnh hay token của phiên trước.\n* Given mất mạng nhưng các điều kiện local hợp lệ; When khách bắt đầu; Then vẫn vào chọn gói.\n* Given máy in không thể phục vụ; When khách nhìn màn hình chào; Then nút bắt đầu bị vô hiệu hóa và có hướng dẫn.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-03, D-06, D-10.\n**Phụ thuộc:** SVC-02, SVC-09.\n**BA:** docs/ba/screens/bth-03.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/bth-03.md",
+      "jiraKey": "SCRUM-14",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-14"
+    },
+    {
+      "id": "BTH-04",
+      "type": "Story",
+      "parent": "EP-01",
+      "title": "Cho chọn gói và màu để xác nhận sản phẩm trước thanh toán",
+      "description": "**Mục tiêu:** Chọn sản phẩm, số bản in và công thức màu trước khi xác nhận giá phiên.\n\n**Phạm vi:**\n* Chọn gói/màu: Cập nhật tóm tắt và số tiền.\n* Tiếp tục thanh toán: Chốt snapshot giá và nội dung cho phiên, mở BTH-05.\n\n**Nghiệm thu:**\n* Given recipe mới chưa tải xong; When mở danh sách; Then recipe đó không được chọn cho phiên.\n* Given giá cấu hình thay đổi sau khi đã sang thanh toán; When nhận tiền; Then phiên vẫn dùng snapshot giá đã xác nhận.\n* Given chưa chọn gói; When bấm tiếp tục; Then UI chỉ rõ lựa chọn còn thiếu.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-04, D-08, D-09.\n**Phụ thuộc:** SVC-05, SVC-09.\n**BA:** docs/ba/screens/bth-04.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/bth-04.md",
+      "jiraKey": "SCRUM-15",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-15"
+    },
+    {
+      "id": "BTH-05",
+      "type": "Story",
+      "parent": "EP-01",
+      "title": "Ghi nhận tiền tại booth để mở phiên chụp hợp lệ",
+      "description": "**Mục tiêu:** Nhận tiền cho phiên chụp và cho khách biết chính xác số tiền đã nhận/còn thiếu.\n\n**Phạm vi:**\n* Nhận tiền: Ghi nhận tiền và cập nhật số còn thiếu.\n* Yêu cầu hỗ trợ: Giữ bằng chứng; gọi hướng xử lý thay vì hứa hoàn tiền tự động.\n\n**Nghiệm thu:**\n* Given cùng sự kiện nhận tiền được giao lại; When xử lý; Then credit chỉ tăng một lần theo cơ chế định danh đã kiểm chứng.\n* Given đủ tiền đã được ghi bền vững; When UI được mở lại; Then khách không phải trả lại từ đầu.\n* Given khả năng trả lại tiền chưa được cấu hình; When hiển thị thanh toán; Then không có lời hứa trả lại tự động.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-04, D-07.\n**Phụ thuộc:** SVC-09.\n**BA:** docs/ba/screens/bth-05.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/bth-05.md",
+      "jiraKey": "SCRUM-16",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-16"
+    },
+    {
+      "id": "BTH-06",
+      "type": "Story",
+      "parent": "EP-01",
+      "title": "Điều khiển live view và chụp để lưu đủ ảnh của phiên",
+      "description": "**Mục tiêu:** Giúp khách chuẩn bị tư thế và chụp đủ ảnh theo gói đã thanh toán.\n\n**Phạm vi:**\n* Sẵn sàng chụp: Đếm ngược và trigger một lần.\n* Chụp lại: Tạo lần chụp mới có theo dõi, không xóa bằng chứng cũ âm thầm.\n\n**Nghiệm thu:**\n* Given khách chạm nút hai lần; When bước chụp đang thực hiện; Then chỉ có một lệnh capture cho bước đó.\n* Given camera đã ngắt; When mở live view; Then có trạng thái mất kết nối thay vì hình cũ được gắn nhãn live.\n* Given chưa nhận được file hợp lệ; When camera báo đã trigger; Then UI không tính ảnh đó là đã lưu thành công.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-07, D-08, D-11.\n**Phụ thuộc:** SVC-09.\n**BA:** docs/ba/screens/bth-06.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/bth-06.md",
+      "jiraKey": "SCRUM-17",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-17"
+    },
+    {
+      "id": "BTH-07",
+      "type": "Story",
+      "parent": "EP-01",
+      "title": "Cho chọn ảnh để xác định nội dung bản in",
+      "description": "**Mục tiêu:** Chọn các ảnh dùng cho sản phẩm theo giới hạn của gói.\n\n**Phạm vi:**\n* Chọn/bỏ chọn: Cập nhật đánh dấu rõ ràng.\n* Tiếp tục: Mở BTH-08 với các ảnh đã chọn.\n\n**Nghiệm thu:**\n* Given chọn chưa đủ số ảnh; When bấm tiếp tục; Then UI nêu số còn thiếu và giữ lựa chọn.\n* Given quay lại từ làm đẹp; When danh sách mở; Then lựa chọn trước đó được giữ.\n* Given ảnh thuộc phiên khác; When truy vấn danh sách; Then ảnh đó không xuất hiện.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-08, D-10.\n**Phụ thuộc:** SVC-09.\n**BA:** docs/ba/screens/bth-07.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/bth-07.md",
+      "jiraKey": "SCRUM-18",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-18"
+    },
+    {
+      "id": "BTH-08",
+      "type": "Story",
+      "parent": "EP-01",
+      "title": "Cho chỉnh làm đẹp để khách duyệt ảnh sau chụp",
+      "description": "**Mục tiêu:** Điều chỉnh mức làm đẹp và xem trước kết quả mà không mất ảnh gốc.\n\n**Phạm vi:**\n* Điều chỉnh: Tạo yêu cầu preview giới hạn tài nguyên.\n* Tiếp tục: Lưu thông số và sang BTH-09.\n\n**Nghiệm thu:**\n* Given khách đổi slider trong khi job cũ chạy; When job cũ trả kết quả sau; Then nó không ghi đè preview revision mới.\n* Given mất mạng; When chọn mức làm đẹp; Then pipeline được hỗ trợ vẫn chạy tại booth.\n* Given đặt lại; When xác nhận; Then original không đổi và thông số beauty trở về mức đã định nghĩa.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-08, D-09, D-11.\n**Phụ thuộc:** SVC-08, SVC-09.\n**BA:** docs/ba/screens/bth-08.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/bth-08.md",
+      "jiraKey": "SCRUM-19",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-19"
+    },
+    {
+      "id": "BTH-09",
+      "type": "Story",
+      "parent": "EP-01",
+      "title": "Cho chọn khung và xác nhận để gửi đúng bản in",
+      "description": "**Mục tiêu:** Xem chính xác bố cục, crop và số bản trước thao tác in khó đảo ngược.\n\n**Phạm vi:**\n* Chọn khung: Tạo preview đúng bố cục.\n* Xác nhận in: Ghi ý định in một lần, mở BTH-10.\n\n**Nghiệm thu:**\n* Given xác nhận in bị chạm hai lần; When UI xử lý; Then chỉ tạo một print intent.\n* Given ảnh xuất chưa render xong; When xem CTA; Then nút xác nhận chưa được bật.\n* Given khung sai khổ giấy; When mở danh sách; Then khung không được chọn như một lựa chọn hợp lệ.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-08, D-09.\n**Phụ thuộc:** SVC-05, SVC-09.\n**BA:** docs/ba/screens/bth-09.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/bth-09.md",
+      "jiraKey": "SCRUM-20",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-20"
+    },
+    {
+      "id": "BTH-10",
+      "type": "Story",
+      "parent": "EP-01",
+      "title": "Theo dõi kết quả in để xử lý lỗi và tránh in trùng",
+      "description": "**Mục tiêu:** Cho khách biết đang xử lý, đã gửi hay đã xác nhận in xong; hỗ trợ khi không rõ kết quả.\n\n**Phạm vi:**\n* Nhận file: Mở BTH-11 và vẫn giữ trạng thái in thật.\n* Gọi hỗ trợ: Hiện mã phiên; đưa incident vào BTH-12.\n\n**Nghiệm thu:**\n* Given chỉ có xác nhận từ spooler; When cập nhật màn hình; Then không gắn nhãn giấy đã in xong.\n* Given restart sau khi gửi lệnh; When phục hồi; Then job giữ trạng thái cần kiểm tra và không được submit lại tự động.\n* Given Internet mất nhưng printer vẫn hoạt động; When in; Then luồng in không phụ thuộc cloud.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-08.\n**Phụ thuộc:** SVC-09.\n**BA:** docs/ba/screens/bth-10.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/bth-10.md",
+      "jiraKey": "SCRUM-21",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-21"
+    },
+    {
+      "id": "BTH-11",
+      "type": "Story",
+      "parent": "EP-07",
+      "title": "Hiển thị QR để giao file và kết thúc phiên an toàn",
+      "description": "**Mục tiêu:** Nhận file đúng phiên và kết thúc mà không để lộ ảnh cho khách kế tiếp.\n\n**Phạm vi:**\n* Hiện QR: Gắn nhãn đúng trạng thái.\n* Kết thúc: Xóa nội dung khách khỏi màn hình và mở BTH-03.\n\n**Nghiệm thu:**\n* Given chưa upload xong; When mở màn hình; Then không hiện nhãn tải ngay cho một link chưa có file.\n* Given bấm kết thúc; When khách mới tới; Then ảnh và QR phiên trước không còn trên UI.\n* Given link đã sẵn sàng; When quét; Then chỉ truy cập bộ ảnh đúng phiên theo quyền token.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-06, D-10.\n**Phụ thuộc:** SVC-07.\n**BA:** docs/ba/screens/bth-11.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/bth-11.md",
+      "jiraKey": "SCRUM-22",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-22"
+    },
+    {
+      "id": "BTH-12",
+      "type": "Story",
+      "parent": "EP-01",
+      "title": "Đối soát phiên gián đoạn để khôi phục phục vụ tại booth",
+      "description": "**Mục tiêu:** Kiểm tra sức khỏe booth và xử lý phiên tiền/in không rõ kết quả ngay tại máy.\n\n**Phạm vi:**\n* Ghi nhận kết quả: Tạo quyết định đối soát có audit.\n* In lại có kiểm soát: Tạo job mới liên kết job cũ, không sửa job cũ thành chưa in.\n* Mở bán lại: Về BTH-03.\n\n**Nghiệm thu:**\n* Given không có quyền operator; When mở trang; Then không thấy điều khiển tiền/in lại.\n* Given operator xác nhận in lại được phép; When thực hiện; Then tạo job mới có tham chiếu job cũ và lý do.\n* Given mất mạng; When xem phiên gián đoạn; Then bằng chứng local vẫn đọc được và audit chưa sync được ghi rõ.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-04, D-05, D-08.\n**Phụ thuộc:** SVC-09, SVC-10.\n**BA:** docs/ba/screens/bth-12.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/bth-12.md",
+      "jiraKey": "SCRUM-23",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-23"
+    },
+    {
+      "id": "CUS-01",
+      "type": "Story",
+      "parent": "EP-02",
+      "title": "Xác thực người dùng để truy cập đúng tổ chức",
+      "description": "**Mục tiêu:** Vào cổng dịch vụ với đúng tài khoản và tổ chức.\n\n**Phạm vi:**\n* Đăng nhập: Vào chọn tổ chức hoặc onboarding.\n* Khôi phục: Thông báo trung tính, không tiết lộ tài khoản tồn tại.\n\n**Nghiệm thu:**\n* Given thành viên thuộc hai tổ chức; When đăng nhập; Then chỉ thấy hai tổ chức đã được cấp.\n* Given lời mời hết hạn; When chấp nhận; Then không tạo membership mới.\n* Given tài khoản tenant A; When yêu cầu dữ liệu tenant B; Then server từ chối.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-05.\n**Phụ thuộc:** SVC-10.\n**BA:** docs/ba/screens/cus-01.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-01.md",
+      "jiraKey": "SCRUM-24",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-24"
+    },
+    {
+      "id": "CUS-02",
+      "type": "Story",
+      "parent": "EP-02",
+      "title": "Thiết lập tổ chức để quản lý hoạt động thương mại",
+      "description": "**Mục tiêu:** Tạo hồ sơ đơn vị mua/thuê phần mềm trước khi đăng ký booth hoặc dịch vụ.\n\n**Phạm vi:**\n* Tạo tổ chức: Cấp owner ban đầu, ghi audit.\n* Tiếp tục: Mở CUS-07 hoặc CUS-03.\n\n**Nghiệm thu:**\n* Given request tạo tổ chức bị gửi lại; When xử lý cùng request ID; Then chỉ một tổ chức được tạo.\n* Given chưa chọn múi giờ; When lưu; Then form chỉ rõ trường cần hoàn thành.\n* Given thành viên thường; When sửa hồ sơ billing; Then phải có quyền tương ứng.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-05, D-12.\n**Phụ thuộc:** SVC-10.\n**BA:** docs/ba/screens/cus-02.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-02.md",
+      "jiraKey": "SCRUM-25",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-25"
+    },
+    {
+      "id": "CUS-03",
+      "type": "Story",
+      "parent": "EP-03",
+      "title": "Tổng hợp tình trạng tài khoản để nhận biết việc cần xử lý",
+      "description": "**Mục tiêu:** Nhìn nhanh booth, giấy phép, dịch vụ và vấn đề cần xử lý của tổ chức.\n\n**Phạm vi:**\n* Xem booth lỗi: Mở danh sách đã lọc.\n* Thêm booth: Mở tải/kích hoạt hoặc mua quyền nếu thiếu.\n\n**Nghiệm thu:**\n* Given booth mất mạng; When mở dashboard; Then hiện lần liên lạc cuối và trạng thái chưa cập nhật.\n* Given chưa có booth; When vào dashboard; Then thấy hướng dẫn kích hoạt.\n* Given bộ đếm truy vấn lỗi; When render; Then không thay lỗi bằng số 0.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-14.\n**Phụ thuộc:** SVC-04, SVC-10.\n**BA:** docs/ba/screens/cus-03.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-03.md",
+      "jiraKey": "SCRUM-26",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-26"
+    },
+    {
+      "id": "CUS-04",
+      "type": "Story",
+      "parent": "EP-03",
+      "title": "Liệt kê và lọc booth để quản lý theo tổ chức",
+      "description": "**Mục tiêu:** Tìm, nhóm và so sánh các booth thuộc tổ chức.\n\n**Phạm vi:**\n* Lọc/tìm: Chỉ lọc trên tenant được phép.\n* Thêm booth: Mở CUS-06.\n\n**Nghiệm thu:**\n* Given tenant có nhiều booth; When sang trang tiếp; Then dữ liệu được phân trang ổn định.\n* Given bộ lọc không khớp; When hiển thị; Then có nút xóa lọc.\n* Given người dùng tenant A; When sửa query ID tenant B; Then không nhận danh sách B.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-05, D-14.\n**Phụ thuộc:** SVC-04, SVC-10.\n**BA:** docs/ba/screens/cus-04.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-04.md",
+      "jiraKey": "SCRUM-27",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-27"
+    },
+    {
+      "id": "CUS-05",
+      "type": "Story",
+      "parent": "EP-03",
+      "title": "Hiển thị chi tiết booth để theo dõi và yêu cầu tác vụ từ xa",
+      "description": "**Mục tiêu:** Xem cấu hình thực tế và yêu cầu thao tác từ xa có theo dõi kết quả.\n\n**Phạm vi:**\n* Yêu cầu đồng bộ: Tạo command ID có hạn.\n* Đặt lịch cập nhật: Tạo kế hoạch; không báo đã cài ngay.\n* Thu hồi/chuyển booth: Yêu cầu xác nhận tác động trước thực hiện.\n\n**Nghiệm thu:**\n* Given booth offline; When gửi yêu cầu sync; Then UI hiện queued, không succeeded.\n* Given có phiên trả tiền; When đến lịch update; Then booth hoãn đến thời điểm an toàn.\n* Given command đã quá hạn; When booth kết nối lại; Then không chạy lệnh đó.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-02, D-13, D-14.\n**Phụ thuộc:** SVC-04, SVC-05, SVC-06.\n**BA:** docs/ba/screens/cus-05.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-05.md",
+      "jiraKey": "SCRUM-28",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-28"
+    },
+    {
+      "id": "CUS-06",
+      "type": "Story",
+      "parent": "EP-02",
+      "title": "Cung cấp bộ cài và mã kích hoạt để triển khai booth mới",
+      "description": "**Mục tiêu:** Tải đúng bộ cài và cấp quyền cài đặt có thể theo dõi.\n\n**Phạm vi:**\n* Tải bộ cài: Tải artifact đúng phiên bản.\n* Tạo mã: Cấp code có thời hạn.\n* Thu hồi mã chưa dùng: Không ảnh hưởng máy đã kích hoạt ngoài chính sách.\n\n**Nghiệm thu:**\n* Given hết seat; When tạo mã dùng để thêm booth; Then hệ thống từ chối hoặc theo chính sách giữ chỗ đã duyệt, không cấp vượt.\n* Given release bị thu hồi; When tải; Then không lấy được bộ cài qua link mới.\n* Given mã dùng thành công; When xem portal; Then thấy Device ID và thời điểm sử dụng.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-01, D-02, D-13.\n**Phụ thuộc:** SVC-01, SVC-02, SVC-06.\n**BA:** docs/ba/screens/cus-06.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-06.md",
+      "jiraKey": "SCRUM-29",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-29"
+    },
+    {
+      "id": "CUS-07",
+      "type": "Story",
+      "parent": "EP-04",
+      "title": "So sánh gói sản phẩm để khách chọn đúng quyền sử dụng",
+      "description": "**Mục tiêu:** Hiểu chính xác sản phẩm mua một lần và dịch vụ có phí định kỳ trước khi đặt hàng.\n\n**Phạm vi:**\n* Chọn gói: Tạo lựa chọn checkout.\n* So sánh quyền: Hiện khác biệt thuê/vĩnh viễn/cloud rõ ràng.\n\n**Nghiệm thu:**\n* Given gói vĩnh viễn chỉ gồm desktop; When xem so sánh; Then cloud và cập nhật trả phí được ghi riêng.\n* Given quote hết hiệu lực; When tiến hành mua; Then phải xác nhận giá mới.\n* Given không có giá sản phẩm hợp lệ; When bấm mua; Then không tạo giao dịch số tiền mặc định.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-01, D-12.\n**Phụ thuộc:** SVC-02, SVC-03.\n**BA:** docs/ba/screens/cus-07.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-07.md",
+      "jiraKey": "SCRUM-30",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-30"
+    },
+    {
+      "id": "CUS-08",
+      "type": "Story",
+      "parent": "EP-04",
+      "title": "Thanh toán dịch vụ để cấp quyền theo đơn hàng",
+      "description": "**Mục tiêu:** Thanh toán phí phần mềm và dịch vụ với kết quả có thể đối soát.\n\n**Phạm vi:**\n* Thanh toán: Tạo một order với idempotency key.\n* Kiểm tra trạng thái: Đọc server, không tạo giao dịch mới.\n\n**Nghiệm thu:**\n* Given browser trả về success nhưng server chưa xác minh; When render; Then trạng thái vẫn chờ xác nhận.\n* Given callback thành công gửi hai lần; When xử lý; Then chỉ một entitlement/order effect được áp dụng.\n* Given đã trả tiền nhưng cấp quyền chưa xong; When mở lại; Then thấy cùng order và trạng thái xử lý, không checkout lại.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-01, D-12.\n**Phụ thuộc:** SVC-02, SVC-03.\n**BA:** docs/ba/screens/cus-08.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-08.md",
+      "jiraKey": "SCRUM-31",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-31"
+    },
+    {
+      "id": "CUS-09",
+      "type": "Story",
+      "parent": "EP-04",
+      "title": "Quản lý giấy phép để theo dõi seat, thời hạn và gia hạn",
+      "description": "**Mục tiêu:** Quản lý quyền desktop, seat, thời hạn thuê và quyền cập nhật một cách tách bạch.\n\n**Phạm vi:**\n* Gia hạn/đổi gói: Review quote và hiệu lực trước xác nhận.\n* Hủy gia hạn: Hiện ngày tác động và dịch vụ bị ảnh hưởng.\n* Chuyển seat: Theo dõi thiết bị cũ/mới và xác nhận.\n\n**Nghiệm thu:**\n* Given license vĩnh viễn và cloud đã hết hạn; When hiển thị; Then hai quyền có trạng thái riêng.\n* Given hủy gia hạn cuối kỳ; When xác nhận; Then UI nêu ngày hiệu lực và không mô tả là hủy ngay nếu policy không phải vậy.\n* Given server đã gia hạn nhưng booth offline; When xem seat; Then hiện chờ booth nhận quyền mới.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-01, D-02, D-03, D-12.\n**Phụ thuộc:** SVC-01, SVC-02, SVC-03.\n**BA:** docs/ba/screens/cus-09.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-09.md",
+      "jiraKey": "SCRUM-32",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-32"
+    },
+    {
+      "id": "CUS-10",
+      "type": "Story",
+      "parent": "EP-04",
+      "title": "Hiển thị usage và quota để kiểm soát chi phí dịch vụ",
+      "description": "**Mục tiêu:** Theo dõi AI, lưu trữ/giao file và các dịch vụ đã mua, biết giới hạn trước khi phát sinh phí.\n\n**Phạm vi:**\n* Mua thêm: Sang checkout có đơn vị và giá rõ.\n* Xem chi tiết usage: Liệt kê sự kiện/trạng thái không lộ dữ liệu người khác.\n\n**Nghiệm thu:**\n* Given usage event bị replay; When cộng mức sử dụng; Then không bị tính hai lần.\n* Given không đồng ý overage; When chạm giới hạn; Then không tự tạo phí vượt mức.\n* Given AI job đang chạy; When xem quota; Then phân biệt reserved với đã tiêu thụ nếu mô hình này được chọn.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-01, D-09, D-12.\n**Phụ thuộc:** SVC-03, SVC-08.\n**BA:** docs/ba/screens/cus-10.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-10.md",
+      "jiraKey": "SCRUM-33",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-33"
+    },
+    {
+      "id": "CUS-11",
+      "type": "Story",
+      "parent": "EP-04",
+      "title": "Tra cứu giao dịch để đối soát phí và tải chứng từ",
+      "description": "**Mục tiêu:** Tra cứu lịch sử phí trả cho FotoAutomat và chứng từ tương ứng.\n\n**Phạm vi:**\n* Tải chứng từ: Trả file được bảo vệ.\n* Hỗ trợ giao dịch: Tạo yêu cầu gắn đúng order ID.\n\n**Nghiệm thu:**\n* Given order thuộc tenant khác; When truy cập URL; Then không thể tải chứng từ.\n* Given refund mới yêu cầu; When xem trạng thái; Then không hiển thị đã hoàn tiền.\n* Given chứng từ chưa tạo; When mở order; Then UI hiển thị đúng trạng thái chờ.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-12.\n**Phụ thuộc:** SVC-03, SVC-10.\n**BA:** docs/ba/screens/cus-11.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-11.md",
+      "jiraKey": "SCRUM-34",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-34"
+    },
+    {
+      "id": "CUS-12",
+      "type": "Story",
+      "parent": "EP-05",
+      "title": "Quản lý thư viện màu để tái sử dụng phiên bản đã duyệt",
+      "description": "**Mục tiêu:** Quản lý bản nháp, bản đã duyệt và phiên bản màu đang dùng tại booth.\n\n**Phạm vi:**\n* Tạo từ tham khảo: Mở CUS-13.\n* Phát hành: Mở CUS-15.\n\n**Nghiệm thu:**\n* Given recipe version đang phục vụ; When chỉnh sửa; Then tạo bản mới và không đổi version đang dùng.\n* Given booth chưa báo áp dụng; When xem recipe; Then không tính booth đó là đã dùng bản mới.\n* Given không có quyền publish; When thao tác; Then không thể phát hành qua UI/API.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-05, D-09.\n**Phụ thuộc:** SVC-05, SVC-08.\n**BA:** docs/ba/screens/cus-12.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-12.md",
+      "jiraKey": "SCRUM-35",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-35"
+    },
+    {
+      "id": "CUS-13",
+      "type": "Story",
+      "parent": "EP-05",
+      "title": "Tạo và tinh chỉnh màu bằng AI để xuất công thức cho booth",
+      "description": "**Mục tiêu:** Tạo gợi ý màu từ ảnh tham khảo, thử trên ảnh mẫu và duyệt công thức có thể chạy tại booth.\n\n**Phạm vi:**\n* Tạo gợi ý AI: Tạo một job có định danh.\n* Lưu nháp: Lưu version và provenance.\n* Sẵn sàng phát hành: Đánh dấu duyệt, không tự đẩy xuống booth.\n\n**Nghiệm thu:**\n* Given bấm tạo AI lặp do timeout; When gửi cùng job request; Then không phát sinh job tính phí trùng.\n* Given recipe chứa thành phần renderer local không hỗ trợ; When duyệt; Then bị chặn và nêu thành phần lỗi.\n* Given lưu nháp; When chưa publish; Then các booth đang phục vụ không đổi màu.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-09, D-10, D-11.\n**Phụ thuộc:** SVC-08, SVC-05.\n**BA:** docs/ba/screens/cus-13.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-13.md",
+      "jiraKey": "SCRUM-36",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-36"
+    },
+    {
+      "id": "CUS-14",
+      "type": "Story",
+      "parent": "EP-05",
+      "title": "Thiết kế khung ảnh để tạo bố cục in tương thích",
+      "description": "**Mục tiêu:** Tạo bố cục in tương thích khổ giấy và số ảnh.\n\n**Phạm vi:**\n* Tạo/chỉnh khung: Lưu bản nháp.\n* Duyệt: Tạo version có thể chọn ở publish.\n\n**Nghiệm thu:**\n* Given template vượt vùng in được hỗ trợ; When duyệt; Then bị chặn với lỗi cụ thể.\n* Given sửa một khung đã publish; When lưu; Then tạo revision mới.\n* Given thiếu artwork đã tham chiếu; When phát hành; Then gói nội dung không được đánh dấu hoàn chỉnh.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-08, D-09.\n**Phụ thuộc:** SVC-05.\n**BA:** docs/ba/screens/cus-14.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-14.md",
+      "jiraKey": "SCRUM-37",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-37"
+    },
+    {
+      "id": "CUS-15",
+      "type": "Story",
+      "parent": "EP-05",
+      "title": "Phát hành nội dung để đồng bộ đúng phiên bản tới booth",
+      "description": "**Mục tiêu:** Đưa bảng giá, màu và khung đã duyệt đến đúng nhóm booth và biết máy nào đã áp dụng.\n\n**Phạm vi:**\n* Phát hành: Tạo deployment có ID.\n* Dừng phân phối tiếp: Không giả định thu hồi những gì đã áp dụng.\n* Quay về version trước: Tạo deployment mới có audit.\n\n**Nghiệm thu:**\n* Given booth đang phục vụ; When bundle mới tải xong; Then đợi điểm chuyển an toàn trước áp dụng.\n* Given tải thiếu asset; When kiểm tra bundle; Then bản cũ vẫn active.\n* Given hai booth offline; When publish thành công ở server; Then hai booth đó vẫn hiển thị pending.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-09, D-13.\n**Phụ thuộc:** SVC-05, SVC-04.\n**BA:** docs/ba/screens/cus-15.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-15.md",
+      "jiraKey": "SCRUM-38",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-38"
+    },
+    {
+      "id": "CUS-16",
+      "type": "Story",
+      "parent": "EP-03",
+      "title": "Tra cứu phiên chụp để theo dõi doanh thu và giao file",
+      "description": "**Mục tiêu:** Theo dõi hoạt động kinh doanh của booth và trạng thái fulfillment mà không nhầm với phí trả FotoAutomat.\n\n**Phạm vi:**\n* Xem chi tiết: Hiện timeline và trạng thái đối soát.\n* Xuất báo cáo: Phạm vi đúng tenant/khoảng thời gian; dữ liệu nhạy cảm theo policy.\n\n**Nghiệm thu:**\n* Given cùng session được sync hai lần; When lập báo cáo; Then không cộng doanh thu hai lần.\n* Given booth chưa đồng bộ hết kỳ; When xem tổng; Then hiển thị cảnh báo dữ liệu chưa đầy đủ.\n* Given role chỉ xem báo cáo; When yêu cầu file ảnh; Then bị từ chối nếu không có quyền riêng.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-04, D-10, D-14.\n**Phụ thuộc:** SVC-04, SVC-07, SVC-09.\n**BA:** docs/ba/screens/cus-16.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-16.md",
+      "jiraKey": "SCRUM-39",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-39"
+    },
+    {
+      "id": "CUS-17",
+      "type": "Story",
+      "parent": "EP-02",
+      "title": "Phân quyền thành viên để giới hạn truy cập theo vai trò",
+      "description": "**Mục tiêu:** Cấp quyền đúng người cho booth, nội dung và billing.\n\n**Phạm vi:**\n* Mời thành viên: Gửi lời mời theo quy trình được duyệt.\n* Đổi/thu hồi quyền: Xác nhận tác động, áp dụng ở server.\n\n**Nghiệm thu:**\n* Given operator không có quyền billing; When gọi API đổi thuê bao; Then bị từ chối.\n* Given chỉ còn một owner; When thu hồi owner đó; Then yêu cầu chuyển quyền trước.\n* Given quyền bị thu hồi; When phiên web cũ thao tác nhạy cảm; Then server kiểm tra lại và từ chối.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-05.\n**Phụ thuộc:** SVC-10.\n**BA:** docs/ba/screens/cus-17.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-17.md",
+      "jiraKey": "SCRUM-40",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-40"
+    },
+    {
+      "id": "CUS-18",
+      "type": "Story",
+      "parent": "EP-03",
+      "title": "Theo dõi yêu cầu hỗ trợ để xử lý sự cố có căn cứ",
+      "description": "**Mục tiêu:** Gửi và theo dõi yêu cầu liên quan booth, phiên hoặc giao dịch dịch vụ.\n\n**Phạm vi:**\n* Gửi yêu cầu: Tạo request ID duy nhất.\n* Gửi diagnostic: Upload dữ liệu đã lọc theo policy.\n\n**Nghiệm thu:**\n* Given cùng request được gửi lại; When retry; Then không tạo yêu cầu trùng ngoài ý muốn.\n* Given diagnostic chứa dữ liệu cấm theo policy; When upload; Then bị loại/chặn và thông báo.\n* Given ticket đã tạo; When support xem; Then quyền tài nguyên vẫn được kiểm tra riêng.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-05, D-10, D-12.\n**Phụ thuộc:** SVC-04, SVC-10.\n**BA:** docs/ba/screens/cus-18.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/cus-18.md",
+      "jiraKey": "SCRUM-41",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-41"
+    },
+    {
+      "id": "OPS-01",
+      "type": "Story",
+      "parent": "EP-03",
+      "title": "Giám sát fleet để phát hiện booth mất liên lạc hoặc lỗi",
+      "description": "**Mục tiêu:** Theo dõi độ phủ phiên bản, sức khỏe và các booth mất liên lạc trên toàn hệ thống.\n\n**Phạm vi:**\n* Mở booth: Hiện chi tiết với nhãn tenant rõ.\n* Lọc phiên bản lỗi: Tạo tập xem, chưa gửi lệnh hàng loạt.\n\n**Nghiệm thu:**\n* Given chỉ có tài khoản khách hàng; When mở Ops; Then không được xem fleet toàn hệ thống.\n* Given rollout target đã đặt nhưng máy chưa báo version; When tính coverage; Then máy chưa được tính là đã nâng cấp.\n* Given heartbeat quá ngưỡng; When hiển thị; Then có last seen và nhãn mất liên lạc.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-05, D-14.\n**Phụ thuộc:** SVC-04, SVC-10.\n**BA:** docs/ba/screens/ops-01.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/ops-01.md",
+      "jiraKey": "SCRUM-42",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-42"
+    },
+    {
+      "id": "OPS-02",
+      "type": "Story",
+      "parent": "EP-04",
+      "title": "Tổng hợp hồ sơ khách hàng để hỗ trợ đúng tổ chức",
+      "description": "**Mục tiêu:** Xem quan hệ giữa tổ chức, người quản trị, booth và sản phẩm đã mua.\n\n**Phạm vi:**\n* Xem quyền/booth: Đi đến tài nguyên đúng tenant.\n* Đề xuất thay đổi hồ sơ: Ghi audit và không sửa chứng từ đã phát hành.\n\n**Nghiệm thu:**\n* Given hai tổ chức cùng tên; When chọn hồ sơ; Then mã tenant được hiển thị để phân biệt.\n* Given nhân viên support không có quyền billing; When thao tác giao dịch; Then bị từ chối.\n* Given license và payment lệch trạng thái; When mở hồ sơ; Then hiện cần đối soát thay tự cấp/thu hồi.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-01, D-05, D-12.\n**Phụ thuộc:** SVC-01, SVC-02, SVC-10.\n**BA:** docs/ba/screens/ops-02.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/ops-02.md",
+      "jiraKey": "SCRUM-43",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-43"
+    },
+    {
+      "id": "OPS-03",
+      "type": "Story",
+      "parent": "EP-04",
+      "title": "Điều chỉnh quyền sử dụng để thực thi chính sách thương mại",
+      "description": "**Mục tiêu:** Cấp, điều chỉnh hoặc thu hồi quyền theo quyết định thương mại có thể truy vết.\n\n**Phạm vi:**\n* Cấp/gia hạn/thu hồi: Review tác động rồi tạo thay đổi có audit.\n* Ngoại lệ offline: Quyền có phạm vi/thời hạn xác định, không hardcode vĩnh viễn.\n\n**Nghiệm thu:**\n* Given staff không có quyền thu hồi; When gửi lệnh; Then bị từ chối và không đổi entitlement.\n* Given ngoại lệ được cấp; When xem audit; Then có actor, reason, hiệu lực và giá trị trước/sau.\n* Given booth chưa nhận thay đổi; When xem kết quả; Then không hiện đã áp dụng tại thiết bị.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-01, D-02, D-03, D-05.\n**Phụ thuộc:** SVC-02, SVC-10.\n**BA:** docs/ba/screens/ops-03.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/ops-03.md",
+      "jiraKey": "SCRUM-44",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-44"
+    },
+    {
+      "id": "OPS-04",
+      "type": "Story",
+      "parent": "EP-06",
+      "title": "Quản lý release để phân phối bộ cài đã được kiểm chứng",
+      "description": "**Mục tiêu:** Đăng ký bản phần mềm hợp lệ và điều kiện phân phối trước khi triển khai.\n\n**Phạm vi:**\n* Đăng ký release: Upload/đăng ký artifact chưa phát hành.\n* Cho phép rollout: Release vào danh sách chọn của OPS-05.\n* Thu hồi phân phối: Chặn cấp mới; không tự gỡ app đang chạy.\n\n**Nghiệm thu:**\n* Given chữ ký không hợp lệ; When yêu cầu phát hành; Then release không đủ điều kiện.\n* Given một version đã đăng ký; When thay artifact; Then phải tạo release mới hoặc bị từ chối.\n* Given schema không hỗ trợ downgrade; When xem release; Then UI không hứa rollback tự động.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-11, D-13.\n**Phụ thuộc:** SVC-06, SVC-10.\n**BA:** docs/ba/screens/ops-04.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/ops-04.md",
+      "jiraKey": "SCRUM-45",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-45"
+    },
+    {
+      "id": "OPS-05",
+      "type": "Story",
+      "parent": "EP-06",
+      "title": "Triển khai cập nhật theo đợt để hạn chế ảnh hưởng toàn fleet",
+      "description": "**Mục tiêu:** Cập nhật nhiều booth theo nhóm và dừng khi có dấu hiệu lỗi.\n\n**Phạm vi:**\n* Khởi chạy: Tạo rollout có ID và cohort.\n* Tạm dừng: Dừng cấp lệnh tiếp theo; không cắt cài đặt đang ở bước nguy hiểm.\n* Rollback: Review rồi tạo rollout riêng.\n\n**Nghiệm thu:**\n* Given booth đang có phiên trả tiền; When nhận update; Then hoãn cài đến điểm an toàn.\n* Given cohort chưa đạt health gate; When mở rộng; Then bị chặn theo policy.\n* Given rollback không tương thích schema; When yêu cầu; Then hệ thống từ chối tự động hạ bản.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-03, D-13, D-14.\n**Phụ thuộc:** SVC-04, SVC-06.\n**BA:** docs/ba/screens/ops-05.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/ops-05.md",
+      "jiraKey": "SCRUM-46",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-46"
+    },
+    {
+      "id": "OPS-06",
+      "type": "Story",
+      "parent": "EP-03",
+      "title": "Đối soát lệnh từ xa để xử lý kết quả chưa xác định",
+      "description": "**Mục tiêu:** Đối soát yêu cầu và trạng thái thực thi ở booth, xử lý sự cố không rõ kết quả.\n\n**Phạm vi:**\n* Tạo lệnh cho phép: Review tác động; cấp ID mới.\n* Đóng sự cố: Ghi audit, không sửa nguyên bản sự kiện.\n* Thử lại: Không retry mù lệnh có tác dụng tiền/in.\n\n**Nghiệm thu:**\n* Given command hết TTL; When booth nhận muộn; Then từ chối thực thi.\n* Given ack kết quả in mất; When support mở incident; Then không có tự động reprint.\n* Given tạo command; When xem audit; Then có actor, tenant, target, lý do và correlation ID.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-05, D-13.\n**Phụ thuộc:** SVC-04, SVC-09, SVC-10.\n**BA:** docs/ba/screens/ops-06.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/ops-06.md",
+      "jiraKey": "SCRUM-47",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-47"
+    },
+    {
+      "id": "OPS-07",
+      "type": "Story",
+      "parent": "EP-04",
+      "title": "Đối soát billing và usage để tránh ghi phí sai",
+      "description": "**Mục tiêu:** Giải quyết lệch trạng thái giữa thanh toán, quyền sử dụng và usage của khách hàng.\n\n**Phạm vi:**\n* Đối soát order: Tra cứu provider và hệ thống nội bộ.\n* Điều chỉnh/hoàn: Tạo giao dịch điều chỉnh, chờ xác nhận kết quả.\n\n**Nghiệm thu:**\n* Given webhook thanh toán lặp; When đối soát; Then không tạo doanh thu dịch vụ trùng.\n* Given điều chỉnh đã gửi nhưng timeout; When thao tác lại; Then dùng cùng định danh để không hoàn hai lần.\n* Given staff support thường; When yêu cầu refund; Then bị từ chối.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-01, D-09, D-12.\n**Phụ thuộc:** SVC-03, SVC-08, SVC-10.\n**BA:** docs/ba/screens/ops-07.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/ops-07.md",
+      "jiraKey": "SCRUM-48",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-48"
+    },
+    {
+      "id": "OPS-08",
+      "type": "Story",
+      "parent": "EP-02",
+      "title": "Tra cứu audit để truy vết thay đổi trên hệ thống",
+      "description": "**Mục tiêu:** Truy vết ai đã thay đổi quyền, nội dung, thiết bị hoặc phiên bản và trong phạm vi nào.\n\n**Phạm vi:**\n* Lọc/xem: Chỉ phạm vi được phép.\n* Xuất: Bản xuất có phạm vi rõ và được ghi audit.\n\n**Nghiệm thu:**\n* Given đổi license; When xem audit; Then thấy actor, lý do, đối tượng và thay đổi trước/sau.\n* Given booth sync sự kiện muộn; When hiển thị; Then phân biệt thời gian tại booth và thời gian nhận.\n* Given token nhạy cảm trong nguồn; When ghi audit; Then không lộ token nguyên văn.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-05, D-10.\n**Phụ thuộc:** SVC-10.\n**BA:** docs/ba/screens/ops-08.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/ops-08.md",
+      "jiraKey": "SCRUM-49",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-49"
+    },
+    {
+      "id": "DL-01",
+      "type": "Story",
+      "parent": "EP-07",
+      "title": "Xác minh QR để thông báo tình trạng bộ ảnh",
+      "description": "**Mục tiêu:** Biết bộ ảnh đã sẵn sàng, đang chờ hay không còn truy cập được.\n\n**Phạm vi:**\n* Mở bộ ảnh: Mở DL-02.\n* Kiểm tra lại: Đọc trạng thái có giới hạn tần suất.\n\n**Nghiệm thu:**\n* Given token hợp lệ nhưng file pending; When mở link; Then thấy trạng thái chờ và không được tải file chưa có.\n* Given token hết hạn; When yêu cầu file trực tiếp; Then cũng bị từ chối.\n* Given sửa session ID trong URL; When truy cập; Then không xem được ảnh phiên khác.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-06, D-10.\n**Phụ thuộc:** SVC-07.\n**BA:** docs/ba/screens/dl-01.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/dl-01.md",
+      "jiraKey": "SCRUM-50",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-50"
+    },
+    {
+      "id": "DL-02",
+      "type": "Story",
+      "parent": "EP-07",
+      "title": "Cung cấp gallery để khách tải đúng file được cấp quyền",
+      "description": "**Mục tiêu:** Tải đúng ảnh được cấp quyền bằng UI phù hợp điện thoại.\n\n**Phạm vi:**\n* Tải file: Cấp truy cập đúng file.\n* Tải tất cả: Không tạo archive không giới hạn gây quá tải.\n\n**Nghiệm thu:**\n* Given token chỉ cho session A; When yêu cầu file B; Then server từ chối.\n* Given một file chưa sẵn sàng; When mở gallery; Then không gắn nhãn mọi file đã tải được.\n* Given truy cập trên màn hình điện thoại; When chọn tải; Then CTA không bị che và tên/định dạng file rõ.\n\n**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.\n\n**Cần chốt:** D-06, D-10.\n**Phụ thuộc:** SVC-07.\n**BA:** docs/ba/screens/dl-02.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/screens/dl-02.md",
+      "jiraKey": "SCRUM-51",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-51"
+    },
+    {
+      "id": "SVC-01",
+      "type": "Task",
+      "parent": "EP-02",
+      "title": "Đăng ký thiết bị để ràng buộc booth với tổ chức và seat",
+      "description": "**Mục tiêu/phạm vi:** Cấp danh tính thiết bị và mã kích hoạt có thời hạn. Xử lý request lặp, chuyển/thu hồi seat và đối soát trạng thái đăng ký.\n\n**Nghiệm thu:**\n* Kích hoạt lặp cùng request không tạo thêm booth hoặc chiếm thêm seat.\n* Thiết bị không thể tự đổi tenant bằng dữ liệu phía client.\n* Chuyển seat giữ lịch sử thiết bị cũ và tuân thủ policy đã duyệt.\n\n**Cần chốt:** D-02, D-05.\n**BA:** docs/ba/services/svc-01.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/services/svc-01.md",
+      "jiraKey": "SCRUM-52",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-52"
+    },
+    {
+      "id": "SVC-02",
+      "type": "Task",
+      "parent": "EP-04",
+      "title": "Quản lý quyền sử dụng để hỗ trợ thuê, vĩnh viễn và offline",
+      "description": "**Mục tiêu/phạm vi:** Tách entitlement desktop, seat, cập nhật và dịch vụ cloud. Phát hành quyền local có thể xác minh và xử lý gia hạn/thu hồi theo policy.\n\n**Nghiệm thu:**\n* Hết hạn cloud không tự hủy quyền desktop vĩnh viễn ngoài điều khoản đã duyệt.\n* Phiên đã trả tiền được xử lý theo chính sách gián đoạn đã thống nhất.\n* Quy tắc offline, thay đổi đồng hồ và thời hạn xác minh có kịch bản kiểm thử.\n\n**Cần chốt:** D-01, D-02, D-03.\n**BA:** docs/ba/services/svc-02.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/services/svc-02.md",
+      "jiraKey": "SCRUM-53",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-53"
+    },
+    {
+      "id": "SVC-03",
+      "type": "Task",
+      "parent": "EP-04",
+      "title": "Đối soát thanh toán để cấp quyền và ghi phí chính xác",
+      "description": "**Mục tiêu/phạm vi:** Xử lý quote, order, provider events, chứng từ và điều chỉnh. Liên kết billing với entitlement và metering bằng định danh ổn định.\n\n**Nghiệm thu:**\n* Callback lặp hoặc đến sai thứ tự không cấp quyền/ghi phí trùng.\n* Redirect phía browser không tự chuyển đơn thành đã thanh toán.\n* Thu tiền thành công nhưng cấp quyền lỗi có trạng thái và quy trình phục hồi.\n\n**Cần chốt:** D-01, D-12.\n**BA:** docs/ba/services/svc-03.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/services/svc-03.md",
+      "jiraKey": "SCRUM-54",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-54"
+    },
+    {
+      "id": "SVC-04",
+      "type": "Task",
+      "parent": "EP-03",
+      "title": "Theo dõi heartbeat và lệnh để biết trạng thái thực của booth",
+      "description": "**Mục tiêu/phạm vi:** Nhận telemetry theo device identity; lưu thời gian xảy ra và thời gian nhận. Quản lý command ID, thời hạn, acknowledgement và kết quả.\n\n**Nghiệm thu:**\n* Mọi trạng thái sức khỏe đều có lần quan sát gần nhất.\n* Queued, received và succeeded là các trạng thái khác nhau.\n* Lệnh hết hạn không được thực thi muộn; retry không tạo side effect trùng.\n\n**Cần chốt:** D-05, D-13, D-14.\n**BA:** docs/ba/services/svc-04.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/services/svc-04.md",
+      "jiraKey": "SCRUM-55",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-55"
+    },
+    {
+      "id": "SVC-05",
+      "type": "Task",
+      "parent": "EP-05",
+      "title": "Đồng bộ nội dung có phiên bản để booth dùng dữ liệu nhất quán",
+      "description": "**Mục tiêu/phạm vi:** Tạo manifest cho recipe, frame và bảng giá; xác minh tài nguyên trước áp dụng. Theo dõi desired/reported và giữ phiên bản cũ khi tải thất bại.\n\n**Nghiệm thu:**\n* Thiếu asset hoặc checksum sai không thay active bundle.\n* Phiên đang chạy giữ snapshot nội dung và giá.\n* Booth offline không bị báo đã áp dụng bundle mới.\n\n**Cần chốt:** D-09, D-13.\n**BA:** docs/ba/services/svc-05.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/services/svc-05.md",
+      "jiraKey": "SCRUM-56",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-56"
+    },
+    {
+      "id": "SVC-06",
+      "type": "Task",
+      "parent": "EP-06",
+      "title": "Cập nhật booth an toàn để triển khai phiên bản trên toàn fleet",
+      "description": "**Mục tiêu/phạm vi:** Xác minh gói phần mềm và metadata tương thích. Thực thi khi idle, theo dõi health và khôi phục trong phạm vi schema cho phép.\n\n**Nghiệm thu:**\n* Gói không hợp lệ không được cài.\n* Không restart giữa phiên đã trả tiền.\n* Rollback bị chặn khi phiên bản cũ không đọc được dữ liệu hiện tại.\n\n**Cần chốt:** D-03, D-11, D-13.\n**BA:** docs/ba/services/svc-06.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/services/svc-06.md",
+      "jiraKey": "SCRUM-57",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-57"
+    },
+    {
+      "id": "SVC-07",
+      "type": "Task",
+      "parent": "EP-07",
+      "title": "Xếp hàng giao file để tiếp tục phục vụ khi mất mạng",
+      "description": "**Mục tiêu/phạm vi:** Lưu công việc upload bền vững, retry có kiểm soát và cấp quyền download. Áp dụng retention, thu hồi link và kiểm tra quyền trên từng file.\n\n**Nghiệm thu:**\n* Restart không làm mất công việc upload chưa hoàn tất.\n* Chỉ báo file sẵn sàng sau khi publish thành công.\n* Token không cho tải ảnh tenant hoặc phiên khác; hết hạn được kiểm tra phía server.\n\n**Cần chốt:** D-06, D-10.\n**BA:** docs/ba/services/svc-07.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/services/svc-07.md",
+      "jiraKey": "SCRUM-58",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-58"
+    },
+    {
+      "id": "SVC-08",
+      "type": "Task",
+      "parent": "EP-05",
+      "title": "Xử lý AI và đo usage để cung cấp dịch vụ có phí minh bạch",
+      "description": "**Mục tiêu/phạm vi:** Quản lý AI jobs, quota và kết quả recipe có thể chạy local. Phân biệt reserved/consumed/refunded theo chính sách được chọn.\n\n**Nghiệm thu:**\n* Retry cùng yêu cầu không tính phí hai lần.\n* Kết quả recipe không tương thích local renderer không được publish.\n* Job lỗi/hủy có cách quyết toán usage đã duyệt và test được.\n\n**Cần chốt:** D-09, D-11, D-12.\n**BA:** docs/ba/services/svc-08.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/services/svc-08.md",
+      "jiraKey": "SCRUM-59",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-59"
+    },
+    {
+      "id": "SVC-09",
+      "type": "Task",
+      "parent": "EP-01",
+      "title": "Điều phối thiết bị và phục hồi phiên để tránh mất tiền hoặc in trùng",
+      "description": "**Mục tiêu/phạm vi:** Tích hợp adapter thật sau hardware proof; lưu intent và bằng chứng phiên. Điều phối camera, bộ nhận tiền, xử lý ảnh và printer bằng trạng thái bền vững.\n\n**Nghiệm thu:**\n* Mất điện ở các bước nhận tiền/chụp/in có quy trình khôi phục kiểm chứng.\n* Print unknown không tự gửi lại.\n* Luồng local được kiểm thử không Internet trên cấu hình booth đại diện.\n\n**Cần chốt:** D-04, D-07, D-08, D-11.\n**BA:** docs/ba/services/svc-09.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/services/svc-09.md",
+      "jiraKey": "SCRUM-60",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-60"
+    },
+    {
+      "id": "SVC-10",
+      "type": "Task",
+      "parent": "EP-02",
+      "title": "Cô lập dữ liệu và ghi audit để bảo vệ từng khách hàng",
+      "description": "**Mục tiêu/phạm vi:** Kiểm tra tenant/role ở server cho mọi tài nguyên và thao tác. Ghi audit có actor, target, lý do, correlation và lọc thông tin nhạy cảm.\n\n**Nghiệm thu:**\n* Thay ID tenant/resource trong request không vượt quyền.\n* Thu hồi quyền có hiệu lực với thao tác nhạy cảm của phiên cũ.\n* Audit không chứa token, activation secret hoặc ảnh khách nguyên bản.\n\n**Cần chốt:** D-05, D-10.\n**BA:** docs/ba/services/svc-10.md.\n**Trạng thái:** đề xuất, chưa triển khai.",
+      "path": "docs/ba/services/svc-10.md",
+      "jiraKey": "SCRUM-61",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-61"
+    }
+  ]
+}

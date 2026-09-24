@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FotoAutomat.Core/FotoAutomat.Core.csproj" />
+    <Project Path="src/FotoAutomat.Infrastructure/FotoAutomat.Infrastructure.csproj" />
+    <Project Path="src/FotoAutomat.Desktop/FotoAutomat.Desktop.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/FotoAutomat.Tests/FotoAutomat.Tests.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/FotoAutomat.Harness/FotoAutomat.Harness.csproj" />
+  </Folder>
+</Solution>

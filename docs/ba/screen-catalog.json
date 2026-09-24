@@ -1,0 +1,610 @@
+[
+  {
+    "id": "BTH-01",
+    "title": "Cài đặt và kích hoạt booth",
+    "area": "Ứng dụng booth Windows",
+    "epic": "EP-02",
+    "path": "screens/bth-01.md",
+    "decisions": [
+      "D-02",
+      "D-03"
+    ],
+    "services": [
+      "SVC-01",
+      "SVC-02"
+    ]
+  },
+  {
+    "id": "BTH-02",
+    "title": "Cấu hình và kiểm tra thiết bị",
+    "area": "Ứng dụng booth Windows",
+    "epic": "EP-01",
+    "path": "screens/bth-02.md",
+    "decisions": [
+      "D-07",
+      "D-08",
+      "D-11"
+    ],
+    "services": [
+      "SVC-09"
+    ]
+  },
+  {
+    "id": "BTH-03",
+    "title": "Màn hình chào và trạng thái phục vụ",
+    "area": "Ứng dụng booth Windows",
+    "epic": "EP-01",
+    "path": "screens/bth-03.md",
+    "decisions": [
+      "D-03",
+      "D-06",
+      "D-10"
+    ],
+    "services": [
+      "SVC-02",
+      "SVC-09"
+    ]
+  },
+  {
+    "id": "BTH-04",
+    "title": "Chọn gói chụp và màu",
+    "area": "Ứng dụng booth Windows",
+    "epic": "EP-01",
+    "path": "screens/bth-04.md",
+    "decisions": [
+      "D-04",
+      "D-08",
+      "D-09"
+    ],
+    "services": [
+      "SVC-05",
+      "SVC-09"
+    ]
+  },
+  {
+    "id": "BTH-05",
+    "title": "Thanh toán tại booth",
+    "area": "Ứng dụng booth Windows",
+    "epic": "EP-01",
+    "path": "screens/bth-05.md",
+    "decisions": [
+      "D-04",
+      "D-07"
+    ],
+    "services": [
+      "SVC-09"
+    ]
+  },
+  {
+    "id": "BTH-06",
+    "title": "Live view và chụp ảnh",
+    "area": "Ứng dụng booth Windows",
+    "epic": "EP-01",
+    "path": "screens/bth-06.md",
+    "decisions": [
+      "D-07",
+      "D-08",
+      "D-11"
+    ],
+    "services": [
+      "SVC-09"
+    ]
+  },
+  {
+    "id": "BTH-07",
+    "title": "Xem và chọn ảnh",
+    "area": "Ứng dụng booth Windows",
+    "epic": "EP-01",
+    "path": "screens/bth-07.md",
+    "decisions": [
+      "D-08",
+      "D-10"
+    ],
+    "services": [
+      "SVC-09"
+    ]
+  },
+  {
+    "id": "BTH-08",
+    "title": "Làm đẹp sau chụp",
+    "area": "Ứng dụng booth Windows",
+    "epic": "EP-01",
+    "path": "screens/bth-08.md",
+    "decisions": [
+      "D-08",
+      "D-09",
+      "D-11"
+    ],
+    "services": [
+      "SVC-08",
+      "SVC-09"
+    ]
+  },
+  {
+    "id": "BTH-09",
+    "title": "Chọn khung và xác nhận bản in",
+    "area": "Ứng dụng booth Windows",
+    "epic": "EP-01",
+    "path": "screens/bth-09.md",
+    "decisions": [
+      "D-08",
+      "D-09"
+    ],
+    "services": [
+      "SVC-05",
+      "SVC-09"
+    ]
+  },
+  {
+    "id": "BTH-10",
+    "title": "Tiến trình in và lỗi in",
+    "area": "Ứng dụng booth Windows",
+    "epic": "EP-01",
+    "path": "screens/bth-10.md",
+    "decisions": [
+      "D-08"
+    ],
+    "services": [
+      "SVC-09"
+    ]
+  },
+  {
+    "id": "BTH-11",
+    "title": "Nhận file qua QR và kết thúc",
+    "area": "Ứng dụng booth Windows",
+    "epic": "EP-07",
+    "path": "screens/bth-11.md",
+    "decisions": [
+      "D-06",
+      "D-10"
+    ],
+    "services": [
+      "SVC-07"
+    ]
+  },
+  {
+    "id": "BTH-12",
+    "title": "Vận hành cục bộ và xử lý phiên gián đoạn",
+    "area": "Ứng dụng booth Windows",
+    "epic": "EP-01",
+    "path": "screens/bth-12.md",
+    "decisions": [
+      "D-04",
+      "D-05",
+      "D-08"
+    ],
+    "services": [
+      "SVC-09",
+      "SVC-10"
+    ]
+  },
+  {
+    "id": "CUS-01",
+    "title": "Đăng nhập, đăng ký và khôi phục tài khoản",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-02",
+    "path": "screens/cus-01.md",
+    "decisions": [
+      "D-05"
+    ],
+    "services": [
+      "SVC-10"
+    ]
+  },
+  {
+    "id": "CUS-02",
+    "title": "Thiết lập tổ chức khách hàng",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-02",
+    "path": "screens/cus-02.md",
+    "decisions": [
+      "D-05",
+      "D-12"
+    ],
+    "services": [
+      "SVC-10"
+    ]
+  },
+  {
+    "id": "CUS-03",
+    "title": "Tổng quan tài khoản và booth",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-03",
+    "path": "screens/cus-03.md",
+    "decisions": [
+      "D-14"
+    ],
+    "services": [
+      "SVC-04",
+      "SVC-10"
+    ]
+  },
+  {
+    "id": "CUS-04",
+    "title": "Danh sách booth",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-03",
+    "path": "screens/cus-04.md",
+    "decisions": [
+      "D-05",
+      "D-14"
+    ],
+    "services": [
+      "SVC-04",
+      "SVC-10"
+    ]
+  },
+  {
+    "id": "CUS-05",
+    "title": "Chi tiết booth và tác vụ từ xa",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-03",
+    "path": "screens/cus-05.md",
+    "decisions": [
+      "D-02",
+      "D-13",
+      "D-14"
+    ],
+    "services": [
+      "SVC-04",
+      "SVC-05",
+      "SVC-06"
+    ]
+  },
+  {
+    "id": "CUS-06",
+    "title": "Tải phần mềm và cấp mã kích hoạt",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-02",
+    "path": "screens/cus-06.md",
+    "decisions": [
+      "D-01",
+      "D-02",
+      "D-13"
+    ],
+    "services": [
+      "SVC-01",
+      "SVC-02",
+      "SVC-06"
+    ]
+  },
+  {
+    "id": "CUS-07",
+    "title": "So sánh gói thuê, mua vĩnh viễn và dịch vụ",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-04",
+    "path": "screens/cus-07.md",
+    "decisions": [
+      "D-01",
+      "D-12"
+    ],
+    "services": [
+      "SVC-02",
+      "SVC-03"
+    ]
+  },
+  {
+    "id": "CUS-08",
+    "title": "Checkout và kết quả thanh toán dịch vụ",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-04",
+    "path": "screens/cus-08.md",
+    "decisions": [
+      "D-01",
+      "D-12"
+    ],
+    "services": [
+      "SVC-02",
+      "SVC-03"
+    ]
+  },
+  {
+    "id": "CUS-09",
+    "title": "Giấy phép và thuê bao",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-04",
+    "path": "screens/cus-09.md",
+    "decisions": [
+      "D-01",
+      "D-02",
+      "D-03",
+      "D-12"
+    ],
+    "services": [
+      "SVC-01",
+      "SVC-02",
+      "SVC-03"
+    ]
+  },
+  {
+    "id": "CUS-10",
+    "title": "Dịch vụ trả phí và mức sử dụng",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-04",
+    "path": "screens/cus-10.md",
+    "decisions": [
+      "D-01",
+      "D-09",
+      "D-12"
+    ],
+    "services": [
+      "SVC-03",
+      "SVC-08"
+    ]
+  },
+  {
+    "id": "CUS-11",
+    "title": "Đơn hàng, thanh toán và chứng từ",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-04",
+    "path": "screens/cus-11.md",
+    "decisions": [
+      "D-12"
+    ],
+    "services": [
+      "SVC-03",
+      "SVC-10"
+    ]
+  },
+  {
+    "id": "CUS-12",
+    "title": "Thư viện công thức màu",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-05",
+    "path": "screens/cus-12.md",
+    "decisions": [
+      "D-05",
+      "D-09"
+    ],
+    "services": [
+      "SVC-05",
+      "SVC-08"
+    ]
+  },
+  {
+    "id": "CUS-13",
+    "title": "Tạo màu bằng AI và tinh chỉnh",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-05",
+    "path": "screens/cus-13.md",
+    "decisions": [
+      "D-09",
+      "D-10",
+      "D-11"
+    ],
+    "services": [
+      "SVC-08",
+      "SVC-05"
+    ]
+  },
+  {
+    "id": "CUS-14",
+    "title": "Thư viện và chỉnh sửa khung ảnh",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-05",
+    "path": "screens/cus-14.md",
+    "decisions": [
+      "D-08",
+      "D-09"
+    ],
+    "services": [
+      "SVC-05"
+    ]
+  },
+  {
+    "id": "CUS-15",
+    "title": "Phát hành nội dung tới booth",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-05",
+    "path": "screens/cus-15.md",
+    "decisions": [
+      "D-09",
+      "D-13"
+    ],
+    "services": [
+      "SVC-05",
+      "SVC-04"
+    ]
+  },
+  {
+    "id": "CUS-16",
+    "title": "Phiên chụp, doanh thu booth và giao file",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-03",
+    "path": "screens/cus-16.md",
+    "decisions": [
+      "D-04",
+      "D-10",
+      "D-14"
+    ],
+    "services": [
+      "SVC-04",
+      "SVC-07",
+      "SVC-09"
+    ]
+  },
+  {
+    "id": "CUS-17",
+    "title": "Thành viên và phân quyền",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-02",
+    "path": "screens/cus-17.md",
+    "decisions": [
+      "D-05"
+    ],
+    "services": [
+      "SVC-10"
+    ]
+  },
+  {
+    "id": "CUS-18",
+    "title": "Hỗ trợ và yêu cầu xử lý",
+    "area": "Cổng khách hàng thương mại",
+    "epic": "EP-03",
+    "path": "screens/cus-18.md",
+    "decisions": [
+      "D-05",
+      "D-10",
+      "D-12"
+    ],
+    "services": [
+      "SVC-04",
+      "SVC-10"
+    ]
+  },
+  {
+    "id": "OPS-01",
+    "title": "Tổng quan đội booth toàn hệ thống",
+    "area": "Quản trị nội bộ FotoAutomat",
+    "epic": "EP-03",
+    "path": "screens/ops-01.md",
+    "decisions": [
+      "D-05",
+      "D-14"
+    ],
+    "services": [
+      "SVC-04",
+      "SVC-10"
+    ]
+  },
+  {
+    "id": "OPS-02",
+    "title": "Hồ sơ khách hàng thương mại",
+    "area": "Quản trị nội bộ FotoAutomat",
+    "epic": "EP-04",
+    "path": "screens/ops-02.md",
+    "decisions": [
+      "D-01",
+      "D-05",
+      "D-12"
+    ],
+    "services": [
+      "SVC-01",
+      "SVC-02",
+      "SVC-10"
+    ]
+  },
+  {
+    "id": "OPS-03",
+    "title": "Quản lý quyền sử dụng và ngoại lệ thương mại",
+    "area": "Quản trị nội bộ FotoAutomat",
+    "epic": "EP-04",
+    "path": "screens/ops-03.md",
+    "decisions": [
+      "D-01",
+      "D-02",
+      "D-03",
+      "D-05"
+    ],
+    "services": [
+      "SVC-02",
+      "SVC-10"
+    ]
+  },
+  {
+    "id": "OPS-04",
+    "title": "Danh mục phiên bản và bộ cài",
+    "area": "Quản trị nội bộ FotoAutomat",
+    "epic": "EP-06",
+    "path": "screens/ops-04.md",
+    "decisions": [
+      "D-11",
+      "D-13"
+    ],
+    "services": [
+      "SVC-06",
+      "SVC-10"
+    ]
+  },
+  {
+    "id": "OPS-05",
+    "title": "Lập đợt cập nhật và theo dõi rollout",
+    "area": "Quản trị nội bộ FotoAutomat",
+    "epic": "EP-06",
+    "path": "screens/ops-05.md",
+    "decisions": [
+      "D-03",
+      "D-13",
+      "D-14"
+    ],
+    "services": [
+      "SVC-04",
+      "SVC-06"
+    ]
+  },
+  {
+    "id": "OPS-06",
+    "title": "Sự cố và lịch sử lệnh từ xa",
+    "area": "Quản trị nội bộ FotoAutomat",
+    "epic": "EP-03",
+    "path": "screens/ops-06.md",
+    "decisions": [
+      "D-05",
+      "D-13"
+    ],
+    "services": [
+      "SVC-04",
+      "SVC-09",
+      "SVC-10"
+    ]
+  },
+  {
+    "id": "OPS-07",
+    "title": "Đối soát phí dịch vụ và mức sử dụng",
+    "area": "Quản trị nội bộ FotoAutomat",
+    "epic": "EP-04",
+    "path": "screens/ops-07.md",
+    "decisions": [
+      "D-01",
+      "D-09",
+      "D-12"
+    ],
+    "services": [
+      "SVC-03",
+      "SVC-08",
+      "SVC-10"
+    ]
+  },
+  {
+    "id": "OPS-08",
+    "title": "Nhật ký kiểm toán và truy cập nội bộ",
+    "area": "Quản trị nội bộ FotoAutomat",
+    "epic": "EP-02",
+    "path": "screens/ops-08.md",
+    "decisions": [
+      "D-05",
+      "D-10"
+    ],
+    "services": [
+      "SVC-10"
+    ]
+  },
+  {
+    "id": "DL-01",
+    "title": "Mở QR và kiểm tra tình trạng giao file",
+    "area": "Web nhận ảnh của khách chụp",
+    "epic": "EP-07",
+    "path": "screens/dl-01.md",
+    "decisions": [
+      "D-06",
+      "D-10"
+    ],
+    "services": [
+      "SVC-07"
+    ]
+  },
+  {
+    "id": "DL-02",
+    "title": "Bộ ảnh và tải xuống trên điện thoại",
+    "area": "Web nhận ảnh của khách chụp",
+    "epic": "EP-07",
+    "path": "screens/dl-02.md",
+    "decisions": [
+      "D-06",
+      "D-10"
+    ],
+    "services": [
+      "SVC-07"
+    ]
+  }
+]

@@ -1,0 +1,1112 @@
+# Nội dung Jira đã duyệt
+
+Đã xuất bản ngày 2026-09-24. Đây là bản nội dung nguồn được duyệt; xem [bảng liên kết Jira](published.md) để mở ticket và theo dõi thay đổi sau xuất bản.
+
+## EP-01 · Vận hành phiên chụp tại booth khi mất mạng
+
+Loại: Epic. Parent BA: Không có.
+
+Mục tiêu: Đảm bảo khách thanh toán, chụp, xử lý và in tại booth; bảo toàn phiên khi thiết bị hoặc kết nối gặp lỗi.
+
+Phạm vi BA draft. Chính sách chưa chốt cần được duyệt trước triển khai thương mại.
+
+Nguồn: docs/ba/README.md
+
+## EP-02 · Quản lý tài khoản và kích hoạt thiết bị theo tổ chức
+
+Loại: Epic. Parent BA: Không có.
+
+Mục tiêu: Phân tách khách hàng thương mại, đăng ký booth đúng chủ sở hữu và kiểm soát quyền truy cập.
+
+Phạm vi BA draft. Chính sách chưa chốt cần được duyệt trước triển khai thương mại.
+
+Nguồn: docs/ba/README.md
+
+## EP-03 · Giám sát booth và xử lý sự cố từ xa
+
+Loại: Epic. Parent BA: Không có.
+
+Mục tiêu: Theo dõi trạng thái, phiên bản thực tế và lịch sử thao tác của từng booth với dữ liệu có thời điểm xác minh.
+
+Phạm vi BA draft. Chính sách chưa chốt cần được duyệt trước triển khai thương mại.
+
+Nguồn: docs/ba/README.md
+
+## EP-04 · Kinh doanh bản quyền và dịch vụ trả phí
+
+Loại: Epic. Parent BA: Không có.
+
+Mục tiêu: Hỗ trợ thuê, mua vĩnh viễn và dịch vụ bổ sung; đối soát thanh toán và quyền sử dụng rõ ràng.
+
+Phạm vi BA draft. Chính sách chưa chốt cần được duyệt trước triển khai thương mại.
+
+Nguồn: docs/ba/README.md
+
+## EP-05 · Tạo và phân phối công thức màu, khung ảnh
+
+Loại: Epic. Parent BA: Không có.
+
+Mục tiêu: Cho phép tạo màu bằng AI, tinh chỉnh và phát hành nội dung tương thích tới đúng booth.
+
+Phạm vi BA draft. Chính sách chưa chốt cần được duyệt trước triển khai thương mại.
+
+Nguồn: docs/ba/README.md
+
+## EP-06 · Phân phối và cập nhật phần mềm booth có kiểm soát
+
+Loại: Epic. Parent BA: Không có.
+
+Mục tiêu: Quản lý bộ cài, phiên bản, rollout và khôi phục mà không gián đoạn phiên đã trả tiền.
+
+Phạm vi BA draft. Chính sách chưa chốt cần được duyệt trước triển khai thương mại.
+
+Nguồn: docs/ba/README.md
+
+## EP-07 · Giao ảnh qua QR và bảo vệ quyền truy cập
+
+Loại: Epic. Parent BA: Không có.
+
+Mục tiêu: Cung cấp file đúng phiên, hiển thị tình trạng giao file và giới hạn truy cập theo chính sách.
+
+Phạm vi BA draft. Chính sách chưa chốt cần được duyệt trước triển khai thương mại.
+
+Nguồn: docs/ba/README.md
+
+## BTH-01 · Kích hoạt booth để gắn thiết bị với giấy phép
+
+Loại: Story. Parent BA: EP-02.
+
+**Mục tiêu:** Gắn bản cài Windows với đúng tổ chức và một quyền sử dụng còn khả dụng.
+
+**Phạm vi:**
+* Xác minh mã: Hiển thị đúng tổ chức, sản phẩm và khả năng cấp seat.
+* Kích hoạt: Ràng buộc thiết bị; tải quyền đã ký; mở BTH-02.
+
+**Nghiệm thu:**
+* Given mã hợp lệ và còn seat; When xác nhận kích hoạt; Then portal thấy một booth mới cùng Device ID và booth chuyển sang cấu hình.
+* Given máy chủ đã cấp thiết bị nhưng phản hồi bị mất; When gửi lại request ID; Then không tạo booth hoặc chiếm seat lần hai.
+* Given máy chưa kích hoạt và mất mạng; When mở ứng dụng; Then UI không cho vào luồng nhận tiền.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-02, D-03.
+**Phụ thuộc:** SVC-01, SVC-02.
+**BA:** docs/ba/screens/bth-01.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## BTH-02 · Kiểm tra thiết bị để xác nhận booth sẵn sàng phục vụ
+
+Loại: Story. Parent BA: EP-01.
+
+**Mục tiêu:** Chọn camera, máy in, bộ nhận tiền và xác minh khả năng phục vụ trước khi mở bán.
+
+**Phạm vi:**
+* Chụp thử / in thử: Tạo ảnh/test job riêng, không tính là doanh thu.
+* Mở booth: Chuyển sang BTH-03.
+
+**Nghiệm thu:**
+* Given camera không sẵn sàng; When chọn mở booth; Then UI giải thích điều kiện bị thiếu và không cho nhận tiền.
+* Given có phiên trả tiền đang chạy; When đổi queue máy in; Then thao tác bị chặn đến khi kết thúc hoặc xử lý phiên.
+* Given test in đã gửi nhưng chưa rõ kết quả; When mở lại trang; Then trạng thái giữ là cần kiểm tra, không tự gửi lại.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-07, D-08, D-11.
+**Phụ thuộc:** SVC-09.
+**BA:** docs/ba/screens/bth-02.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## BTH-03 · Hiển thị màn hình chào để bắt đầu phiên chụp
+
+Loại: Story. Parent BA: EP-01.
+
+**Mục tiêu:** Cho khách biết booth có thể phục vụ và bắt đầu một phiên mới.
+
+**Phạm vi:**
+* Bắt đầu chụp: Tạo phiên mới và mở BTH-04.
+* Hỗ trợ: Hiện cách liên hệ phù hợp tại booth.
+
+**Nghiệm thu:**
+* Given phiên trước đã kết thúc; When màn hình chào xuất hiện; Then không hiển thị ảnh hay token của phiên trước.
+* Given mất mạng nhưng các điều kiện local hợp lệ; When khách bắt đầu; Then vẫn vào chọn gói.
+* Given máy in không thể phục vụ; When khách nhìn màn hình chào; Then nút bắt đầu bị vô hiệu hóa và có hướng dẫn.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-03, D-06, D-10.
+**Phụ thuộc:** SVC-02, SVC-09.
+**BA:** docs/ba/screens/bth-03.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## BTH-04 · Cho chọn gói và màu để xác nhận sản phẩm trước thanh toán
+
+Loại: Story. Parent BA: EP-01.
+
+**Mục tiêu:** Chọn sản phẩm, số bản in và công thức màu trước khi xác nhận giá phiên.
+
+**Phạm vi:**
+* Chọn gói/màu: Cập nhật tóm tắt và số tiền.
+* Tiếp tục thanh toán: Chốt snapshot giá và nội dung cho phiên, mở BTH-05.
+
+**Nghiệm thu:**
+* Given recipe mới chưa tải xong; When mở danh sách; Then recipe đó không được chọn cho phiên.
+* Given giá cấu hình thay đổi sau khi đã sang thanh toán; When nhận tiền; Then phiên vẫn dùng snapshot giá đã xác nhận.
+* Given chưa chọn gói; When bấm tiếp tục; Then UI chỉ rõ lựa chọn còn thiếu.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-04, D-08, D-09.
+**Phụ thuộc:** SVC-05, SVC-09.
+**BA:** docs/ba/screens/bth-04.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## BTH-05 · Ghi nhận tiền tại booth để mở phiên chụp hợp lệ
+
+Loại: Story. Parent BA: EP-01.
+
+**Mục tiêu:** Nhận tiền cho phiên chụp và cho khách biết chính xác số tiền đã nhận/còn thiếu.
+
+**Phạm vi:**
+* Nhận tiền: Ghi nhận tiền và cập nhật số còn thiếu.
+* Yêu cầu hỗ trợ: Giữ bằng chứng; gọi hướng xử lý thay vì hứa hoàn tiền tự động.
+
+**Nghiệm thu:**
+* Given cùng sự kiện nhận tiền được giao lại; When xử lý; Then credit chỉ tăng một lần theo cơ chế định danh đã kiểm chứng.
+* Given đủ tiền đã được ghi bền vững; When UI được mở lại; Then khách không phải trả lại từ đầu.
+* Given khả năng trả lại tiền chưa được cấu hình; When hiển thị thanh toán; Then không có lời hứa trả lại tự động.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-04, D-07.
+**Phụ thuộc:** SVC-09.
+**BA:** docs/ba/screens/bth-05.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## BTH-06 · Điều khiển live view và chụp để lưu đủ ảnh của phiên
+
+Loại: Story. Parent BA: EP-01.
+
+**Mục tiêu:** Giúp khách chuẩn bị tư thế và chụp đủ ảnh theo gói đã thanh toán.
+
+**Phạm vi:**
+* Sẵn sàng chụp: Đếm ngược và trigger một lần.
+* Chụp lại: Tạo lần chụp mới có theo dõi, không xóa bằng chứng cũ âm thầm.
+
+**Nghiệm thu:**
+* Given khách chạm nút hai lần; When bước chụp đang thực hiện; Then chỉ có một lệnh capture cho bước đó.
+* Given camera đã ngắt; When mở live view; Then có trạng thái mất kết nối thay vì hình cũ được gắn nhãn live.
+* Given chưa nhận được file hợp lệ; When camera báo đã trigger; Then UI không tính ảnh đó là đã lưu thành công.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-07, D-08, D-11.
+**Phụ thuộc:** SVC-09.
+**BA:** docs/ba/screens/bth-06.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## BTH-07 · Cho chọn ảnh để xác định nội dung bản in
+
+Loại: Story. Parent BA: EP-01.
+
+**Mục tiêu:** Chọn các ảnh dùng cho sản phẩm theo giới hạn của gói.
+
+**Phạm vi:**
+* Chọn/bỏ chọn: Cập nhật đánh dấu rõ ràng.
+* Tiếp tục: Mở BTH-08 với các ảnh đã chọn.
+
+**Nghiệm thu:**
+* Given chọn chưa đủ số ảnh; When bấm tiếp tục; Then UI nêu số còn thiếu và giữ lựa chọn.
+* Given quay lại từ làm đẹp; When danh sách mở; Then lựa chọn trước đó được giữ.
+* Given ảnh thuộc phiên khác; When truy vấn danh sách; Then ảnh đó không xuất hiện.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-08, D-10.
+**Phụ thuộc:** SVC-09.
+**BA:** docs/ba/screens/bth-07.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## BTH-08 · Cho chỉnh làm đẹp để khách duyệt ảnh sau chụp
+
+Loại: Story. Parent BA: EP-01.
+
+**Mục tiêu:** Điều chỉnh mức làm đẹp và xem trước kết quả mà không mất ảnh gốc.
+
+**Phạm vi:**
+* Điều chỉnh: Tạo yêu cầu preview giới hạn tài nguyên.
+* Tiếp tục: Lưu thông số và sang BTH-09.
+
+**Nghiệm thu:**
+* Given khách đổi slider trong khi job cũ chạy; When job cũ trả kết quả sau; Then nó không ghi đè preview revision mới.
+* Given mất mạng; When chọn mức làm đẹp; Then pipeline được hỗ trợ vẫn chạy tại booth.
+* Given đặt lại; When xác nhận; Then original không đổi và thông số beauty trở về mức đã định nghĩa.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-08, D-09, D-11.
+**Phụ thuộc:** SVC-08, SVC-09.
+**BA:** docs/ba/screens/bth-08.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## BTH-09 · Cho chọn khung và xác nhận để gửi đúng bản in
+
+Loại: Story. Parent BA: EP-01.
+
+**Mục tiêu:** Xem chính xác bố cục, crop và số bản trước thao tác in khó đảo ngược.
+
+**Phạm vi:**
+* Chọn khung: Tạo preview đúng bố cục.
+* Xác nhận in: Ghi ý định in một lần, mở BTH-10.
+
+**Nghiệm thu:**
+* Given xác nhận in bị chạm hai lần; When UI xử lý; Then chỉ tạo một print intent.
+* Given ảnh xuất chưa render xong; When xem CTA; Then nút xác nhận chưa được bật.
+* Given khung sai khổ giấy; When mở danh sách; Then khung không được chọn như một lựa chọn hợp lệ.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-08, D-09.
+**Phụ thuộc:** SVC-05, SVC-09.
+**BA:** docs/ba/screens/bth-09.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## BTH-10 · Theo dõi kết quả in để xử lý lỗi và tránh in trùng
+
+Loại: Story. Parent BA: EP-01.
+
+**Mục tiêu:** Cho khách biết đang xử lý, đã gửi hay đã xác nhận in xong; hỗ trợ khi không rõ kết quả.
+
+**Phạm vi:**
+* Nhận file: Mở BTH-11 và vẫn giữ trạng thái in thật.
+* Gọi hỗ trợ: Hiện mã phiên; đưa incident vào BTH-12.
+
+**Nghiệm thu:**
+* Given chỉ có xác nhận từ spooler; When cập nhật màn hình; Then không gắn nhãn giấy đã in xong.
+* Given restart sau khi gửi lệnh; When phục hồi; Then job giữ trạng thái cần kiểm tra và không được submit lại tự động.
+* Given Internet mất nhưng printer vẫn hoạt động; When in; Then luồng in không phụ thuộc cloud.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-08.
+**Phụ thuộc:** SVC-09.
+**BA:** docs/ba/screens/bth-10.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## BTH-11 · Hiển thị QR để giao file và kết thúc phiên an toàn
+
+Loại: Story. Parent BA: EP-07.
+
+**Mục tiêu:** Nhận file đúng phiên và kết thúc mà không để lộ ảnh cho khách kế tiếp.
+
+**Phạm vi:**
+* Hiện QR: Gắn nhãn đúng trạng thái.
+* Kết thúc: Xóa nội dung khách khỏi màn hình và mở BTH-03.
+
+**Nghiệm thu:**
+* Given chưa upload xong; When mở màn hình; Then không hiện nhãn tải ngay cho một link chưa có file.
+* Given bấm kết thúc; When khách mới tới; Then ảnh và QR phiên trước không còn trên UI.
+* Given link đã sẵn sàng; When quét; Then chỉ truy cập bộ ảnh đúng phiên theo quyền token.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-06, D-10.
+**Phụ thuộc:** SVC-07.
+**BA:** docs/ba/screens/bth-11.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## BTH-12 · Đối soát phiên gián đoạn để khôi phục phục vụ tại booth
+
+Loại: Story. Parent BA: EP-01.
+
+**Mục tiêu:** Kiểm tra sức khỏe booth và xử lý phiên tiền/in không rõ kết quả ngay tại máy.
+
+**Phạm vi:**
+* Ghi nhận kết quả: Tạo quyết định đối soát có audit.
+* In lại có kiểm soát: Tạo job mới liên kết job cũ, không sửa job cũ thành chưa in.
+* Mở bán lại: Về BTH-03.
+
+**Nghiệm thu:**
+* Given không có quyền operator; When mở trang; Then không thấy điều khiển tiền/in lại.
+* Given operator xác nhận in lại được phép; When thực hiện; Then tạo job mới có tham chiếu job cũ và lý do.
+* Given mất mạng; When xem phiên gián đoạn; Then bằng chứng local vẫn đọc được và audit chưa sync được ghi rõ.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-04, D-05, D-08.
+**Phụ thuộc:** SVC-09, SVC-10.
+**BA:** docs/ba/screens/bth-12.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-01 · Xác thực người dùng để truy cập đúng tổ chức
+
+Loại: Story. Parent BA: EP-02.
+
+**Mục tiêu:** Vào cổng dịch vụ với đúng tài khoản và tổ chức.
+
+**Phạm vi:**
+* Đăng nhập: Vào chọn tổ chức hoặc onboarding.
+* Khôi phục: Thông báo trung tính, không tiết lộ tài khoản tồn tại.
+
+**Nghiệm thu:**
+* Given thành viên thuộc hai tổ chức; When đăng nhập; Then chỉ thấy hai tổ chức đã được cấp.
+* Given lời mời hết hạn; When chấp nhận; Then không tạo membership mới.
+* Given tài khoản tenant A; When yêu cầu dữ liệu tenant B; Then server từ chối.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-05.
+**Phụ thuộc:** SVC-10.
+**BA:** docs/ba/screens/cus-01.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-02 · Thiết lập tổ chức để quản lý hoạt động thương mại
+
+Loại: Story. Parent BA: EP-02.
+
+**Mục tiêu:** Tạo hồ sơ đơn vị mua/thuê phần mềm trước khi đăng ký booth hoặc dịch vụ.
+
+**Phạm vi:**
+* Tạo tổ chức: Cấp owner ban đầu, ghi audit.
+* Tiếp tục: Mở CUS-07 hoặc CUS-03.
+
+**Nghiệm thu:**
+* Given request tạo tổ chức bị gửi lại; When xử lý cùng request ID; Then chỉ một tổ chức được tạo.
+* Given chưa chọn múi giờ; When lưu; Then form chỉ rõ trường cần hoàn thành.
+* Given thành viên thường; When sửa hồ sơ billing; Then phải có quyền tương ứng.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-05, D-12.
+**Phụ thuộc:** SVC-10.
+**BA:** docs/ba/screens/cus-02.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-03 · Tổng hợp tình trạng tài khoản để nhận biết việc cần xử lý
+
+Loại: Story. Parent BA: EP-03.
+
+**Mục tiêu:** Nhìn nhanh booth, giấy phép, dịch vụ và vấn đề cần xử lý của tổ chức.
+
+**Phạm vi:**
+* Xem booth lỗi: Mở danh sách đã lọc.
+* Thêm booth: Mở tải/kích hoạt hoặc mua quyền nếu thiếu.
+
+**Nghiệm thu:**
+* Given booth mất mạng; When mở dashboard; Then hiện lần liên lạc cuối và trạng thái chưa cập nhật.
+* Given chưa có booth; When vào dashboard; Then thấy hướng dẫn kích hoạt.
+* Given bộ đếm truy vấn lỗi; When render; Then không thay lỗi bằng số 0.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-14.
+**Phụ thuộc:** SVC-04, SVC-10.
+**BA:** docs/ba/screens/cus-03.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-04 · Liệt kê và lọc booth để quản lý theo tổ chức
+
+Loại: Story. Parent BA: EP-03.
+
+**Mục tiêu:** Tìm, nhóm và so sánh các booth thuộc tổ chức.
+
+**Phạm vi:**
+* Lọc/tìm: Chỉ lọc trên tenant được phép.
+* Thêm booth: Mở CUS-06.
+
+**Nghiệm thu:**
+* Given tenant có nhiều booth; When sang trang tiếp; Then dữ liệu được phân trang ổn định.
+* Given bộ lọc không khớp; When hiển thị; Then có nút xóa lọc.
+* Given người dùng tenant A; When sửa query ID tenant B; Then không nhận danh sách B.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-05, D-14.
+**Phụ thuộc:** SVC-04, SVC-10.
+**BA:** docs/ba/screens/cus-04.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-05 · Hiển thị chi tiết booth để theo dõi và yêu cầu tác vụ từ xa
+
+Loại: Story. Parent BA: EP-03.
+
+**Mục tiêu:** Xem cấu hình thực tế và yêu cầu thao tác từ xa có theo dõi kết quả.
+
+**Phạm vi:**
+* Yêu cầu đồng bộ: Tạo command ID có hạn.
+* Đặt lịch cập nhật: Tạo kế hoạch; không báo đã cài ngay.
+* Thu hồi/chuyển booth: Yêu cầu xác nhận tác động trước thực hiện.
+
+**Nghiệm thu:**
+* Given booth offline; When gửi yêu cầu sync; Then UI hiện queued, không succeeded.
+* Given có phiên trả tiền; When đến lịch update; Then booth hoãn đến thời điểm an toàn.
+* Given command đã quá hạn; When booth kết nối lại; Then không chạy lệnh đó.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-02, D-13, D-14.
+**Phụ thuộc:** SVC-04, SVC-05, SVC-06.
+**BA:** docs/ba/screens/cus-05.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-06 · Cung cấp bộ cài và mã kích hoạt để triển khai booth mới
+
+Loại: Story. Parent BA: EP-02.
+
+**Mục tiêu:** Tải đúng bộ cài và cấp quyền cài đặt có thể theo dõi.
+
+**Phạm vi:**
+* Tải bộ cài: Tải artifact đúng phiên bản.
+* Tạo mã: Cấp code có thời hạn.
+* Thu hồi mã chưa dùng: Không ảnh hưởng máy đã kích hoạt ngoài chính sách.
+
+**Nghiệm thu:**
+* Given hết seat; When tạo mã dùng để thêm booth; Then hệ thống từ chối hoặc theo chính sách giữ chỗ đã duyệt, không cấp vượt.
+* Given release bị thu hồi; When tải; Then không lấy được bộ cài qua link mới.
+* Given mã dùng thành công; When xem portal; Then thấy Device ID và thời điểm sử dụng.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-01, D-02, D-13.
+**Phụ thuộc:** SVC-01, SVC-02, SVC-06.
+**BA:** docs/ba/screens/cus-06.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-07 · So sánh gói sản phẩm để khách chọn đúng quyền sử dụng
+
+Loại: Story. Parent BA: EP-04.
+
+**Mục tiêu:** Hiểu chính xác sản phẩm mua một lần và dịch vụ có phí định kỳ trước khi đặt hàng.
+
+**Phạm vi:**
+* Chọn gói: Tạo lựa chọn checkout.
+* So sánh quyền: Hiện khác biệt thuê/vĩnh viễn/cloud rõ ràng.
+
+**Nghiệm thu:**
+* Given gói vĩnh viễn chỉ gồm desktop; When xem so sánh; Then cloud và cập nhật trả phí được ghi riêng.
+* Given quote hết hiệu lực; When tiến hành mua; Then phải xác nhận giá mới.
+* Given không có giá sản phẩm hợp lệ; When bấm mua; Then không tạo giao dịch số tiền mặc định.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-01, D-12.
+**Phụ thuộc:** SVC-02, SVC-03.
+**BA:** docs/ba/screens/cus-07.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-08 · Thanh toán dịch vụ để cấp quyền theo đơn hàng
+
+Loại: Story. Parent BA: EP-04.
+
+**Mục tiêu:** Thanh toán phí phần mềm và dịch vụ với kết quả có thể đối soát.
+
+**Phạm vi:**
+* Thanh toán: Tạo một order với idempotency key.
+* Kiểm tra trạng thái: Đọc server, không tạo giao dịch mới.
+
+**Nghiệm thu:**
+* Given browser trả về success nhưng server chưa xác minh; When render; Then trạng thái vẫn chờ xác nhận.
+* Given callback thành công gửi hai lần; When xử lý; Then chỉ một entitlement/order effect được áp dụng.
+* Given đã trả tiền nhưng cấp quyền chưa xong; When mở lại; Then thấy cùng order và trạng thái xử lý, không checkout lại.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-01, D-12.
+**Phụ thuộc:** SVC-02, SVC-03.
+**BA:** docs/ba/screens/cus-08.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-09 · Quản lý giấy phép để theo dõi seat, thời hạn và gia hạn
+
+Loại: Story. Parent BA: EP-04.
+
+**Mục tiêu:** Quản lý quyền desktop, seat, thời hạn thuê và quyền cập nhật một cách tách bạch.
+
+**Phạm vi:**
+* Gia hạn/đổi gói: Review quote và hiệu lực trước xác nhận.
+* Hủy gia hạn: Hiện ngày tác động và dịch vụ bị ảnh hưởng.
+* Chuyển seat: Theo dõi thiết bị cũ/mới và xác nhận.
+
+**Nghiệm thu:**
+* Given license vĩnh viễn và cloud đã hết hạn; When hiển thị; Then hai quyền có trạng thái riêng.
+* Given hủy gia hạn cuối kỳ; When xác nhận; Then UI nêu ngày hiệu lực và không mô tả là hủy ngay nếu policy không phải vậy.
+* Given server đã gia hạn nhưng booth offline; When xem seat; Then hiện chờ booth nhận quyền mới.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-01, D-02, D-03, D-12.
+**Phụ thuộc:** SVC-01, SVC-02, SVC-03.
+**BA:** docs/ba/screens/cus-09.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-10 · Hiển thị usage và quota để kiểm soát chi phí dịch vụ
+
+Loại: Story. Parent BA: EP-04.
+
+**Mục tiêu:** Theo dõi AI, lưu trữ/giao file và các dịch vụ đã mua, biết giới hạn trước khi phát sinh phí.
+
+**Phạm vi:**
+* Mua thêm: Sang checkout có đơn vị và giá rõ.
+* Xem chi tiết usage: Liệt kê sự kiện/trạng thái không lộ dữ liệu người khác.
+
+**Nghiệm thu:**
+* Given usage event bị replay; When cộng mức sử dụng; Then không bị tính hai lần.
+* Given không đồng ý overage; When chạm giới hạn; Then không tự tạo phí vượt mức.
+* Given AI job đang chạy; When xem quota; Then phân biệt reserved với đã tiêu thụ nếu mô hình này được chọn.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-01, D-09, D-12.
+**Phụ thuộc:** SVC-03, SVC-08.
+**BA:** docs/ba/screens/cus-10.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-11 · Tra cứu giao dịch để đối soát phí và tải chứng từ
+
+Loại: Story. Parent BA: EP-04.
+
+**Mục tiêu:** Tra cứu lịch sử phí trả cho FotoAutomat và chứng từ tương ứng.
+
+**Phạm vi:**
+* Tải chứng từ: Trả file được bảo vệ.
+* Hỗ trợ giao dịch: Tạo yêu cầu gắn đúng order ID.
+
+**Nghiệm thu:**
+* Given order thuộc tenant khác; When truy cập URL; Then không thể tải chứng từ.
+* Given refund mới yêu cầu; When xem trạng thái; Then không hiển thị đã hoàn tiền.
+* Given chứng từ chưa tạo; When mở order; Then UI hiển thị đúng trạng thái chờ.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-12.
+**Phụ thuộc:** SVC-03, SVC-10.
+**BA:** docs/ba/screens/cus-11.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-12 · Quản lý thư viện màu để tái sử dụng phiên bản đã duyệt
+
+Loại: Story. Parent BA: EP-05.
+
+**Mục tiêu:** Quản lý bản nháp, bản đã duyệt và phiên bản màu đang dùng tại booth.
+
+**Phạm vi:**
+* Tạo từ tham khảo: Mở CUS-13.
+* Phát hành: Mở CUS-15.
+
+**Nghiệm thu:**
+* Given recipe version đang phục vụ; When chỉnh sửa; Then tạo bản mới và không đổi version đang dùng.
+* Given booth chưa báo áp dụng; When xem recipe; Then không tính booth đó là đã dùng bản mới.
+* Given không có quyền publish; When thao tác; Then không thể phát hành qua UI/API.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-05, D-09.
+**Phụ thuộc:** SVC-05, SVC-08.
+**BA:** docs/ba/screens/cus-12.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-13 · Tạo và tinh chỉnh màu bằng AI để xuất công thức cho booth
+
+Loại: Story. Parent BA: EP-05.
+
+**Mục tiêu:** Tạo gợi ý màu từ ảnh tham khảo, thử trên ảnh mẫu và duyệt công thức có thể chạy tại booth.
+
+**Phạm vi:**
+* Tạo gợi ý AI: Tạo một job có định danh.
+* Lưu nháp: Lưu version và provenance.
+* Sẵn sàng phát hành: Đánh dấu duyệt, không tự đẩy xuống booth.
+
+**Nghiệm thu:**
+* Given bấm tạo AI lặp do timeout; When gửi cùng job request; Then không phát sinh job tính phí trùng.
+* Given recipe chứa thành phần renderer local không hỗ trợ; When duyệt; Then bị chặn và nêu thành phần lỗi.
+* Given lưu nháp; When chưa publish; Then các booth đang phục vụ không đổi màu.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-09, D-10, D-11.
+**Phụ thuộc:** SVC-08, SVC-05.
+**BA:** docs/ba/screens/cus-13.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-14 · Thiết kế khung ảnh để tạo bố cục in tương thích
+
+Loại: Story. Parent BA: EP-05.
+
+**Mục tiêu:** Tạo bố cục in tương thích khổ giấy và số ảnh.
+
+**Phạm vi:**
+* Tạo/chỉnh khung: Lưu bản nháp.
+* Duyệt: Tạo version có thể chọn ở publish.
+
+**Nghiệm thu:**
+* Given template vượt vùng in được hỗ trợ; When duyệt; Then bị chặn với lỗi cụ thể.
+* Given sửa một khung đã publish; When lưu; Then tạo revision mới.
+* Given thiếu artwork đã tham chiếu; When phát hành; Then gói nội dung không được đánh dấu hoàn chỉnh.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-08, D-09.
+**Phụ thuộc:** SVC-05.
+**BA:** docs/ba/screens/cus-14.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-15 · Phát hành nội dung để đồng bộ đúng phiên bản tới booth
+
+Loại: Story. Parent BA: EP-05.
+
+**Mục tiêu:** Đưa bảng giá, màu và khung đã duyệt đến đúng nhóm booth và biết máy nào đã áp dụng.
+
+**Phạm vi:**
+* Phát hành: Tạo deployment có ID.
+* Dừng phân phối tiếp: Không giả định thu hồi những gì đã áp dụng.
+* Quay về version trước: Tạo deployment mới có audit.
+
+**Nghiệm thu:**
+* Given booth đang phục vụ; When bundle mới tải xong; Then đợi điểm chuyển an toàn trước áp dụng.
+* Given tải thiếu asset; When kiểm tra bundle; Then bản cũ vẫn active.
+* Given hai booth offline; When publish thành công ở server; Then hai booth đó vẫn hiển thị pending.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-09, D-13.
+**Phụ thuộc:** SVC-05, SVC-04.
+**BA:** docs/ba/screens/cus-15.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-16 · Tra cứu phiên chụp để theo dõi doanh thu và giao file
+
+Loại: Story. Parent BA: EP-03.
+
+**Mục tiêu:** Theo dõi hoạt động kinh doanh của booth và trạng thái fulfillment mà không nhầm với phí trả FotoAutomat.
+
+**Phạm vi:**
+* Xem chi tiết: Hiện timeline và trạng thái đối soát.
+* Xuất báo cáo: Phạm vi đúng tenant/khoảng thời gian; dữ liệu nhạy cảm theo policy.
+
+**Nghiệm thu:**
+* Given cùng session được sync hai lần; When lập báo cáo; Then không cộng doanh thu hai lần.
+* Given booth chưa đồng bộ hết kỳ; When xem tổng; Then hiển thị cảnh báo dữ liệu chưa đầy đủ.
+* Given role chỉ xem báo cáo; When yêu cầu file ảnh; Then bị từ chối nếu không có quyền riêng.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-04, D-10, D-14.
+**Phụ thuộc:** SVC-04, SVC-07, SVC-09.
+**BA:** docs/ba/screens/cus-16.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-17 · Phân quyền thành viên để giới hạn truy cập theo vai trò
+
+Loại: Story. Parent BA: EP-02.
+
+**Mục tiêu:** Cấp quyền đúng người cho booth, nội dung và billing.
+
+**Phạm vi:**
+* Mời thành viên: Gửi lời mời theo quy trình được duyệt.
+* Đổi/thu hồi quyền: Xác nhận tác động, áp dụng ở server.
+
+**Nghiệm thu:**
+* Given operator không có quyền billing; When gọi API đổi thuê bao; Then bị từ chối.
+* Given chỉ còn một owner; When thu hồi owner đó; Then yêu cầu chuyển quyền trước.
+* Given quyền bị thu hồi; When phiên web cũ thao tác nhạy cảm; Then server kiểm tra lại và từ chối.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-05.
+**Phụ thuộc:** SVC-10.
+**BA:** docs/ba/screens/cus-17.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## CUS-18 · Theo dõi yêu cầu hỗ trợ để xử lý sự cố có căn cứ
+
+Loại: Story. Parent BA: EP-03.
+
+**Mục tiêu:** Gửi và theo dõi yêu cầu liên quan booth, phiên hoặc giao dịch dịch vụ.
+
+**Phạm vi:**
+* Gửi yêu cầu: Tạo request ID duy nhất.
+* Gửi diagnostic: Upload dữ liệu đã lọc theo policy.
+
+**Nghiệm thu:**
+* Given cùng request được gửi lại; When retry; Then không tạo yêu cầu trùng ngoài ý muốn.
+* Given diagnostic chứa dữ liệu cấm theo policy; When upload; Then bị loại/chặn và thông báo.
+* Given ticket đã tạo; When support xem; Then quyền tài nguyên vẫn được kiểm tra riêng.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-05, D-10, D-12.
+**Phụ thuộc:** SVC-04, SVC-10.
+**BA:** docs/ba/screens/cus-18.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## OPS-01 · Giám sát fleet để phát hiện booth mất liên lạc hoặc lỗi
+
+Loại: Story. Parent BA: EP-03.
+
+**Mục tiêu:** Theo dõi độ phủ phiên bản, sức khỏe và các booth mất liên lạc trên toàn hệ thống.
+
+**Phạm vi:**
+* Mở booth: Hiện chi tiết với nhãn tenant rõ.
+* Lọc phiên bản lỗi: Tạo tập xem, chưa gửi lệnh hàng loạt.
+
+**Nghiệm thu:**
+* Given chỉ có tài khoản khách hàng; When mở Ops; Then không được xem fleet toàn hệ thống.
+* Given rollout target đã đặt nhưng máy chưa báo version; When tính coverage; Then máy chưa được tính là đã nâng cấp.
+* Given heartbeat quá ngưỡng; When hiển thị; Then có last seen và nhãn mất liên lạc.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-05, D-14.
+**Phụ thuộc:** SVC-04, SVC-10.
+**BA:** docs/ba/screens/ops-01.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## OPS-02 · Tổng hợp hồ sơ khách hàng để hỗ trợ đúng tổ chức
+
+Loại: Story. Parent BA: EP-04.
+
+**Mục tiêu:** Xem quan hệ giữa tổ chức, người quản trị, booth và sản phẩm đã mua.
+
+**Phạm vi:**
+* Xem quyền/booth: Đi đến tài nguyên đúng tenant.
+* Đề xuất thay đổi hồ sơ: Ghi audit và không sửa chứng từ đã phát hành.
+
+**Nghiệm thu:**
+* Given hai tổ chức cùng tên; When chọn hồ sơ; Then mã tenant được hiển thị để phân biệt.
+* Given nhân viên support không có quyền billing; When thao tác giao dịch; Then bị từ chối.
+* Given license và payment lệch trạng thái; When mở hồ sơ; Then hiện cần đối soát thay tự cấp/thu hồi.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-01, D-05, D-12.
+**Phụ thuộc:** SVC-01, SVC-02, SVC-10.
+**BA:** docs/ba/screens/ops-02.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## OPS-03 · Điều chỉnh quyền sử dụng để thực thi chính sách thương mại
+
+Loại: Story. Parent BA: EP-04.
+
+**Mục tiêu:** Cấp, điều chỉnh hoặc thu hồi quyền theo quyết định thương mại có thể truy vết.
+
+**Phạm vi:**
+* Cấp/gia hạn/thu hồi: Review tác động rồi tạo thay đổi có audit.
+* Ngoại lệ offline: Quyền có phạm vi/thời hạn xác định, không hardcode vĩnh viễn.
+
+**Nghiệm thu:**
+* Given staff không có quyền thu hồi; When gửi lệnh; Then bị từ chối và không đổi entitlement.
+* Given ngoại lệ được cấp; When xem audit; Then có actor, reason, hiệu lực và giá trị trước/sau.
+* Given booth chưa nhận thay đổi; When xem kết quả; Then không hiện đã áp dụng tại thiết bị.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-01, D-02, D-03, D-05.
+**Phụ thuộc:** SVC-02, SVC-10.
+**BA:** docs/ba/screens/ops-03.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## OPS-04 · Quản lý release để phân phối bộ cài đã được kiểm chứng
+
+Loại: Story. Parent BA: EP-06.
+
+**Mục tiêu:** Đăng ký bản phần mềm hợp lệ và điều kiện phân phối trước khi triển khai.
+
+**Phạm vi:**
+* Đăng ký release: Upload/đăng ký artifact chưa phát hành.
+* Cho phép rollout: Release vào danh sách chọn của OPS-05.
+* Thu hồi phân phối: Chặn cấp mới; không tự gỡ app đang chạy.
+
+**Nghiệm thu:**
+* Given chữ ký không hợp lệ; When yêu cầu phát hành; Then release không đủ điều kiện.
+* Given một version đã đăng ký; When thay artifact; Then phải tạo release mới hoặc bị từ chối.
+* Given schema không hỗ trợ downgrade; When xem release; Then UI không hứa rollback tự động.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-11, D-13.
+**Phụ thuộc:** SVC-06, SVC-10.
+**BA:** docs/ba/screens/ops-04.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## OPS-05 · Triển khai cập nhật theo đợt để hạn chế ảnh hưởng toàn fleet
+
+Loại: Story. Parent BA: EP-06.
+
+**Mục tiêu:** Cập nhật nhiều booth theo nhóm và dừng khi có dấu hiệu lỗi.
+
+**Phạm vi:**
+* Khởi chạy: Tạo rollout có ID và cohort.
+* Tạm dừng: Dừng cấp lệnh tiếp theo; không cắt cài đặt đang ở bước nguy hiểm.
+* Rollback: Review rồi tạo rollout riêng.
+
+**Nghiệm thu:**
+* Given booth đang có phiên trả tiền; When nhận update; Then hoãn cài đến điểm an toàn.
+* Given cohort chưa đạt health gate; When mở rộng; Then bị chặn theo policy.
+* Given rollback không tương thích schema; When yêu cầu; Then hệ thống từ chối tự động hạ bản.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-03, D-13, D-14.
+**Phụ thuộc:** SVC-04, SVC-06.
+**BA:** docs/ba/screens/ops-05.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## OPS-06 · Đối soát lệnh từ xa để xử lý kết quả chưa xác định
+
+Loại: Story. Parent BA: EP-03.
+
+**Mục tiêu:** Đối soát yêu cầu và trạng thái thực thi ở booth, xử lý sự cố không rõ kết quả.
+
+**Phạm vi:**
+* Tạo lệnh cho phép: Review tác động; cấp ID mới.
+* Đóng sự cố: Ghi audit, không sửa nguyên bản sự kiện.
+* Thử lại: Không retry mù lệnh có tác dụng tiền/in.
+
+**Nghiệm thu:**
+* Given command hết TTL; When booth nhận muộn; Then từ chối thực thi.
+* Given ack kết quả in mất; When support mở incident; Then không có tự động reprint.
+* Given tạo command; When xem audit; Then có actor, tenant, target, lý do và correlation ID.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-05, D-13.
+**Phụ thuộc:** SVC-04, SVC-09, SVC-10.
+**BA:** docs/ba/screens/ops-06.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## OPS-07 · Đối soát billing và usage để tránh ghi phí sai
+
+Loại: Story. Parent BA: EP-04.
+
+**Mục tiêu:** Giải quyết lệch trạng thái giữa thanh toán, quyền sử dụng và usage của khách hàng.
+
+**Phạm vi:**
+* Đối soát order: Tra cứu provider và hệ thống nội bộ.
+* Điều chỉnh/hoàn: Tạo giao dịch điều chỉnh, chờ xác nhận kết quả.
+
+**Nghiệm thu:**
+* Given webhook thanh toán lặp; When đối soát; Then không tạo doanh thu dịch vụ trùng.
+* Given điều chỉnh đã gửi nhưng timeout; When thao tác lại; Then dùng cùng định danh để không hoàn hai lần.
+* Given staff support thường; When yêu cầu refund; Then bị từ chối.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-01, D-09, D-12.
+**Phụ thuộc:** SVC-03, SVC-08, SVC-10.
+**BA:** docs/ba/screens/ops-07.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## OPS-08 · Tra cứu audit để truy vết thay đổi trên hệ thống
+
+Loại: Story. Parent BA: EP-02.
+
+**Mục tiêu:** Truy vết ai đã thay đổi quyền, nội dung, thiết bị hoặc phiên bản và trong phạm vi nào.
+
+**Phạm vi:**
+* Lọc/xem: Chỉ phạm vi được phép.
+* Xuất: Bản xuất có phạm vi rõ và được ghi audit.
+
+**Nghiệm thu:**
+* Given đổi license; When xem audit; Then thấy actor, lý do, đối tượng và thay đổi trước/sau.
+* Given booth sync sự kiện muộn; When hiển thị; Then phân biệt thời gian tại booth và thời gian nhận.
+* Given token nhạy cảm trong nguồn; When ghi audit; Then không lộ token nguyên văn.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-05, D-10.
+**Phụ thuộc:** SVC-10.
+**BA:** docs/ba/screens/ops-08.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## DL-01 · Xác minh QR để thông báo tình trạng bộ ảnh
+
+Loại: Story. Parent BA: EP-07.
+
+**Mục tiêu:** Biết bộ ảnh đã sẵn sàng, đang chờ hay không còn truy cập được.
+
+**Phạm vi:**
+* Mở bộ ảnh: Mở DL-02.
+* Kiểm tra lại: Đọc trạng thái có giới hạn tần suất.
+
+**Nghiệm thu:**
+* Given token hợp lệ nhưng file pending; When mở link; Then thấy trạng thái chờ và không được tải file chưa có.
+* Given token hết hạn; When yêu cầu file trực tiếp; Then cũng bị từ chối.
+* Given sửa session ID trong URL; When truy cập; Then không xem được ảnh phiên khác.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-06, D-10.
+**Phụ thuộc:** SVC-07.
+**BA:** docs/ba/screens/dl-01.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## DL-02 · Cung cấp gallery để khách tải đúng file được cấp quyền
+
+Loại: Story. Parent BA: EP-07.
+
+**Mục tiêu:** Tải đúng ảnh được cấp quyền bằng UI phù hợp điện thoại.
+
+**Phạm vi:**
+* Tải file: Cấp truy cập đúng file.
+* Tải tất cả: Không tạo archive không giới hạn gây quá tải.
+
+**Nghiệm thu:**
+* Given token chỉ cho session A; When yêu cầu file B; Then server từ chối.
+* Given một file chưa sẵn sàng; When mở gallery; Then không gắn nhãn mọi file đã tải được.
+* Given truy cập trên màn hình điện thoại; When chọn tải; Then CTA không bị che và tên/định dạng file rõ.
+
+**UI/UX:** thể hiện luồng chính, CTA, trạng thái lỗi/offline/quyền tương ứng BA.
+
+**Cần chốt:** D-06, D-10.
+**Phụ thuộc:** SVC-07.
+**BA:** docs/ba/screens/dl-02.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## SVC-01 · Đăng ký thiết bị để ràng buộc booth với tổ chức và seat
+
+Loại: Task. Parent BA: EP-02.
+
+**Mục tiêu/phạm vi:** Cấp danh tính thiết bị và mã kích hoạt có thời hạn. Xử lý request lặp, chuyển/thu hồi seat và đối soát trạng thái đăng ký.
+
+**Nghiệm thu:**
+* Kích hoạt lặp cùng request không tạo thêm booth hoặc chiếm thêm seat.
+* Thiết bị không thể tự đổi tenant bằng dữ liệu phía client.
+* Chuyển seat giữ lịch sử thiết bị cũ và tuân thủ policy đã duyệt.
+
+**Cần chốt:** D-02, D-05.
+**BA:** docs/ba/services/svc-01.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## SVC-02 · Quản lý quyền sử dụng để hỗ trợ thuê, vĩnh viễn và offline
+
+Loại: Task. Parent BA: EP-04.
+
+**Mục tiêu/phạm vi:** Tách entitlement desktop, seat, cập nhật và dịch vụ cloud. Phát hành quyền local có thể xác minh và xử lý gia hạn/thu hồi theo policy.
+
+**Nghiệm thu:**
+* Hết hạn cloud không tự hủy quyền desktop vĩnh viễn ngoài điều khoản đã duyệt.
+* Phiên đã trả tiền được xử lý theo chính sách gián đoạn đã thống nhất.
+* Quy tắc offline, thay đổi đồng hồ và thời hạn xác minh có kịch bản kiểm thử.
+
+**Cần chốt:** D-01, D-02, D-03.
+**BA:** docs/ba/services/svc-02.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## SVC-03 · Đối soát thanh toán để cấp quyền và ghi phí chính xác
+
+Loại: Task. Parent BA: EP-04.
+
+**Mục tiêu/phạm vi:** Xử lý quote, order, provider events, chứng từ và điều chỉnh. Liên kết billing với entitlement và metering bằng định danh ổn định.
+
+**Nghiệm thu:**
+* Callback lặp hoặc đến sai thứ tự không cấp quyền/ghi phí trùng.
+* Redirect phía browser không tự chuyển đơn thành đã thanh toán.
+* Thu tiền thành công nhưng cấp quyền lỗi có trạng thái và quy trình phục hồi.
+
+**Cần chốt:** D-01, D-12.
+**BA:** docs/ba/services/svc-03.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## SVC-04 · Theo dõi heartbeat và lệnh để biết trạng thái thực của booth
+
+Loại: Task. Parent BA: EP-03.
+
+**Mục tiêu/phạm vi:** Nhận telemetry theo device identity; lưu thời gian xảy ra và thời gian nhận. Quản lý command ID, thời hạn, acknowledgement và kết quả.
+
+**Nghiệm thu:**
+* Mọi trạng thái sức khỏe đều có lần quan sát gần nhất.
+* Queued, received và succeeded là các trạng thái khác nhau.
+* Lệnh hết hạn không được thực thi muộn; retry không tạo side effect trùng.
+
+**Cần chốt:** D-05, D-13, D-14.
+**BA:** docs/ba/services/svc-04.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## SVC-05 · Đồng bộ nội dung có phiên bản để booth dùng dữ liệu nhất quán
+
+Loại: Task. Parent BA: EP-05.
+
+**Mục tiêu/phạm vi:** Tạo manifest cho recipe, frame và bảng giá; xác minh tài nguyên trước áp dụng. Theo dõi desired/reported và giữ phiên bản cũ khi tải thất bại.
+
+**Nghiệm thu:**
+* Thiếu asset hoặc checksum sai không thay active bundle.
+* Phiên đang chạy giữ snapshot nội dung và giá.
+* Booth offline không bị báo đã áp dụng bundle mới.
+
+**Cần chốt:** D-09, D-13.
+**BA:** docs/ba/services/svc-05.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## SVC-06 · Cập nhật booth an toàn để triển khai phiên bản trên toàn fleet
+
+Loại: Task. Parent BA: EP-06.
+
+**Mục tiêu/phạm vi:** Xác minh gói phần mềm và metadata tương thích. Thực thi khi idle, theo dõi health và khôi phục trong phạm vi schema cho phép.
+
+**Nghiệm thu:**
+* Gói không hợp lệ không được cài.
+* Không restart giữa phiên đã trả tiền.
+* Rollback bị chặn khi phiên bản cũ không đọc được dữ liệu hiện tại.
+
+**Cần chốt:** D-03, D-11, D-13.
+**BA:** docs/ba/services/svc-06.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## SVC-07 · Xếp hàng giao file để tiếp tục phục vụ khi mất mạng
+
+Loại: Task. Parent BA: EP-07.
+
+**Mục tiêu/phạm vi:** Lưu công việc upload bền vững, retry có kiểm soát và cấp quyền download. Áp dụng retention, thu hồi link và kiểm tra quyền trên từng file.
+
+**Nghiệm thu:**
+* Restart không làm mất công việc upload chưa hoàn tất.
+* Chỉ báo file sẵn sàng sau khi publish thành công.
+* Token không cho tải ảnh tenant hoặc phiên khác; hết hạn được kiểm tra phía server.
+
+**Cần chốt:** D-06, D-10.
+**BA:** docs/ba/services/svc-07.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## SVC-08 · Xử lý AI và đo usage để cung cấp dịch vụ có phí minh bạch
+
+Loại: Task. Parent BA: EP-05.
+
+**Mục tiêu/phạm vi:** Quản lý AI jobs, quota và kết quả recipe có thể chạy local. Phân biệt reserved/consumed/refunded theo chính sách được chọn.
+
+**Nghiệm thu:**
+* Retry cùng yêu cầu không tính phí hai lần.
+* Kết quả recipe không tương thích local renderer không được publish.
+* Job lỗi/hủy có cách quyết toán usage đã duyệt và test được.
+
+**Cần chốt:** D-09, D-11, D-12.
+**BA:** docs/ba/services/svc-08.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## SVC-09 · Điều phối thiết bị và phục hồi phiên để tránh mất tiền hoặc in trùng
+
+Loại: Task. Parent BA: EP-01.
+
+**Mục tiêu/phạm vi:** Tích hợp adapter thật sau hardware proof; lưu intent và bằng chứng phiên. Điều phối camera, bộ nhận tiền, xử lý ảnh và printer bằng trạng thái bền vững.
+
+**Nghiệm thu:**
+* Mất điện ở các bước nhận tiền/chụp/in có quy trình khôi phục kiểm chứng.
+* Print unknown không tự gửi lại.
+* Luồng local được kiểm thử không Internet trên cấu hình booth đại diện.
+
+**Cần chốt:** D-04, D-07, D-08, D-11.
+**BA:** docs/ba/services/svc-09.md.
+**Trạng thái:** đề xuất, chưa triển khai.
+
+## SVC-10 · Cô lập dữ liệu và ghi audit để bảo vệ từng khách hàng
+
+Loại: Task. Parent BA: EP-02.
+
+**Mục tiêu/phạm vi:** Kiểm tra tenant/role ở server cho mọi tài nguyên và thao tác. Ghi audit có actor, target, lý do, correlation và lọc thông tin nhạy cảm.
+
+**Nghiệm thu:**
+* Thay ID tenant/resource trong request không vượt quyền.
+* Thu hồi quyền có hiệu lực với thao tác nhạy cảm của phiên cũ.
+* Audit không chứa token, activation secret hoặc ảnh khách nguyên bản.
+
+**Cần chốt:** D-05, D-10.
+**BA:** docs/ba/services/svc-10.md.
+**Trạng thái:** đề xuất, chưa triển khai.

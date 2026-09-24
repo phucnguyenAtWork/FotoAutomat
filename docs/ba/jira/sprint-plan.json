@@ -1,0 +1,479 @@
+{
+  "status": "published-future-not-started",
+  "date": "2026-09-25",
+  "boardId": 1,
+  "duration": "2 tuần đề xuất; chưa chốt nhân lực/ngày bắt đầu",
+  "mode": "UI/UX toàn dự án → Backend toàn dự án → Test, CI/CD toàn dự án",
+  "sprints": [
+    {
+      "number": 1,
+      "name": "FA-01 · UI/UX · Booth, tài khoản và giao ảnh",
+      "phase": "UI/UX",
+      "goal": "Duyệt luồng và xây dựng giao diện dữ liệu giả cho kích hoạt, phiên chụp offline và nhận ảnh qua QR.",
+      "existingBaIds": [],
+      "newTaskIds": [
+        "UX-01",
+        "UX-02",
+        "UX-07"
+      ],
+      "jiraSprintId": 1,
+      "jiraName": "FA-01 UI Booth & tài khoản"
+    },
+    {
+      "number": 2,
+      "name": "FA-02 · UI/UX · Cổng thương mại và vận hành",
+      "phase": "UI/UX",
+      "goal": "Hoàn thành 40 màn hình; duyệt trạng thái, quyền, dữ liệu và hợp đồng tích hợp để bàn giao Backend.",
+      "existingBaIds": [],
+      "newTaskIds": [
+        "UX-03",
+        "UX-04",
+        "UX-05",
+        "UX-06"
+      ],
+      "jiraSprintId": 3,
+      "jiraName": "FA-02 UI Quản trị & dịch vụ"
+    },
+    {
+      "number": 3,
+      "name": "FA-03 · Backend · Tài khoản và cách ly dữ liệu",
+      "phase": "Backend",
+      "goal": "Tích hợp đăng nhập, tổ chức, phân quyền và audit để dữ liệu chỉ được truy cập đúng phạm vi.",
+      "existingBaIds": [
+        "CUS-01",
+        "CUS-02",
+        "CUS-17",
+        "OPS-08",
+        "SVC-10"
+      ],
+      "newTaskIds": [],
+      "jiraSprintId": 4,
+      "jiraName": "FA-03 BE Tài khoản & quyền"
+    },
+    {
+      "number": 4,
+      "name": "FA-04 · Backend · Giấy phép, thanh toán và kích hoạt",
+      "phase": "Backend",
+      "goal": "Cấp đúng quyền thuê/vĩnh viễn; đối soát thanh toán và kích hoạt booth không trùng seat.",
+      "existingBaIds": [
+        "BTH-01",
+        "CUS-06",
+        "CUS-07",
+        "CUS-08",
+        "CUS-09",
+        "CUS-10",
+        "CUS-11",
+        "OPS-02",
+        "OPS-03",
+        "OPS-07",
+        "SVC-01",
+        "SVC-02",
+        "SVC-03"
+      ],
+      "newTaskIds": [],
+      "jiraSprintId": 5,
+      "jiraName": "FA-04 BE Billing & kích hoạt"
+    },
+    {
+      "number": 5,
+      "name": "FA-05 · Backend · Phiên chụp và thiết bị tại booth",
+      "phase": "Backend",
+      "goal": "Hoàn thành nhận tiền, chụp, xử lý, in offline và phục hồi phiên; không tự in lại khi kết quả chưa xác định.",
+      "existingBaIds": [
+        "BTH-02",
+        "BTH-03",
+        "BTH-04",
+        "BTH-05",
+        "BTH-06",
+        "BTH-07",
+        "BTH-08",
+        "BTH-09",
+        "BTH-10",
+        "BTH-12",
+        "SVC-09"
+      ],
+      "newTaskIds": [],
+      "jiraSprintId": 6,
+      "jiraName": "FA-05 BE Phiên chụp offline"
+    },
+    {
+      "number": 6,
+      "name": "FA-06 · Backend · AI, công thức màu và nội dung",
+      "phase": "Backend",
+      "goal": "Tạo, duyệt và đồng bộ công thức màu/khung có phiên bản; ghi nhận usage dịch vụ AI.",
+      "existingBaIds": [
+        "CUS-12",
+        "CUS-13",
+        "CUS-14",
+        "CUS-15",
+        "SVC-05",
+        "SVC-08"
+      ],
+      "newTaskIds": [],
+      "jiraSprintId": 7,
+      "jiraName": "FA-06 BE AI & nội dung"
+    },
+    {
+      "number": 7,
+      "name": "FA-07 · Backend · Giao ảnh qua QR",
+      "phase": "Backend",
+      "goal": "Xếp hàng upload khi offline và giao đúng ảnh cho người có quyền; xử lý link hết hạn hoặc bị thu hồi.",
+      "existingBaIds": [
+        "BTH-11",
+        "DL-01",
+        "DL-02",
+        "SVC-07"
+      ],
+      "newTaskIds": [],
+      "jiraSprintId": 8,
+      "jiraName": "FA-07 BE Giao ảnh QR"
+    },
+    {
+      "number": 8,
+      "name": "FA-08 · Backend · Giám sát fleet và hỗ trợ",
+      "phase": "Backend",
+      "goal": "Máy chủ nắm trạng thái booth, phiên chụp và lệnh từ xa; phân biệt dữ liệu cũ và kết quả chưa xác định.",
+      "existingBaIds": [
+        "CUS-03",
+        "CUS-04",
+        "CUS-05",
+        "CUS-16",
+        "CUS-18",
+        "OPS-01",
+        "OPS-06",
+        "SVC-04"
+      ],
+      "newTaskIds": [],
+      "jiraSprintId": 9,
+      "jiraName": "FA-08 BE Giám sát fleet"
+    },
+    {
+      "number": 9,
+      "name": "FA-09 · Backend · Phân phối phiên bản và cập nhật",
+      "phase": "Backend",
+      "goal": "Tích hợp release, rollout theo nhóm và rollback tương thích; không gián đoạn phiên trả tiền.",
+      "existingBaIds": [
+        "OPS-04",
+        "OPS-05",
+        "SVC-06"
+      ],
+      "newTaskIds": [],
+      "jiraSprintId": 10,
+      "jiraName": "FA-09 BE Cập nhật booth"
+    },
+    {
+      "number": 10,
+      "name": "FA-10 · Test, CI/CD · Hồi quy và chất lượng",
+      "phase": "Test, CI/CD",
+      "goal": "Kiểm chứng luồng khách hàng, tiền/quyền, offline, cách ly dữ liệu và pipeline build/test có bằng chứng.",
+      "existingBaIds": [],
+      "newTaskIds": [
+        "QA-01",
+        "QA-02",
+        "QA-04",
+        "QA-05",
+        "QA-07",
+        "CICD-01"
+      ],
+      "jiraSprintId": 11,
+      "jiraName": "FA-10 QA Hồi quy & CI"
+    },
+    {
+      "number": 11,
+      "name": "FA-11 · Test, CI/CD · Fleet và phát hành thử nghiệm",
+      "phase": "Test, CI/CD",
+      "goal": "Kiểm chứng giám sát nhiều booth, tải mục tiêu, cập nhật, phục hồi và phát hành có kiểm soát trước pilot.",
+      "existingBaIds": [],
+      "newTaskIds": [
+        "QA-03",
+        "QA-06",
+        "CICD-02"
+      ],
+      "jiraSprintId": 12,
+      "jiraName": "FA-11 QA Rollout & CD"
+    }
+  ],
+  "newTasks": [
+    {
+      "id": "UX-01",
+      "type": "Task",
+      "parent": "EP-01",
+      "title": "Thiết kế và dựng UI booth để kiểm chứng trọn phiên chụp",
+      "description": "Mục tiêu: Thiết kế và dựng UI booth để kiểm chứng trọn phiên chụp.\n\nCần làm: Mô phỏng nhận tiền, live view, chọn ảnh, làm đẹp, khung, in và phục hồi; ưu tiên cảm ứng và máy cấu hình thấp.\n\nPhạm vi: SCRUM-13 (BTH-02), SCRUM-14 (BTH-03), SCRUM-15 (BTH-04), SCRUM-16 (BTH-05), SCRUM-17 (BTH-06), SCRUM-18 (BTH-07), SCRUM-19 (BTH-08), SCRUM-20 (BTH-09), SCRUM-21 (BTH-10), SCRUM-23 (BTH-12).\n\nĐầu ra / nghiệm thu:\n- Tất cả màn hình trong phạm vi có UI chạy bằng dữ liệu giả và luồng điều hướng kiểm chứng được.\n- Có trạng thái loading/empty/error/offline, ma trận quyền và trường dữ liệu/hợp đồng tích hợp; chính sách mở được đánh dấu.\n- Có biên bản duyệt và danh sách bàn giao; không gọi giao diện dữ liệu giả là chức năng hoàn chỉnh.\n\nGiai đoạn: UI/UX. Sprint dự kiến: FA-01.\nNguồn: docs/ba/jira/sprint-plan.md.\nMã kế hoạch: UX-01.",
+      "sprint": 1,
+      "covers": [
+        "BTH-02",
+        "BTH-03",
+        "BTH-04",
+        "BTH-05",
+        "BTH-06",
+        "BTH-07",
+        "BTH-08",
+        "BTH-09",
+        "BTH-10",
+        "BTH-12"
+      ],
+      "jiraKey": "SCRUM-62",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-62"
+    },
+    {
+      "id": "UX-02",
+      "type": "Task",
+      "parent": "EP-02",
+      "title": "Thiết kế UI tài khoản và kích hoạt để làm rõ quyền truy cập",
+      "description": "Mục tiêu: Thiết kế UI tài khoản và kích hoạt để làm rõ quyền truy cập.\n\nCần làm: Dựng đăng nhập, tổ chức, thành viên, kích hoạt, tải bộ cài và audit; phân biệt vai trò khách hàng với staff.\n\nPhạm vi: SCRUM-12 (BTH-01), SCRUM-24 (CUS-01), SCRUM-25 (CUS-02), SCRUM-29 (CUS-06), SCRUM-40 (CUS-17), SCRUM-49 (OPS-08).\n\nĐầu ra / nghiệm thu:\n- Tất cả màn hình trong phạm vi có UI chạy bằng dữ liệu giả và luồng điều hướng kiểm chứng được.\n- Có trạng thái loading/empty/error/offline, ma trận quyền và trường dữ liệu/hợp đồng tích hợp; chính sách mở được đánh dấu.\n- Có biên bản duyệt và danh sách bàn giao; không gọi giao diện dữ liệu giả là chức năng hoàn chỉnh.\n\nGiai đoạn: UI/UX. Sprint dự kiến: FA-01.\nNguồn: docs/ba/jira/sprint-plan.md.\nMã kế hoạch: UX-02.",
+      "sprint": 1,
+      "covers": [
+        "BTH-01",
+        "CUS-01",
+        "CUS-02",
+        "CUS-06",
+        "CUS-17",
+        "OPS-08"
+      ],
+      "jiraKey": "SCRUM-63",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-63"
+    },
+    {
+      "id": "UX-03",
+      "type": "Task",
+      "parent": "EP-03",
+      "title": "Thiết kế UI giám sát để nhận biết booth cần xử lý",
+      "description": "Mục tiêu: Thiết kế UI giám sát để nhận biết booth cần xử lý.\n\nCần làm: Dựng dashboard, danh sách/chi tiết booth, phiên chụp và hỗ trợ; hiển thị last seen, stale và lệnh chưa rõ kết quả.\n\nPhạm vi: SCRUM-26 (CUS-03), SCRUM-27 (CUS-04), SCRUM-28 (CUS-05), SCRUM-39 (CUS-16), SCRUM-41 (CUS-18), SCRUM-42 (OPS-01), SCRUM-47 (OPS-06).\n\nĐầu ra / nghiệm thu:\n- Tất cả màn hình trong phạm vi có UI chạy bằng dữ liệu giả và luồng điều hướng kiểm chứng được.\n- Có trạng thái loading/empty/error/offline, ma trận quyền và trường dữ liệu/hợp đồng tích hợp; chính sách mở được đánh dấu.\n- Có biên bản duyệt và danh sách bàn giao; không gọi giao diện dữ liệu giả là chức năng hoàn chỉnh.\n\nGiai đoạn: UI/UX. Sprint dự kiến: FA-02.\nNguồn: docs/ba/jira/sprint-plan.md.\nMã kế hoạch: UX-03.",
+      "sprint": 2,
+      "covers": [
+        "CUS-03",
+        "CUS-04",
+        "CUS-05",
+        "CUS-16",
+        "CUS-18",
+        "OPS-01",
+        "OPS-06"
+      ],
+      "jiraKey": "SCRUM-64",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-64"
+    },
+    {
+      "id": "UX-04",
+      "type": "Task",
+      "parent": "EP-04",
+      "title": "Thiết kế UI thương mại để minh bạch gói phí và quyền sử dụng",
+      "description": "Mục tiêu: Thiết kế UI thương mại để minh bạch gói phí và quyền sử dụng.\n\nCần làm: Dựng gói, checkout, giấy phép, quota, chứng từ và đối soát; dùng dữ liệu mẫu, đánh dấu chính sách chưa chốt.\n\nPhạm vi: SCRUM-30 (CUS-07), SCRUM-31 (CUS-08), SCRUM-32 (CUS-09), SCRUM-33 (CUS-10), SCRUM-34 (CUS-11), SCRUM-43 (OPS-02), SCRUM-44 (OPS-03), SCRUM-48 (OPS-07).\n\nĐầu ra / nghiệm thu:\n- Tất cả màn hình trong phạm vi có UI chạy bằng dữ liệu giả và luồng điều hướng kiểm chứng được.\n- Có trạng thái loading/empty/error/offline, ma trận quyền và trường dữ liệu/hợp đồng tích hợp; chính sách mở được đánh dấu.\n- Có biên bản duyệt và danh sách bàn giao; không gọi giao diện dữ liệu giả là chức năng hoàn chỉnh.\n\nGiai đoạn: UI/UX. Sprint dự kiến: FA-02.\nNguồn: docs/ba/jira/sprint-plan.md.\nMã kế hoạch: UX-04.",
+      "sprint": 2,
+      "covers": [
+        "CUS-07",
+        "CUS-08",
+        "CUS-09",
+        "CUS-10",
+        "CUS-11",
+        "OPS-02",
+        "OPS-03",
+        "OPS-07"
+      ],
+      "jiraKey": "SCRUM-65",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-65"
+    },
+    {
+      "id": "UX-05",
+      "type": "Task",
+      "parent": "EP-05",
+      "title": "Thiết kế UI nội dung để duyệt màu và khung trước phát hành",
+      "description": "Mục tiêu: Thiết kế UI nội dung để duyệt màu và khung trước phát hành.\n\nCần làm: Dựng thư viện, chỉnh công thức AI, khung và publish; mô phỏng preview, version, lỗi và quota.\n\nPhạm vi: SCRUM-35 (CUS-12), SCRUM-36 (CUS-13), SCRUM-37 (CUS-14), SCRUM-38 (CUS-15).\n\nĐầu ra / nghiệm thu:\n- Tất cả màn hình trong phạm vi có UI chạy bằng dữ liệu giả và luồng điều hướng kiểm chứng được.\n- Có trạng thái loading/empty/error/offline, ma trận quyền và trường dữ liệu/hợp đồng tích hợp; chính sách mở được đánh dấu.\n- Có biên bản duyệt và danh sách bàn giao; không gọi giao diện dữ liệu giả là chức năng hoàn chỉnh.\n\nGiai đoạn: UI/UX. Sprint dự kiến: FA-02.\nNguồn: docs/ba/jira/sprint-plan.md.\nMã kế hoạch: UX-05.",
+      "sprint": 2,
+      "covers": [
+        "CUS-12",
+        "CUS-13",
+        "CUS-14",
+        "CUS-15"
+      ],
+      "jiraKey": "SCRUM-66",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-66"
+    },
+    {
+      "id": "UX-06",
+      "type": "Task",
+      "parent": "EP-06",
+      "title": "Thiết kế UI cập nhật để kiểm soát rollout và sự cố",
+      "description": "Mục tiêu: Thiết kế UI cập nhật để kiểm soát rollout và sự cố.\n\nCần làm: Dựng quản lý release và triển khai theo nhóm; thể hiện downloaded, installed, healthy, pause và rollback.\n\nPhạm vi: SCRUM-45 (OPS-04), SCRUM-46 (OPS-05).\n\nĐầu ra / nghiệm thu:\n- Tất cả màn hình trong phạm vi có UI chạy bằng dữ liệu giả và luồng điều hướng kiểm chứng được.\n- Có trạng thái loading/empty/error/offline, ma trận quyền và trường dữ liệu/hợp đồng tích hợp; chính sách mở được đánh dấu.\n- Có biên bản duyệt và danh sách bàn giao; không gọi giao diện dữ liệu giả là chức năng hoàn chỉnh.\n\nGiai đoạn: UI/UX. Sprint dự kiến: FA-02.\nNguồn: docs/ba/jira/sprint-plan.md.\nMã kế hoạch: UX-06.",
+      "sprint": 2,
+      "covers": [
+        "OPS-04",
+        "OPS-05"
+      ],
+      "jiraKey": "SCRUM-67",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-67"
+    },
+    {
+      "id": "UX-07",
+      "type": "Task",
+      "parent": "EP-07",
+      "title": "Thiết kế UI nhận ảnh để giải thích rõ trạng thái QR",
+      "description": "Mục tiêu: Thiết kế UI nhận ảnh để giải thích rõ trạng thái QR.\n\nCần làm: Dựng QR tại booth và gallery di động; phân biệt đang upload, sẵn sàng, hết hạn, bị thu hồi và mất mạng.\n\nPhạm vi: SCRUM-22 (BTH-11), SCRUM-50 (DL-01), SCRUM-51 (DL-02).\n\nĐầu ra / nghiệm thu:\n- Tất cả màn hình trong phạm vi có UI chạy bằng dữ liệu giả và luồng điều hướng kiểm chứng được.\n- Có trạng thái loading/empty/error/offline, ma trận quyền và trường dữ liệu/hợp đồng tích hợp; chính sách mở được đánh dấu.\n- Có biên bản duyệt và danh sách bàn giao; không gọi giao diện dữ liệu giả là chức năng hoàn chỉnh.\n\nGiai đoạn: UI/UX. Sprint dự kiến: FA-01.\nNguồn: docs/ba/jira/sprint-plan.md.\nMã kế hoạch: UX-07.",
+      "sprint": 1,
+      "covers": [
+        "BTH-11",
+        "DL-01",
+        "DL-02"
+      ],
+      "jiraKey": "SCRUM-68",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-68"
+    },
+    {
+      "id": "QA-01",
+      "type": "Task",
+      "parent": "EP-01",
+      "title": "Kiểm thử booth offline để chứng minh an toàn tiền và bản in",
+      "description": "Mục tiêu: Kiểm thử booth offline để chứng minh an toàn tiền và bản in.\n\nCần làm: Chạy trọn phiên trên Windows và cấu hình đại diện; thử restart/mất mạng/lỗi camera/printer, print unknown và receipt replay; hardware test chỉ sau khi được cho phép.\n\nPhạm vi: SCRUM-13 (BTH-02), SCRUM-14 (BTH-03), SCRUM-15 (BTH-04), SCRUM-16 (BTH-05), SCRUM-17 (BTH-06), SCRUM-18 (BTH-07), SCRUM-19 (BTH-08), SCRUM-20 (BTH-09), SCRUM-21 (BTH-10), SCRUM-23 (BTH-12), SCRUM-60 (SVC-09).\n\nĐầu ra / nghiệm thu:\n- Có ma trận test liên kết tiêu chí BA, dữ liệu kiểm thử và kết quả pass/fail tái hiện được.\n- Các lỗi chặn phát hành được xử lý và chạy lại; phần thiếu thiết bị/chính sách ghi Blocked, không ghi Pass.\n- Lưu báo cáo và bằng chứng trong pipeline/tài liệu nghiệm thu; đạt tiêu chí đã duyệt trước khi đóng Task.\n\nGiai đoạn: Test, CI/CD. Sprint dự kiến: FA-10.\nNguồn: docs/ba/jira/sprint-plan.md.\nMã kế hoạch: QA-01.",
+      "sprint": 10,
+      "covers": [
+        "BTH-02",
+        "BTH-03",
+        "BTH-04",
+        "BTH-05",
+        "BTH-06",
+        "BTH-07",
+        "BTH-08",
+        "BTH-09",
+        "BTH-10",
+        "BTH-12",
+        "SVC-09"
+      ],
+      "jiraKey": "SCRUM-69",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-69"
+    },
+    {
+      "id": "QA-02",
+      "type": "Task",
+      "parent": "EP-02",
+      "title": "Kiểm thử phân quyền và kích hoạt để ngăn truy cập sai tổ chức",
+      "description": "Mục tiêu: Kiểm thử phân quyền và kích hoạt để ngăn truy cập sai tổ chức.\n\nCần làm: Thử quyền ở API và UI, truy cập chéo tenant, mã hết hạn, kích hoạt lặp, chuyển seat và audit; xác minh không lộ token hoặc ảnh.\n\nPhạm vi: SCRUM-12 (BTH-01), SCRUM-24 (CUS-01), SCRUM-25 (CUS-02), SCRUM-29 (CUS-06), SCRUM-40 (CUS-17), SCRUM-49 (OPS-08), SCRUM-52 (SVC-01), SCRUM-61 (SVC-10).\n\nĐầu ra / nghiệm thu:\n- Có ma trận test liên kết tiêu chí BA, dữ liệu kiểm thử và kết quả pass/fail tái hiện được.\n- Các lỗi chặn phát hành được xử lý và chạy lại; phần thiếu thiết bị/chính sách ghi Blocked, không ghi Pass.\n- Lưu báo cáo và bằng chứng trong pipeline/tài liệu nghiệm thu; đạt tiêu chí đã duyệt trước khi đóng Task.\n\nGiai đoạn: Test, CI/CD. Sprint dự kiến: FA-10.\nNguồn: docs/ba/jira/sprint-plan.md.\nMã kế hoạch: QA-02.",
+      "sprint": 10,
+      "covers": [
+        "BTH-01",
+        "CUS-01",
+        "CUS-02",
+        "CUS-06",
+        "CUS-17",
+        "OPS-08",
+        "SVC-01",
+        "SVC-10"
+      ],
+      "jiraKey": "SCRUM-70",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-70"
+    },
+    {
+      "id": "QA-03",
+      "type": "Task",
+      "parent": "EP-03",
+      "title": "Kiểm thử fleet để phát hiện trạng thái cũ và lệnh không an toàn",
+      "description": "Mục tiêu: Kiểm thử fleet để phát hiện trạng thái cũ và lệnh không an toàn.\n\nCần làm: Mô phỏng nhiều booth, heartbeat đến muộn, mất mạng, lệnh lặp/hết hạn và kết quả unknown; kiểm tra tải theo quy mô đã chốt.\n\nPhạm vi: SCRUM-26 (CUS-03), SCRUM-27 (CUS-04), SCRUM-28 (CUS-05), SCRUM-39 (CUS-16), SCRUM-41 (CUS-18), SCRUM-42 (OPS-01), SCRUM-47 (OPS-06), SCRUM-55 (SVC-04).\n\nĐầu ra / nghiệm thu:\n- Có ma trận test liên kết tiêu chí BA, dữ liệu kiểm thử và kết quả pass/fail tái hiện được.\n- Các lỗi chặn phát hành được xử lý và chạy lại; phần thiếu thiết bị/chính sách ghi Blocked, không ghi Pass.\n- Lưu báo cáo và bằng chứng trong pipeline/tài liệu nghiệm thu; đạt tiêu chí đã duyệt trước khi đóng Task.\n\nGiai đoạn: Test, CI/CD. Sprint dự kiến: FA-11.\nNguồn: docs/ba/jira/sprint-plan.md.\nMã kế hoạch: QA-03.",
+      "sprint": 11,
+      "covers": [
+        "CUS-03",
+        "CUS-04",
+        "CUS-05",
+        "CUS-16",
+        "CUS-18",
+        "OPS-01",
+        "OPS-06",
+        "SVC-04"
+      ],
+      "jiraKey": "SCRUM-71",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-71"
+    },
+    {
+      "id": "QA-04",
+      "type": "Task",
+      "parent": "EP-04",
+      "title": "Kiểm thử billing và giấy phép để tránh ghi phí hoặc cấp quyền sai",
+      "description": "Mục tiêu: Kiểm thử billing và giấy phép để tránh ghi phí hoặc cấp quyền sai.\n\nCần làm: Thử webhook lặp/sai thứ tự, hủy/hoàn tiền theo policy, offline grace, thuê/vĩnh viễn, quota và đối soát hai dòng tiền riêng.\n\nPhạm vi: SCRUM-30 (CUS-07), SCRUM-31 (CUS-08), SCRUM-32 (CUS-09), SCRUM-33 (CUS-10), SCRUM-34 (CUS-11), SCRUM-43 (OPS-02), SCRUM-44 (OPS-03), SCRUM-48 (OPS-07), SCRUM-53 (SVC-02), SCRUM-54 (SVC-03).\n\nĐầu ra / nghiệm thu:\n- Có ma trận test liên kết tiêu chí BA, dữ liệu kiểm thử và kết quả pass/fail tái hiện được.\n- Các lỗi chặn phát hành được xử lý và chạy lại; phần thiếu thiết bị/chính sách ghi Blocked, không ghi Pass.\n- Lưu báo cáo và bằng chứng trong pipeline/tài liệu nghiệm thu; đạt tiêu chí đã duyệt trước khi đóng Task.\n\nGiai đoạn: Test, CI/CD. Sprint dự kiến: FA-10.\nNguồn: docs/ba/jira/sprint-plan.md.\nMã kế hoạch: QA-04.",
+      "sprint": 10,
+      "covers": [
+        "CUS-07",
+        "CUS-08",
+        "CUS-09",
+        "CUS-10",
+        "CUS-11",
+        "OPS-02",
+        "OPS-03",
+        "OPS-07",
+        "SVC-02",
+        "SVC-03"
+      ],
+      "jiraKey": "SCRUM-72",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-72"
+    },
+    {
+      "id": "QA-05",
+      "type": "Task",
+      "parent": "EP-05",
+      "title": "Kiểm thử nội dung và AI để bảo toàn phiên bản và usage",
+      "description": "Mục tiêu: Kiểm thử nội dung và AI để bảo toàn phiên bản và usage.\n\nCần làm: Thử job thất bại/lặp, quota, tính phí, preview/render, khung không hợp lệ, publish gián đoạn và nội dung cũ tại booth.\n\nPhạm vi: SCRUM-35 (CUS-12), SCRUM-36 (CUS-13), SCRUM-37 (CUS-14), SCRUM-38 (CUS-15), SCRUM-56 (SVC-05), SCRUM-59 (SVC-08).\n\nĐầu ra / nghiệm thu:\n- Có ma trận test liên kết tiêu chí BA, dữ liệu kiểm thử và kết quả pass/fail tái hiện được.\n- Các lỗi chặn phát hành được xử lý và chạy lại; phần thiếu thiết bị/chính sách ghi Blocked, không ghi Pass.\n- Lưu báo cáo và bằng chứng trong pipeline/tài liệu nghiệm thu; đạt tiêu chí đã duyệt trước khi đóng Task.\n\nGiai đoạn: Test, CI/CD. Sprint dự kiến: FA-10.\nNguồn: docs/ba/jira/sprint-plan.md.\nMã kế hoạch: QA-05.",
+      "sprint": 10,
+      "covers": [
+        "CUS-12",
+        "CUS-13",
+        "CUS-14",
+        "CUS-15",
+        "SVC-05",
+        "SVC-08"
+      ],
+      "jiraKey": "SCRUM-73",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-73"
+    },
+    {
+      "id": "QA-06",
+      "type": "Task",
+      "parent": "EP-06",
+      "title": "Kiểm thử rollout và rollback để bảo vệ booth đang phục vụ",
+      "description": "Mục tiêu: Kiểm thử rollout và rollback để bảo vệ booth đang phục vụ.\n\nCần làm: Thử gói lỗi/chữ ký sai, tải gián đoạn, thiếu dung lượng, phiên đang trả tiền, canary lỗi và phục hồi schema tương thích; giữ bằng chứng Windows.\n\nPhạm vi: SCRUM-45 (OPS-04), SCRUM-46 (OPS-05), SCRUM-57 (SVC-06).\n\nĐầu ra / nghiệm thu:\n- Có ma trận test liên kết tiêu chí BA, dữ liệu kiểm thử và kết quả pass/fail tái hiện được.\n- Các lỗi chặn phát hành được xử lý và chạy lại; phần thiếu thiết bị/chính sách ghi Blocked, không ghi Pass.\n- Lưu báo cáo và bằng chứng trong pipeline/tài liệu nghiệm thu; đạt tiêu chí đã duyệt trước khi đóng Task.\n\nGiai đoạn: Test, CI/CD. Sprint dự kiến: FA-11.\nNguồn: docs/ba/jira/sprint-plan.md.\nMã kế hoạch: QA-06.",
+      "sprint": 11,
+      "covers": [
+        "OPS-04",
+        "OPS-05",
+        "SVC-06"
+      ],
+      "jiraKey": "SCRUM-74",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-74"
+    },
+    {
+      "id": "QA-07",
+      "type": "Task",
+      "parent": "EP-07",
+      "title": "Kiểm thử giao ảnh để bảo vệ file và phục hồi upload",
+      "description": "Mục tiêu: Kiểm thử giao ảnh để bảo vệ file và phục hồi upload.\n\nCần làm: Thử upload lặp/gián đoạn, QR trước khi có file, token hết hạn/thu hồi, truy cập sai bộ ảnh và xóa theo retention đã duyệt.\n\nPhạm vi: SCRUM-22 (BTH-11), SCRUM-50 (DL-01), SCRUM-51 (DL-02), SCRUM-58 (SVC-07).\n\nĐầu ra / nghiệm thu:\n- Có ma trận test liên kết tiêu chí BA, dữ liệu kiểm thử và kết quả pass/fail tái hiện được.\n- Các lỗi chặn phát hành được xử lý và chạy lại; phần thiếu thiết bị/chính sách ghi Blocked, không ghi Pass.\n- Lưu báo cáo và bằng chứng trong pipeline/tài liệu nghiệm thu; đạt tiêu chí đã duyệt trước khi đóng Task.\n\nGiai đoạn: Test, CI/CD. Sprint dự kiến: FA-10.\nNguồn: docs/ba/jira/sprint-plan.md.\nMã kế hoạch: QA-07.",
+      "sprint": 10,
+      "covers": [
+        "BTH-11",
+        "DL-01",
+        "DL-02",
+        "SVC-07"
+      ],
+      "jiraKey": "SCRUM-75",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-75"
+    },
+    {
+      "id": "CICD-01",
+      "type": "Task",
+      "parent": "EP-06",
+      "title": "Hoàn thiện CI để kiểm tra tự động và truy vết từng bản build",
+      "description": "Mục tiêu: Hoàn thiện CI để kiểm tra tự động và truy vết từng bản build.\n\nCần làm: Mở rộng pipeline hiện có cho booth, web và backend; restore/build/lint, unit/integration, harness, kiểm tra dependency/secret, lưu báo cáo và artifact gắn commit. Chạy lỗi có chủ đích để xác minh gate chặn; ghi rõ test nào cần Windows/hardware.\n\nNghiệm thu:\n- Có cấu hình được review và lần chạy thành công lưu bằng chứng.\n- Kịch bản lỗi chặn phát hành hoặc phục hồi theo runbook được kiểm chứng.\n- Bàn giao tài liệu vận hành, quyền phê duyệt và các giới hạn còn lại.\n\nGiai đoạn: Test, CI/CD. Sprint dự kiến: FA-10.\nNguồn: docs/ba/jira/sprint-plan.md.\nMã kế hoạch: CICD-01.",
+      "sprint": 10,
+      "covers": [],
+      "jiraKey": "SCRUM-76",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-76"
+    },
+    {
+      "id": "CICD-02",
+      "type": "Task",
+      "parent": "EP-06",
+      "title": "Thiết lập CD và diễn tập phát hành để triển khai có thể phục hồi",
+      "description": "Mục tiêu: Thiết lập CD và diễn tập phát hành để triển khai có thể phục hồi.\n\nCần làm: Thiết lập staging, quản lý secret, migration/backup, ký và đóng gói Windows, promotion có phê duyệt, health check, rollback và runbook; diễn tập trên môi trường thử nghiệm trước pilot. Không tự triển khai production trong task lập kế hoạch.\n\nNghiệm thu:\n- Có cấu hình được review và lần chạy thành công lưu bằng chứng.\n- Kịch bản lỗi chặn phát hành hoặc phục hồi theo runbook được kiểm chứng.\n- Bàn giao tài liệu vận hành, quyền phê duyệt và các giới hạn còn lại.\n\nGiai đoạn: Test, CI/CD. Sprint dự kiến: FA-11.\nNguồn: docs/ba/jira/sprint-plan.md.\nMã kế hoạch: CICD-02.",
+      "sprint": 11,
+      "covers": [],
+      "jiraKey": "SCRUM-77",
+      "jiraUrl": "https://phucnguyen31work.atlassian.net/browse/SCRUM-77"
+    }
+  ],
+  "publishedMapping": "sprint-published.json"
+}
