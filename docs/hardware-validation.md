@@ -60,3 +60,9 @@ Wait for the exact hardware model and protocol before writing a real adapter.
 * Verify compatibility between application versions, stored session data, and recipe versions before rollback.
 
 These are acceptance targets for future implementation, not automated checks that currently exist.
+
+## DS620A layout target
+
+The operator specified DNP DS620A for 4x6 full-sheet and paired 2x6 strip layouts. DNP's Windows cutting guide confirms these sizes and requires appropriate driver/firmware. The software now stores intended cut mode with layout geometry; no driver or physical cutter is integrated or tested. Before deployment verify full-sheet output with 2-inch cutting disabled, paired strips with it enabled, orientation, margins and image alignment on the actual printer.
+
+Source: https://dnpphoto.com/Portals/0/Resources/FAQ_17_DS_HowToEnable2InchCutsInWindows.pdf

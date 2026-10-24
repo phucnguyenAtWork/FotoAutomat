@@ -4,8 +4,9 @@
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="CustomerTheme.xaml"/>
+        <ResourceDictionary Source="TouchControls.xaml"/>
       </ResourceDictionary.MergedDictionaries>
-      <local:IndexEqualsConverter x:Key="Equal"/>
+      <local:CustomerPhotoConverter x:Key="CustomerPhoto"/><local:LayoutEffectConverter x:Key="LayoutEffect"/><local:IndexEqualsConverter x:Key="Equal"/><BooleanToVisibilityConverter x:Key="Visible"/>
       <DataTemplate x:Key="Welcome">
         <Grid Margin="64,24,64,24">
           <Grid.RowDefinitions>
@@ -20,200 +21,138 @@
               <Ellipse Width="570" Height="480" Opacity="0.7">
                 <Ellipse.Fill>
                   <RadialGradientBrush>
-                    <GradientStop Color="#F3D2DF"/>
+                    <GradientStop Color="{DynamicResource BrandGlowColor}"/>
                     <GradientStop Color="#00FAF3E9" Offset="1"/>
                   </RadialGradientBrush>
                 </Ellipse.Fill>
               </Ellipse>
               <StackPanel VerticalAlignment="Center">
-                <TextBlock TextAlignment="Center" Foreground="{StaticResource Ink}" FontSize="78" FontFamily="{StaticResource HeadingFont}">
-                  <Run Text="Foto " FontStyle="Italic"/>
-                  <Run Text="Hunter" FontWeight="Bold"/>
-                </TextBlock>
-                <Button Content="CHẠM ĐỂ BẮT ĐẦU" Click="OnNext" Style="{StaticResource Back}" BorderBrush="{StaticResource Rose}" Foreground="{StaticResource ActionRose}" FontFamily="{StaticResource HeadingFont}" FontSize="28" Margin="0,46,0,10" HorizontalAlignment="Center" Padding="52,20"/>
+                <TextBlock TextAlignment="Center" Foreground="{StaticResource Ink}" FontSize="78" FontWeight="Bold" FontFamily="{StaticResource HeadingFont}" MaxWidth="900" TextTrimming="CharacterEllipsis" Text="{Binding BrandTitle, RelativeSource={RelativeSource AncestorType=Window}}" Visibility="{Binding HasNoBrandLogo, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Visible}}"/>
+                <Image MaxWidth="520" MaxHeight="200" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Source="{Binding BrandLogo, RelativeSource={RelativeSource AncestorType=Window}}" Visibility="{Binding HasBrandLogo, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Visible}}"/>
+                <Button Content="CHẠM ĐỂ BẮT ĐẦU" Click="OnNext" IsEnabled="{Binding CanStart, RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource Back}" BorderBrush="{StaticResource Rose}" Foreground="{StaticResource ActionRose}" FontFamily="{StaticResource HeadingFont}" FontSize="28" Margin="0,46,0,10" HorizontalAlignment="Center" Padding="52,20"/>
                 <TextBlock Text="TOUCH TO START" Style="{StaticResource Body}"/>
+                <TextBlock Text="{Binding CameraStatus, RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource Body}" FontSize="16" Margin="0,18,0,0" Visibility="{Binding HasCameraStatus, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Visible}}"/>
               </StackPanel>
             </Grid>
           </Grid>
-          <TextBlock Grid.Row="1" Text="FOTO HUNTER PHOTOBOOTH" VerticalAlignment="Bottom" Style="{StaticResource Subtitle}" Foreground="{StaticResource Muted}"/>
+          <TextBlock Grid.Row="1" Text="{Binding BrandFooter, RelativeSource={RelativeSource AncestorType=Window}}" VerticalAlignment="Bottom" Style="{StaticResource Subtitle}" Foreground="{StaticResource Muted}"/>
         </Grid>
       </DataTemplate>
       <DataTemplate x:Key="Filter">
         <Grid Margin="64,24,64,24">
           <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="80"/>
           </Grid.RowDefinitions>
-          <Grid>
-            <StackPanel VerticalAlignment="Top">
-              <TextBlock Style="{StaticResource Heading}" Text="Chọn bộ lọc màu ảnh"/>
-              <TextBlock Style="{StaticResource Subtitle}" Text="SELECT COLOR FILTER"/>
-            </StackPanel>
-            <StackPanel VerticalAlignment="Center">
-              <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <RadioButton Style="{StaticResource Choice}" Width="295" Height="160" Tag="f0" GroupName="FilterIndex" Click="OnChoice" IsChecked="{Binding FilterIndex, Converter={StaticResource Equal}, ConverterParameter=0, Mode=OneWay}">
-                  <StackPanel>
-                    <Ellipse Width="62" Height="62" Stroke="{StaticResource Wine}" StrokeThickness="2">
-                      <Ellipse.Fill>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                          <GradientStop Color="#F1D4B4"/>
-                          <GradientStop Color="#E6A1B7" Offset="1"/>
-                        </LinearGradientBrush>
-                      </Ellipse.Fill>
-                    </Ellipse>
-                    <TextBlock Text="Bộ lọc 1" FontFamily="{StaticResource HeadingFont}" FontSize="24" FontWeight="Bold" TextAlignment="Center" Margin="0,16,0,0"/>
-                  </StackPanel>
-                </RadioButton>
-                <RadioButton Style="{StaticResource Choice}" Width="295" Height="160" Tag="f1" GroupName="FilterIndex" Click="OnChoice" IsChecked="{Binding FilterIndex, Converter={StaticResource Equal}, ConverterParameter=1, Mode=OneWay}">
-                  <StackPanel>
-                    <Ellipse Width="62" Height="62" Stroke="{StaticResource Wine}" StrokeThickness="2">
-                      <Ellipse.Fill>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                          <GradientStop Color="#C4B797"/>
-                          <GradientStop Color="#716351" Offset="1"/>
-                        </LinearGradientBrush>
-                      </Ellipse.Fill>
-                    </Ellipse>
-                    <TextBlock Text="Bộ lọc 2" FontFamily="{StaticResource HeadingFont}" FontSize="24" FontWeight="Bold" TextAlignment="Center" Margin="0,16,0,0"/>
-                  </StackPanel>
-                </RadioButton>
-                <RadioButton Style="{StaticResource Choice}" Width="295" Height="160" Tag="f2" GroupName="FilterIndex" Click="OnChoice" IsChecked="{Binding FilterIndex, Converter={StaticResource Equal}, ConverterParameter=2, Mode=OneWay}">
-                  <StackPanel>
-                    <Ellipse Width="62" Height="62" Stroke="{StaticResource Wine}" StrokeThickness="2">
-                      <Ellipse.Fill>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                          <GradientStop Color="#44372F"/>
-                          <GradientStop Color="#BAAEA2" Offset="1"/>
-                        </LinearGradientBrush>
-                      </Ellipse.Fill>
-                    </Ellipse>
-                    <TextBlock Text="Bộ lọc 3" FontFamily="{StaticResource HeadingFont}" FontSize="24" FontWeight="Bold" TextAlignment="Center" Margin="0,16,0,0"/>
-                  </StackPanel>
-                </RadioButton>
-              </StackPanel>
-              <TextBlock Text="Bộ lọc do quản trị viên cửa hàng thiết lập" Style="{StaticResource Body}" FontSize="15" Margin="0,30,0,0"/>
-            </StackPanel>
-          </Grid>
-          <Button Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="QUAY LẠI" Style="{StaticResource Back}" Click="OnBack"/>
-          <Button Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="TIẾP TỤC" Style="{StaticResource Action}" Click="OnNext"/>
+          <StackPanel>
+            <TextBlock Style="{StaticResource Heading}" Text="Chọn chế độ chụp"/>
+            <TextBlock Style="{StaticResource Subtitle}" Text="SELECT SHOOTING MODE"/>
+          </StackPanel>
+          <!-- Cuộn ngang bằng cảm ứng; thanh cuộn ẩn. Ảnh là ảnh xem trước của bộ lọc; tiêu đề và mô tả đặt ở Màn hình &amp; thương hiệu. -->
+          <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" PanningMode="HorizontalOnly" VerticalAlignment="Center" Margin="0,12">
+            <!-- Grid rộng tối thiểu bằng vùng nhìn: ít thẻ thì căn giữa, nhiều thẻ thì bắt đầu từ mép trái và cuộn. -->
+            <Grid MinWidth="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
+              <ItemsControl ItemsSource="{Binding FilterCards, RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center">
+                <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate><DataTemplate>
+                  <RadioButton Style="{StaticResource Choice}" Width="300" Padding="16" VerticalContentAlignment="Top" Tag="{Binding Index}" GroupName="FilterIndex" Click="OnPresetChoice" IsChecked="{Binding Selected, Mode=OneWay}">
+                    <StackPanel Width="268">
+                      <Image Width="268" Height="201" Stretch="UniformToFill" Source="{Binding Image}">
+                        <Image.Clip><RectangleGeometry Rect="0,0,268,201" RadiusX="12" RadiusY="12"/></Image.Clip>
+                      </Image>
+                      <TextBlock Text="{Binding Title}" FontFamily="{StaticResource HeadingFont}" FontSize="24" FontWeight="Bold" TextAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0,14,0,0"/>
+                      <TextBlock Text="{Binding Description}" Style="{StaticResource Body}" FontSize="16" LineHeight="22" MaxHeight="66" TextTrimming="CharacterEllipsis" Margin="0,8,0,2" Visibility="{Binding HasDescription, Converter={StaticResource Visible}}"/>
+                    </StackPanel>
+                  </RadioButton>
+                </DataTemplate></ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </Grid>
+          </ScrollViewer>
+          <Button Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="QUAY LẠI" Style="{StaticResource Back}" Click="OnBack"/>
+          <Button Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="TIẾP TỤC" Style="{StaticResource Action}" Click="OnNext"/>
         </Grid>
       </DataTemplate>
       <DataTemplate x:Key="Layout">
-        <Grid Margin="64,24,64,24">
-          <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="80"/>
-          </Grid.RowDefinitions>
-          <Grid>
-            <StackPanel VerticalAlignment="Top">
-              <TextBlock Style="{StaticResource Heading}" Text="Chọn khung ảnh"/>
-              <TextBlock Style="{StaticResource Subtitle}" Text="SELECT YOUR LAYOUT"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,60,0,0">
-              <RadioButton Style="{StaticResource Choice}" Width="215" Height="225" Tag="l0" GroupName="LayoutIndex" Click="OnChoice" IsChecked="{Binding LayoutIndex, Converter={StaticResource Equal}, ConverterParameter=0, Mode=OneWay}">
-                <StackPanel>
-                  <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Border Width="32" Height="88" BorderBrush="{StaticResource Wine}" BorderThickness="2" CornerRadius="4" Margin="3">
-                      <UniformGrid Rows="3">
-                        <Border Background="{StaticResource Blush}" Margin="2"/>
-                        <Border Background="{StaticResource Blush}" Margin="2"/>
-                        <Border Background="{StaticResource Blush}" Margin="2"/>
-                      </UniformGrid>
-                    </Border>
-                    <Border Width="32" Height="88" BorderBrush="{StaticResource Wine}" BorderThickness="2" CornerRadius="4" Margin="3">
-                      <UniformGrid Rows="3">
-                        <Border Background="{StaticResource Blush}" Margin="2"/>
-                        <Border Background="{StaticResource Blush}" Margin="2"/>
-                        <Border Background="{StaticResource Blush}" Margin="2"/>
-                      </UniformGrid>
-                    </Border>
-                  </StackPanel>
-                  <TextBlock Text="Khổ nhỏ 1+1" FontFamily="{StaticResource HeadingFont}" FontSize="24" FontWeight="Bold" TextAlignment="Center" Margin="0,16,0,0"/>
-                  <TextBlock Text="Small size 1+1" Style="{StaticResource Body}" FontSize="14" Margin="0,10,0,0"/>
-                </StackPanel>
-              </RadioButton>
-              <RadioButton Style="{StaticResource Choice}" Width="215" Height="225" Tag="l1" GroupName="LayoutIndex" Click="OnChoice" IsChecked="{Binding LayoutIndex, Converter={StaticResource Equal}, ConverterParameter=1, Mode=OneWay}">
-                <StackPanel>
-                  <Border Width="74" Height="88" BorderBrush="{StaticResource Wine}" BorderThickness="2" CornerRadius="4" HorizontalAlignment="Center">
-                    <UniformGrid Rows="2" Columns="2">
-                      <Border Background="{StaticResource Blush}" Margin="2"/>
-                      <Border Background="{StaticResource Blush}" Margin="2"/>
-                      <Border Background="{StaticResource Blush}" Margin="2"/>
-                      <Border Background="{StaticResource Blush}" Margin="2"/>
-                    </UniformGrid>
-                  </Border>
-                  <TextBlock Text="Khổ lớn 1+1" FontFamily="{StaticResource HeadingFont}" FontSize="24" FontWeight="Bold" TextAlignment="Center" Margin="0,16,0,0"/>
-                  <TextBlock Text="Big size 1+1" Style="{StaticResource Body}" FontSize="14" Margin="0,10,0,0"/>
-                </StackPanel>
-              </RadioButton>
-              <StackPanel Margin="38,0,0,0">
-                <TextBlock Text="SỐ LƯỢNG ẢNH" Style="{StaticResource Subtitle}" Foreground="{StaticResource Muted}"/>
-                <RadioButton Style="{StaticResource Choice}" Width="122" Height="65" Tag="q0" GroupName="PackageIndex" Click="OnChoice" IsChecked="{Binding PackageIndex, Converter={StaticResource Equal}, ConverterParameter=0, Mode=OneWay}" Padding="8">
-                  <StackPanel>
-                    <TextBlock Text="2" FontFamily="{StaticResource HeadingFont}" FontSize="22" FontWeight="Bold" TextAlignment="Center" Margin="0"/>
-                    <TextBlock Text="80.000đ" TextAlignment="Center" FontSize="13"/>
-                  </StackPanel>
-                </RadioButton>
-                <RadioButton Style="{StaticResource Choice}" Width="122" Height="65" Tag="q1" GroupName="PackageIndex" Click="OnChoice" IsChecked="{Binding PackageIndex, Converter={StaticResource Equal}, ConverterParameter=1, Mode=OneWay}" Padding="8">
-                  <StackPanel>
-                    <TextBlock Text="4" FontFamily="{StaticResource HeadingFont}" FontSize="22" FontWeight="Bold" TextAlignment="Center" Margin="0"/>
-                    <TextBlock Text="140.000đ" TextAlignment="Center" FontSize="13"/>
-                  </StackPanel>
-                </RadioButton>
-                <RadioButton Style="{StaticResource Choice}" Width="122" Height="65" Tag="q2" GroupName="PackageIndex" Click="OnChoice" IsChecked="{Binding PackageIndex, Converter={StaticResource Equal}, ConverterParameter=2, Mode=OneWay}" Padding="8">
-                  <StackPanel>
-                    <TextBlock Text="6" FontFamily="{StaticResource HeadingFont}" FontSize="22" FontWeight="Bold" TextAlignment="Center" Margin="0"/>
-                    <TextBlock Text="210.000đ" TextAlignment="Center" FontSize="13"/>
-                  </StackPanel>
-                </RadioButton>
-                <RadioButton Style="{StaticResource Choice}" Width="122" Height="65" Tag="q3" GroupName="PackageIndex" Click="OnChoice" IsChecked="{Binding PackageIndex, Converter={StaticResource Equal}, ConverterParameter=3, Mode=OneWay}" Padding="8">
-                  <StackPanel>
-                    <TextBlock Text="8" FontFamily="{StaticResource HeadingFont}" FontSize="22" FontWeight="Bold" TextAlignment="Center" Margin="0"/>
-                    <TextBlock Text="280.000đ" TextAlignment="Center" FontSize="13"/>
-                  </StackPanel>
-                </RadioButton>
-              </StackPanel>
-            </StackPanel>
-          </Grid>
-          <Button Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="QUAY LẠI" Style="{StaticResource Back}" Click="OnBack"/>
-          <Button Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="THANH TOÁN" Style="{StaticResource Action}" Click="OnNext"/>
-        </Grid>
-      </DataTemplate>
+<Grid Margin="64,24"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="80"/></Grid.RowDefinitions>
+<TextBlock Text="{Binding PackageHeading}" Style="{StaticResource Heading}"/>
+<StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+<RadioButton Content="{Binding PackageOptions[0].Label}" Tag="q0" Click="OnChoice" GroupName="Package" Style="{StaticResource Choice}" IsEnabled="{Binding PackageAvailability[0]}" IsChecked="{Binding PackageIndex, Converter={StaticResource Equal}, ConverterParameter=0, Mode=OneWay}" Padding="36,26" FontSize="22"/>
+<RadioButton Content="{Binding PackageOptions[1].Label}" Tag="q1" Click="OnChoice" GroupName="Package" Style="{StaticResource Choice}" IsEnabled="{Binding PackageAvailability[1]}" IsChecked="{Binding PackageIndex, Converter={StaticResource Equal}, ConverterParameter=1, Mode=OneWay}" Padding="36,26" FontSize="22"/>
+</StackPanel>
+<TextBlock Text="Số tấm in" Style="{StaticResource Body}" HorizontalAlignment="Center" Margin="0,36,0,4"/>
+<ItemsControl ItemsSource="{Binding CopyChoices}" HorizontalAlignment="Center"><ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+<ItemsControl.ItemTemplate><DataTemplate><RadioButton Content="{Binding Count}" Tag="{Binding Tag}" Click="OnChoice" GroupName="Copies" Style="{StaticResource Choice}" IsChecked="{Binding Selected, Mode=OneWay}" Width="84" Height="84" Padding="0" FontSize="28" FontWeight="SemiBold"/></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+</StackPanel>
+<Button Grid.Row="2" Content="QUAY LẠI" Click="OnBack" Style="{StaticResource Back}" HorizontalAlignment="Left"/>
+<Button Grid.Row="2" Content="THANH TOÁN" Click="OnNext" Style="{StaticResource Action}" HorizontalAlignment="Right"/>
+</Grid></DataTemplate>
       <DataTemplate x:Key="Payment">
         <Grid Margin="64,24,64,24">
           <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="80"/>
           </Grid.RowDefinitions>
-          <Grid>
-            <StackPanel VerticalAlignment="Top">
-              <TextBlock Style="{StaticResource Heading}" Text="Phương thức thanh toán"/>
-              <TextBlock Style="{StaticResource Subtitle}" Text="PAYMENT METHOD"/>
-            </StackPanel>
-            <Border Style="{StaticResource Panel}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,92,0,0" Padding="20,12">
-              <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding OrderSummary}" Style="{StaticResource Body}" VerticalAlignment="Center"/>
-                <TextBlock Text="{Binding Amount}" FontSize="24" FontWeight="Bold" Foreground="{StaticResource Wine}" Margin="24,0,0,0"/>
+          <StackPanel>
+            <TextBlock Style="{StaticResource Heading}" Text="Thanh toán"/>
+            <TextBlock Style="{StaticResource Subtitle}" Text="PAYMENT"/>
+          </StackPanel>
+          <Grid Grid.Row="1" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition/>
+              <ColumnDefinition Width="48"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center">
+              <TextBlock Text="Mã voucher" FontFamily="{StaticResource HeadingFont}" FontSize="26" Foreground="{StaticResource ActionRose}"/>
+              <TextBlock Text="VOUCHER CODE" Style="{StaticResource Subtitle}" Foreground="{StaticResource Muted}" TextAlignment="Left" Margin="0,2,0,8"/>
+              <Border Height="60" CornerRadius="30" Background="{StaticResource Card}" BorderThickness="2" Padding="24,0">
+                <Border.Style>
+                  <Style TargetType="Border">
+                    <Setter Property="BorderBrush" Value="{StaticResource Line}"/>
+                    <Style.Triggers><DataTrigger Binding="{Binding ShowsAppliedVoucher, RelativeSource={RelativeSource AncestorType=Window}}" Value="True"><Setter Property="BorderBrush" Value="{StaticResource ActionRose}"/></DataTrigger></Style.Triggers>
+                  </Style>
+                </Border.Style>
+                <Grid>
+                  <TextBlock Text="{Binding VoucherBoxText, RelativeSource={RelativeSource AncestorType=Window}}" FontFamily="Consolas" FontSize="34" FontWeight="SemiBold" Foreground="{StaticResource Ink}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  <Border HorizontalAlignment="Right" VerticalAlignment="Center" Background="{StaticResource Blush}" CornerRadius="14" Padding="14,4" Visibility="{Binding ShowsAppliedVoucher, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Visible}}">
+                    <TextBlock Text="✓ ĐÃ ÁP DỤNG" Foreground="{StaticResource Wine}" FontSize="14" FontWeight="SemiBold"/>
+                  </Border>
+                </Grid>
+              </Border>
+              <TextBlock Text="{Binding VoucherMessage, RelativeSource={RelativeSource AncestorType=Window}}" Foreground="{StaticResource Wine}" FontSize="16" Margin="16,10,0,0" Visibility="{Binding HasVoucherMessage, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Visible}}"/>
+              <DockPanel Margin="16,10,0,0" Visibility="{Binding HasVoucher, Converter={StaticResource Visible}}">
+                <Button DockPanel.Dock="Right" Content="XÓA MÃ" Click="OnClearVoucher" Style="{StaticResource Back}" MinWidth="0" MinHeight="40" Padding="18,6" FontSize="14"/>
+                <TextBlock Text="{Binding VoucherSummary}" Style="{StaticResource Body}" TextAlignment="Left" VerticalAlignment="Center"/>
+              </DockPanel>
+              <Border Height="2" Background="{StaticResource Line}" Margin="0,16"/>
+              <TextBlock Text="Số tiền thanh toán" FontFamily="{StaticResource HeadingFont}" FontSize="26" Foreground="{StaticResource ActionRose}"/>
+              <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                <TextBlock Text="{Binding Amount}" FontFamily="{StaticResource BodyFont}" FontSize="42" FontWeight="SemiBold" Foreground="{StaticResource Ink}"/>
+                <TextBlock Text="{Binding PriceLabel}" TextDecorations="Strikethrough" FontSize="22" Foreground="{StaticResource Muted}" VerticalAlignment="Bottom" Margin="18,0,0,10" Visibility="{Binding HasVoucher, Converter={StaticResource Visible}}"/>
               </StackPanel>
-            </Border>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,100,0,0">
-              <Button Tag="cash" Click="OnPaymentChoice" Style="{StaticResource Back}" Background="{StaticResource Card}" BorderBrush="{StaticResource Line}" Width="275" Height="205" Margin="18">
-                <StackPanel>
-                  <TextBlock Text="▣" FontSize="44" Foreground="{StaticResource Wine}" TextAlignment="Center"/>
-                  <TextBlock Text="Tiền mặt" FontFamily="{StaticResource HeadingFont}" FontSize="24" FontWeight="Bold" TextAlignment="Center" Margin="0,16,0,0"/>
-                  <TextBlock Text="Cash" Style="{StaticResource Body}" FontSize="15" Margin="0,12,0,0"/>
-                </StackPanel>
-              </Button>
-              <Button Tag="qr" Click="OnPaymentChoice" Style="{StaticResource Back}" Background="{StaticResource Card}" BorderBrush="{StaticResource Line}" Width="275" Height="205" Margin="18">
-                <StackPanel>
-                  <TextBlock Text="▦" FontSize="44" Foreground="{StaticResource Wine}" TextAlignment="Center"/>
-                  <TextBlock Text="Chuyển khoản QR" FontFamily="{StaticResource HeadingFont}" FontSize="24" FontWeight="Bold" TextAlignment="Center" Margin="0,16,0,0"/>
-                  <TextBlock Text="Bank / e-wallet QR" Style="{StaticResource Body}" FontSize="15" Margin="0,12,0,0"/>
-                </StackPanel>
-              </Button>
+              <StackPanel Orientation="Horizontal" Margin="0,14,0,0" Visibility="{Binding NeedsPayment, Converter={StaticResource Visible}}">
+                <Button Tag="cash" Click="OnPaymentChoice" Style="{StaticResource Back}" Background="{StaticResource Card}" BorderBrush="{StaticResource Line}" Width="290" Height="84" Margin="0,0,18,0">
+                  <StackPanel>
+                    <TextBlock Text="Tiền mặt" FontFamily="{StaticResource HeadingFont}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource Ink}" TextAlignment="Center"/>
+                    <TextBlock Text="CASH" Style="{StaticResource Subtitle}" Margin="0,6,0,0"/>
+                  </StackPanel>
+                </Button>
+                <Button Tag="qr" Click="OnPaymentChoice" Style="{StaticResource Back}" Background="{StaticResource Card}" BorderBrush="{StaticResource Line}" Width="290" Height="84">
+                  <StackPanel>
+                    <TextBlock Text="Chuyển khoản QR" FontFamily="{StaticResource HeadingFont}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource Ink}" TextAlignment="Center"/>
+                    <TextBlock Text="BANK / E-WALLET" Style="{StaticResource Subtitle}" Margin="0,6,0,0"/>
+                  </StackPanel>
+                </Button>
+              </StackPanel>
+              <Button Content="BẮT ĐẦU CHỤP" Click="OnStartFree" Style="{StaticResource Action}" HorizontalAlignment="Left" Margin="0,14,0,0" Visibility="{Binding IsFree, Converter={StaticResource Visible}}"/>
             </StackPanel>
+            <local:NumericKeypad Grid.Column="2" VerticalAlignment="Center" KeyWidth="92" KeyHeight="78" KeyPressed="OnVoucherKey"
+                                 CanEnter="{Binding CanEnterVoucher, RelativeSource={RelativeSource AncestorType=Window}}" CanErase="{Binding CanEraseVoucher, RelativeSource={RelativeSource AncestorType=Window}}"/>
           </Grid>
-          <Button Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="QUAY LẠI" Style="{StaticResource Back}" Click="OnBack"/>
+          <Button Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="QUAY LẠI" Style="{StaticResource Back}" Click="OnBack"/>
         </Grid>
       </DataTemplate>
       <DataTemplate x:Key="QrPayment">
@@ -271,130 +210,150 @@
         </Grid>
       </DataTemplate>
       <DataTemplate x:Key="Instructions">
-        <Grid Margin="64,24,64,24">
-          <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="80"/>
-          </Grid.RowDefinitions>
-          <Grid>
-            <StackPanel VerticalAlignment="Top">
-              <TextBlock Style="{StaticResource Heading}" Text="Hướng dẫn chụp"/>
-            </StackPanel>
-            <StackPanel VerticalAlignment="Center" Margin="0,40,0,0">
-              <Border Width="172" Height="172" BorderBrush="{StaticResource Rose}" BorderThickness="2" CornerRadius="28" HorizontalAlignment="Center">
-                <Grid>
-                  <Ellipse Width="115" Height="115" Fill="{StaticResource Rose}" Stroke="{StaticResource Wine}" StrokeThickness="3"/>
-                  <Ellipse Width="34" Height="34" Fill="{StaticResource Cream}" Stroke="{StaticResource Ink}" StrokeThickness="2"/>
-                </Grid>
+        <!-- Màn chờ trước khi chụp: tấm ảnh (ảnh màn chờ của thương hiệu hoặc ảnh xem trước của chế độ đã chọn) bồng bềnh,
+             kèm số ảnh và số lần chụp lại; thanh tiến trình bằng LoadingDuration (4 giây). -->
+        <Grid Margin="64,8,64,24">
+          <Grid.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+              <BeginStoryboard>
+                <Storyboard>
+                  <DoubleAnimation Storyboard.TargetName="ProgressScale" Storyboard.TargetProperty="ScaleX" From="0" To="1" Duration="0:0:4"/>
+                  <DoubleAnimation Storyboard.TargetName="PhotoTilt" Storyboard.TargetProperty="Angle" From="-3" To="3" Duration="0:0:1.6" AutoReverse="True" RepeatBehavior="Forever">
+                    <DoubleAnimation.EasingFunction><SineEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
+                  </DoubleAnimation>
+                  <DoubleAnimation Storyboard.TargetName="PhotoFloat" Storyboard.TargetProperty="Y" From="-10" To="10" Duration="0:0:1.2" AutoReverse="True" RepeatBehavior="Forever">
+                    <DoubleAnimation.EasingFunction><SineEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
+                  </DoubleAnimation>
+                </Storyboard>
+              </BeginStoryboard>
+            </EventTrigger>
+          </Grid.Triggers>
+          <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid Width="520" Height="400">
+              <Border Width="380" Height="330" Background="{StaticResource Card}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="6" Opacity="0.75" RenderTransformOrigin="0.5,0.5">
+                <Border.RenderTransform><RotateTransform Angle="-10"/></Border.RenderTransform>
               </Border>
-              <TextBlock Text="Nhìn thẳng ống kính, giữ dáng đến khi chụp xong." Style="{StaticResource Body}" Margin="0,28,0,0"/>
-              <TextBlock Text="Bạn có thể chụp lại tối đa 4 lần." Style="{StaticResource Body}" Margin="0,10,0,0"/>
-              <Button Content="SẴN SÀNG" Click="OnNext" Style="{StaticResource Action}" HorizontalAlignment="Center" Margin="0,30,0,0"/>
-            </StackPanel>
-          </Grid>
-        <Button Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="QUAY LẠI" Style="{StaticResource Back}" Click="OnBack" />
-</Grid>
+              <Border Width="380" Height="330" Background="{StaticResource Card}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="6" Opacity="0.9" RenderTransformOrigin="0.5,0.5">
+                <Border.RenderTransform><RotateTransform Angle="8"/></Border.RenderTransform>
+              </Border>
+              <!-- Khung ảnh lấy liền: viền trắng, phần dưới dày hơn. -->
+              <Border Width="380" Height="330" Background="{StaticResource Card}" BorderBrush="{StaticResource Line}" BorderThickness="1" CornerRadius="6" Padding="16,16,16,56" RenderTransformOrigin="0.5,0.5">
+                <Border.Effect><DropShadowEffect BlurRadius="24" ShadowDepth="6" Direction="270" Opacity="0.18"/></Border.Effect>
+                <Border.RenderTransform>
+                  <TransformGroup>
+                    <RotateTransform x:Name="PhotoTilt" Angle="-2"/>
+                    <TranslateTransform x:Name="PhotoFloat"/>
+                  </TransformGroup>
+                </Border.RenderTransform>
+                <Border Background="#E9E1D6" ClipToBounds="True">
+                  <Image Source="{Binding LoadingPhoto, RelativeSource={RelativeSource AncestorType=Window}}" Stretch="UniformToFill"/>
+                </Border>
+              </Border>
+            </Grid>
+            <TextBlock Text="{Binding LoadingCaption}" Style="{StaticResource Heading}" FontSize="34" Margin="0,8,0,0"/>
+            <TextBlock Text="Nhìn thẳng ống kính, giữ dáng đến khi chụp xong." Style="{StaticResource Body}" Margin="0,10,0,0"/>
+            <Border Width="360" Height="6" CornerRadius="3" Background="{StaticResource Line}" Margin="0,22,0,0" HorizontalAlignment="Center">
+              <Border Width="360" HorizontalAlignment="Left" CornerRadius="3" Background="{StaticResource ActionRose}" RenderTransformOrigin="0,0.5">
+                <Border.RenderTransform><ScaleTransform x:Name="ProgressScale" ScaleX="0"/></Border.RenderTransform>
+              </Border>
+            </Border>
+            <TextBlock Text="{Binding CameraStatus, RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource Body}" FontSize="16" Foreground="{StaticResource Wine}" Margin="0,16,0,0" Visibility="{Binding HasCameraStatus, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Visible}}"/>
+          </StackPanel>
+        </Grid>
       </DataTemplate>
       <DataTemplate x:Key="Capture">
-        <Grid Margin="64,24,64,24">
-          <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="80"/>
-          </Grid.RowDefinitions>
-          <Grid>
-            <StackPanel VerticalAlignment="Top">
-              <TextBlock Style="{StaticResource Heading}" Text=""/>
-            </StackPanel>
-            <StackPanel VerticalAlignment="Center">
-              <Border Width="218" Height="218" CornerRadius="109" BorderBrush="{StaticResource Rose}" BorderThickness="2" HorizontalAlignment="Center">
-                <TextBlock Text="{Binding CaptureDisplay}" FontFamily="{StaticResource HeadingFont}" FontSize="94" Foreground="{StaticResource Cream}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-              </Border>
-              <TextBlock Text="GIỮ NGUYÊN TƯ THẾ · HOLD YOUR POSE" Style="{StaticResource Body}" Foreground="{StaticResource Cream}" Margin="0,28,0,0"/>
-              <TextBlock Text="{Binding CaptureLabel}" Style="{StaticResource Body}" Foreground="{StaticResource Cream}" Margin="0,14,0,0"/>
-            </StackPanel>
-          </Grid>
-          <Button Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="QUAY LẠI" Style="{StaticResource Back}" Foreground="{StaticResource Cream}" BorderBrush="{StaticResource Cream}" Click="OnBack"/>
-          <Button Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="CHỌN ẢNH VÀO KHUNG" Style="{StaticResource Action}" Click="OnNext" IsEnabled="{Binding CanSelectPhotos}"/>
+        <!-- Toàn khung màn hình: live view hiện đủ khung cảm biến; phần ngoài vùng sẽ in phủ tối, viền là khuôn theo tỉ lệ ô ảnh. -->
+        <Grid Background="{StaticResource Ink}" ClipToBounds="True">
+          <!-- Hai bên khung camera: chính ảnh đó phóng to, làm mờ và tối, để màn hình kín ảnh mà không lẫn với phần sẽ in. -->
+          <Image Source="{Binding SelectedColorImage, RelativeSource={RelativeSource AncestorType=Window}}" Stretch="UniformToFill" Margin="-60">
+            <Image.Effect><BlurEffect Radius="48" KernelType="Gaussian"/></Image.Effect>
+          </Image>
+          <Rectangle Fill="#B3000000"/>
+          <Viewbox Stretch="Uniform">
+            <Grid Width="{Binding CaptureFrameWidth, RelativeSource={RelativeSource AncestorType=Window}}" Height="{Binding CaptureFrameHeight, RelativeSource={RelativeSource AncestorType=Window}}">
+              <Image Source="{Binding SelectedColorImage, RelativeSource={RelativeSource AncestorType=Window}}" Stretch="Fill"/>
+              <Path Data="{Binding CaptureMask, RelativeSource={RelativeSource AncestorType=Window}}" Fill="#8C000000" Visibility="{Binding HasCaptureMask, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Visible}}"/>
+              <!-- Gạch chéo nhạt: phần ảnh có chụp nhưng không được in. -->
+              <Path Data="{Binding CaptureMask, RelativeSource={RelativeSource AncestorType=Window}}" Fill="{Binding CaptureHatch, RelativeSource={RelativeSource AncestorType=Window}}" Visibility="{Binding HasCaptureMask, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Visible}}"/>
+              <Border BorderBrush="#66FAF3E9" BorderThickness="{Binding CaptureFrameOutline, RelativeSource={RelativeSource AncestorType=Window}}"/>
+              <Path Data="{Binding CaptureGuide, RelativeSource={RelativeSource AncestorType=Window}}" Stroke="{StaticResource Cream}" StrokeThickness="{Binding CaptureGuideStroke, RelativeSource={RelativeSource AncestorType=Window}}" Visibility="{Binding HasCaptureMask, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Visible}}"/>
+            </Grid>
+          </Viewbox>
+          <TextBlock Text="{Binding SessionClock}" Foreground="{StaticResource Cream}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,16,0,0" Visibility="{Binding ShowSessionClock, Converter={StaticResource Visible}}"/>
+          <TextBlock Text="{Binding CaptureDisplay}" Background="#80000000" Padding="20,4" FontSize="72" Foreground="{StaticResource Cream}" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock.Style><Style TargetType="TextBlock"><Style.Triggers><Trigger Property="Text" Value=""><Setter Property="Visibility" Value="Collapsed"/></Trigger></Style.Triggers></Style></TextBlock.Style>
+          </TextBlock>
+          <Border Background="#99000000" CornerRadius="22" Padding="22,8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,24">
+            <TextBlock Text="{Binding CaptureLabel}" Foreground="{StaticResource Cream}" FontSize="20"/>
+          </Border>
+          <!-- Đang xem lại ảnh vừa chụp: nút X bên trái để xóa ảnh đó; ảnh bị xóa không tính vào số shot và được chụp lại ngay. -->
+          <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="56,0,0,0" Visibility="{Binding CanRetake, Converter={StaticResource Visible}}">
+            <Button Click="OnRetake" Width="112" Height="112" Cursor="Hand" Focusable="False" AutomationProperties.Name="Xóa ảnh vừa chụp">
+              <Button.Template>
+                <ControlTemplate TargetType="Button">
+                  <Grid>
+                    <Ellipse x:Name="Face" Fill="#B3000000" Stroke="{StaticResource Cream}" StrokeThickness="3"/>
+                    <Path Data="M 0,0 L 40,40 M 40,0 L 0,40" Stroke="{StaticResource Cream}" StrokeThickness="6" StrokeStartLineCap="Round" StrokeEndLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Grid>
+                  <ControlTemplate.Triggers>
+                    <Trigger Property="IsPressed" Value="True"><Setter TargetName="Face" Property="Fill" Value="{StaticResource ActionRose}"/></Trigger>
+                  </ControlTemplate.Triggers>
+                </ControlTemplate>
+              </Button.Template>
+            </Button>
+            <TextBlock Text="{Binding RetakeLabel}" Foreground="{StaticResource Cream}" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,12,0,0"/>
+          </StackPanel>
         </Grid>
       </DataTemplate>
       <DataTemplate x:Key="Selection">
-        <Grid Margin="64,24,64,24">
-          <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="80"/>
-          </Grid.RowDefinitions>
-          <Grid>
-            <StackPanel VerticalAlignment="Top">
-              <TextBlock Style="{StaticResource Heading}" Text="Chọn ảnh vào khung"/>
-              <TextBlock Style="{StaticResource Subtitle}" Text="TAP A PHOTO, THEN TAP A SLOT"/>
-            </StackPanel>
-            <StackPanel VerticalAlignment="Center" Margin="0,60,0,0">
-              <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Border Style="{StaticResource Panel}" Padding="16" VerticalAlignment="Center">
-                  <ItemsControl ItemsSource="{Binding Slots}">
-                    <ItemsControl.ItemsPanel>
-                      <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                      </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                      <DataTemplate>
-                        <Button Style="{StaticResource Slot}" Tag="{Binding Index}" Click="OnSlot" AutomationProperties.Name="{Binding Label}">
-                          <TextBlock Text="{Binding Label}" TextWrapping="Wrap" TextAlignment="Center"/>
-                        </Button>
-                      </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                  </ItemsControl>
-                </Border>
-                <StackPanel Margin="40,0,0,0">
-                  <TextBlock Text="ẢNH ĐÃ CHỤP" Style="{StaticResource Subtitle}" Foreground="{StaticResource Muted}"/>
-                  <WrapPanel Width="336" Margin="0,14,0,0">
-                    <RadioButton Style="{StaticResource Choice}" Width="92" Height="100" Tag="p1" GroupName="Photos" Click="OnChoice" IsChecked="{Binding SelectedPhoto, Converter={StaticResource Equal}, ConverterParameter=1, Mode=OneWay}" Padding="6">
-                      <StackPanel>
-                        <TextBlock Text="1" FontFamily="{StaticResource HeadingFont}" FontSize="28" FontWeight="Bold" TextAlignment="Center" Margin="0,16,0,0"/>
-                        <TextBlock Text="Ảnh mẫu" FontSize="12" TextAlignment="Center"/>
-                      </StackPanel>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource Choice}" Width="92" Height="100" Tag="p2" GroupName="Photos" Click="OnChoice" IsChecked="{Binding SelectedPhoto, Converter={StaticResource Equal}, ConverterParameter=2, Mode=OneWay}" Padding="6">
-                      <StackPanel>
-                        <TextBlock Text="2" FontFamily="{StaticResource HeadingFont}" FontSize="28" FontWeight="Bold" TextAlignment="Center" Margin="0,16,0,0"/>
-                        <TextBlock Text="Ảnh mẫu" FontSize="12" TextAlignment="Center"/>
-                      </StackPanel>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource Choice}" Width="92" Height="100" Tag="p3" GroupName="Photos" Click="OnChoice" IsChecked="{Binding SelectedPhoto, Converter={StaticResource Equal}, ConverterParameter=3, Mode=OneWay}" Padding="6">
-                      <StackPanel>
-                        <TextBlock Text="3" FontFamily="{StaticResource HeadingFont}" FontSize="28" FontWeight="Bold" TextAlignment="Center" Margin="0,16,0,0"/>
-                        <TextBlock Text="Ảnh mẫu" FontSize="12" TextAlignment="Center"/>
-                      </StackPanel>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource Choice}" Width="92" Height="100" Tag="p4" GroupName="Photos" Click="OnChoice" IsChecked="{Binding SelectedPhoto, Converter={StaticResource Equal}, ConverterParameter=4, Mode=OneWay}" Padding="6">
-                      <StackPanel>
-                        <TextBlock Text="4" FontFamily="{StaticResource HeadingFont}" FontSize="28" FontWeight="Bold" TextAlignment="Center" Margin="0,16,0,0"/>
-                        <TextBlock Text="Ảnh mẫu" FontSize="12" TextAlignment="Center"/>
-                      </StackPanel>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource Choice}" Width="92" Height="100" Tag="p5" GroupName="Photos" Click="OnChoice" IsChecked="{Binding SelectedPhoto, Converter={StaticResource Equal}, ConverterParameter=5, Mode=OneWay}" Padding="6">
-                      <StackPanel>
-                        <TextBlock Text="5" FontFamily="{StaticResource HeadingFont}" FontSize="28" FontWeight="Bold" TextAlignment="Center" Margin="0,16,0,0"/>
-                        <TextBlock Text="Ảnh mẫu" FontSize="12" TextAlignment="Center"/>
-                      </StackPanel>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource Choice}" Width="92" Height="100" Tag="p6" GroupName="Photos" Click="OnChoice" IsChecked="{Binding SelectedPhoto, Converter={StaticResource Equal}, ConverterParameter=6, Mode=OneWay}" Padding="6">
-                      <StackPanel>
-                        <TextBlock Text="6" FontFamily="{StaticResource HeadingFont}" FontSize="28" FontWeight="Bold" TextAlignment="Center" Margin="0,16,0,0"/>
-                        <TextBlock Text="Ảnh mẫu" FontSize="12" TextAlignment="Center"/>
-                      </StackPanel>
-                    </RadioButton>
-                  </WrapPanel>
-                </StackPanel>
-              </StackPanel>
-              <TextBlock Text="{Binding SelectionHint}" Style="{StaticResource Body}" FontSize="15" Margin="0,24,0,0"/>
-            </StackPanel>
-          </Grid>
-          <Button Grid.Row="1" Content="{Binding RetakeLabel}" Style="{StaticResource Back}" Click="OnRetake" IsEnabled="{Binding CanRetake}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-          <Button Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="IN ẢNH" Style="{StaticResource Action}" Click="OnNext" IsEnabled="{Binding CanPrint}"/>
-        </Grid>
-      </DataTemplate>
+<Grid Margin="64,24"><Grid.RowDefinitions><RowDefinition Height="85"/><RowDefinition/><RowDefinition Height="80"/></Grid.RowDefinitions>
+<StackPanel><TextBlock Text="Chọn những ảnh bạn thích" Style="{StaticResource Heading}"/><TextBlock Text="{Binding SelectionHint}" Style="{StaticResource Body}" Margin="0,12"/></StackPanel>
+<ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"><ItemsControl ItemsSource="{Binding Photos}"><ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel><ItemsControl.ItemTemplate><DataTemplate>
+<Button Tag="{Binding Number}" Click="OnPhoto" Width="205" Height="165" Margin="10" Style="{StaticResource Back}"><StackPanel><Image Height="100" Stretch="Uniform"><Image.Source><MultiBinding Converter="{StaticResource CustomerPhoto}"><Binding Path="Number"/><Binding RelativeSource="{RelativeSource AncestorType=Window}"/></MultiBinding></Image.Source></Image><TextBlock Text="{Binding Label}" HorizontalAlignment="Center" Margin="0,8,0,0"/></StackPanel></Button>
+</DataTemplate></ItemsControl.ItemTemplate></ItemsControl></ScrollViewer>
+<Button Grid.Row="2" Content="TIẾP TỤC" Click="OnNext" IsEnabled="{Binding CanChooseFrame}" Style="{StaticResource Action}" HorizontalAlignment="Right"/>
+</Grid></DataTemplate>
+<DataTemplate x:Key="Beauty">
+<Grid Margin="64,24"><Grid.RowDefinitions><RowDefinition Height="85"/><RowDefinition/><RowDefinition Height="80"/></Grid.RowDefinitions>
+<TextBlock Text="Làm đẹp" Style="{StaticResource Heading}"/>
+<Grid Grid.Row="1"><Grid.ColumnDefinitions><ColumnDefinition Width="3*"/><ColumnDefinition Width="2*"/></Grid.ColumnDefinitions>
+<Border Style="{StaticResource Panel}" Margin="0,0,32,0"><Grid><Image Source="{Binding SelectedColorImage, RelativeSource={RelativeSource AncestorType=Window}}" Stretch="Uniform"/><TextBlock Text="{Binding BeautyPhotoLabel}" Style="{StaticResource Body}" VerticalAlignment="Bottom"/></Grid></Border>
+<StackPanel Grid.Column="1" VerticalAlignment="Center"><TextBlock Text="Mức làm đẹp" Style="{StaticResource Body}"/><TextBlock Text="{Binding BeautyLevel, StringFormat='{}{0}%'}" Style="{StaticResource Heading}" Margin="0,12"/>
+<Slider Minimum="0" Maximum="100" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding BeautyLevel, Mode=TwoWay}" Height="52" AutomationProperties.Name="Mức làm đẹp"/>
+<Button Content="ĐẶT LẠI" Click="OnResetBeauty" Style="{StaticResource Back}" Margin="0,16"/>
+<ScrollViewer MaxHeight="180" VerticalScrollBarVisibility="Auto"><ItemsControl ItemsSource="{Binding FavoritePhotos}"><ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel><ItemsControl.ItemTemplate><DataTemplate><Button Content="{Binding Label}" Tag="{Binding Number}" Click="OnPhoto" Width="150" Height="64" Margin="4" Style="{StaticResource Back}"/></DataTemplate></ItemsControl.ItemTemplate></ItemsControl></ScrollViewer>
+</StackPanel></Grid>
+<Button Grid.Row="2" Content="QUAY LẠI" Click="OnBack" Style="{StaticResource Back}" HorizontalAlignment="Left"/>
+<Button Grid.Row="2" Content="CHỌN KHUNG" Click="OnNext" Style="{StaticResource Action}" HorizontalAlignment="Right"/>
+</Grid></DataTemplate>
+<DataTemplate x:Key="Frame">
+<Grid Margin="64,24"><Grid.RowDefinitions><RowDefinition Height="80"/><RowDefinition Height="75"/><RowDefinition/><RowDefinition Height="80"/></Grid.RowDefinitions>
+<TextBlock Text="{Binding FrameTitle}" Style="{StaticResource Heading}"/>
+<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Visibility="{Binding UsesSampleFrames, Converter={StaticResource Visible}}"><RadioButton Content="Khung 3 ảnh" Tag="l0" Click="OnChoice" GroupName="FrameChoice" Padding="18,8" FontSize="18" Style="{StaticResource Choice}" IsChecked="{Binding LayoutIndex, Converter={StaticResource Equal}, ConverterParameter=0, Mode=OneWay}"/>
+<RadioButton Content="Khung 4 ảnh" Tag="l1" Click="OnChoice" GroupName="FrameChoice" Padding="18,8" FontSize="18" Style="{StaticResource Choice}" IsChecked="{Binding LayoutIndex, Converter={StaticResource Equal}, ConverterParameter=1, Mode=OneWay}"/>
+</StackPanel>
+<ItemsControl Grid.Row="1" ItemsSource="{Binding FrameChoiceItems}" HorizontalAlignment="Center" Visibility="{Binding HasFrameChoice, Converter={StaticResource Visible}}"><ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+<ItemsControl.ItemTemplate><DataTemplate><RadioButton Content="{Binding Name}" Tag="{Binding Tag}" Click="OnChoice" GroupName="FrameChoice" Padding="18,8" FontSize="18" Style="{StaticResource Choice}" IsChecked="{Binding Selected, Mode=OneWay}"/></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+<Grid Grid.Row="2"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="390"/></Grid.ColumnDefinitions>
+<Grid><Grid.RowDefinitions><RowDefinition/><RowDefinition Height="45"/></Grid.RowDefinitions>
+<Viewbox Stretch="Uniform" Margin="12"><Grid Width="{Binding FrameWidth}" Height="{Binding FrameHeight}" Background="{Binding FrameBackground}">
+<ItemsControl ItemsSource="{Binding Slots}">
+<ItemsControl.ItemsPanel><ItemsPanelTemplate><Canvas Width="{Binding FrameWidth}" Height="{Binding FrameHeight}"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+<ItemsControl.ItemContainerStyle><Style TargetType="ContentPresenter"><Setter Property="Canvas.Left" Value="{Binding X}"/><Setter Property="Canvas.Top" Value="{Binding Y}"/></Style></ItemsControl.ItemContainerStyle>
+<ItemsControl.ItemTemplate><DataTemplate>
+<Border Width="{Binding Width}" Height="{Binding Height}" BorderBrush="{Binding Appearance.StrokeColor, FallbackValue=#222222}" BorderThickness="{Binding Appearance.StrokeWidth, FallbackValue=0}" RenderTransformOrigin="0.5,0.5" Effect="{Binding Appearance, Converter={StaticResource LayoutEffect}}">
+<Border.RenderTransform><RotateTransform Angle="{Binding Appearance.Rotation, FallbackValue=0}"/></Border.RenderTransform>
+<Button IsHitTestVisible="{Binding IsPhoto}" Tag="{Binding Index}" Click="OnSlot" Padding="0" Margin="0" MinHeight="0" MinWidth="0" Background="Transparent" BorderThickness="0"><Grid ClipToBounds="True"><local:LayoutElementVisual Element="{Binding Appearance}" Preview="True"/><Image Stretch="UniformToFill"><Image.Source><MultiBinding Converter="{StaticResource CustomerPhoto}"><Binding Path="Photo"/><Binding RelativeSource="{RelativeSource AncestorType=Window}"/></MultiBinding></Image.Source><Image.Style><Style TargetType="Image"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding IsPhoto}" Value="True"><Setter Property="Visibility" Value="Visible"/></DataTrigger><DataTrigger Binding="{Binding Photo}" Value="{x:Null}"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></Image.Style></Image><TextBlock Text="{Binding Label}" FontSize="20" TextWrapping="Wrap" Visibility="{Binding IsPhoto, Converter={StaticResource Visible}}"/></Grid></Button>
+</Border></DataTemplate></ItemsControl.ItemTemplate>
+</ItemsControl>
+<Image Panel.ZIndex="{Binding FrameArtworkZIndex, RelativeSource={RelativeSource AncestorType=Window}}" Source="{Binding FrameArtwork, RelativeSource={RelativeSource AncestorType=Window}}" Stretch="Fill" IsHitTestVisible="False"/>
+</Grid></Viewbox>
+<TextBlock Grid.Row="1" Text="{Binding SelectionHint}" Style="{StaticResource Body}" FontSize="14" VerticalAlignment="Center"/>
+</Grid><ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto"><ItemsControl ItemsSource="{Binding FavoritePhotos}"><ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel><ItemsControl.ItemTemplate><DataTemplate><Button Content="{Binding Label}" Tag="{Binding Number}" Click="OnPhoto" Width="165" Height="90" Margin="8" Style="{StaticResource Back}"/></DataTemplate></ItemsControl.ItemTemplate></ItemsControl></ScrollViewer>
+</Grid>
+<Button Grid.Row="3" Content="QUAY LẠI" Click="OnBack" Style="{StaticResource Back}" HorizontalAlignment="Left"/>
+<Button Grid.Row="3" Content="IN ẢNH" Click="OnNext" IsEnabled="{Binding CanPrint}" Style="{StaticResource Action}" HorizontalAlignment="Right"/>
+</Grid></DataTemplate>
       <DataTemplate x:Key="Printing">
         <Grid Margin="64,24,64,24">
           <Grid.RowDefinitions>
@@ -409,43 +368,19 @@
               <TextBlock Text="▣" Style="{StaticResource Heading}" FontSize="64"/>
               <TextBlock Text="Đang in ảnh của bạn" Style="{StaticResource Heading}" Margin="0,24,0,0"/>
               <TextBlock Text="PRINTING YOUR PHOTOS · GIỮ VỮNG VUI CHỜ NHÉ" Style="{StaticResource Subtitle}" Foreground="{StaticResource Muted}" Margin="0,22,0,0"/>
-              <ProgressBar Value="{Binding PrintProgress}" Maximum="100" Height="10" Width="360" Foreground="{StaticResource Rose}" Background="{StaticResource Line}" BorderThickness="0" Margin="0,28,0,0" AutomationProperties.Name="Tiến trình in mô phỏng"/>
+              <ProgressBar Value="{Binding PrintProgress}" Maximum="100" Height="10" Width="360" Foreground="{StaticResource Rose}" Background="{StaticResource Line}" BorderThickness="0" Margin="0,28,0,0" AutomationProperties.Name="Tiến trình in"/>
+              <TextBlock Text="{Binding PrintError}" Style="{StaticResource Body}" Foreground="{StaticResource Wine}" HorizontalAlignment="Center" Margin="0,20,0,0" Visibility="{Binding HasPrintError, Converter={StaticResource Visible}}"/>
             </StackPanel>
           </Grid>
           <Button Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="HOÀN TẤT" Style="{StaticResource Action}" Click="OnNext" IsEnabled="{Binding CanFinishPrint}"/>
         </Grid>
       </DataTemplate>
       <DataTemplate x:Key="Delivery">
-        <Grid Margin="64,24,64,24">
-          <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="80"/>
-          </Grid.RowDefinitions>
-          <Grid>
-            <StackPanel VerticalAlignment="Top">
-              <TextBlock Style="{StaticResource Heading}" Text="Quét mã QR để tải file"/>
-              <TextBlock Style="{StaticResource Subtitle}" Text="SCAN FOR YOUR DIGITAL FILE"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,40,0,0">
-              <Border Style="{StaticResource Panel}" Width="205" Height="240" Margin="12" BorderBrush="{StaticResource Rose}">
-                <TextBlock Text="PHOTO FILE" Style="{StaticResource Body}" VerticalAlignment="Center"/>
-              </Border>
-              <StackPanel VerticalAlignment="Center" Margin="12">
-                <Border Width="205" Height="205" CornerRadius="16" BorderBrush="{StaticResource Rose}" BorderThickness="2" Background="{StaticResource Card}" HorizontalAlignment="Center">
-                  <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="[MÃ QR]" Foreground="{StaticResource ActionRose}" FontSize="20" TextAlignment="Center"/>
-                    <TextBlock Text="Bản xem trước" Style="{StaticResource Body}" FontSize="14" Margin="0,12,0,0"/>
-                  </StackPanel>
-                </Border>
-                <TextBlock Text="SCAN QR CODE" Style="{StaticResource Subtitle}"/>
-              </StackPanel>
-              <Border Style="{StaticResource Panel}" Width="205" Height="240" Margin="12" BorderBrush="{StaticResource Rose}">
-                <TextBlock Text="VIDEO FILE" Style="{StaticResource Body}" VerticalAlignment="Center"/>
-              </Border>
-            </StackPanel>
-          </Grid>
-          <Button Grid.Row="1" Content="CHỤP PHIÊN MỚI" Click="OnRestart" Style="{StaticResource Action}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-        </Grid>
+<Grid Margin="64,24"><Grid.RowDefinitions><RowDefinition Height="100"/><RowDefinition/><RowDefinition Height="80"/></Grid.RowDefinitions>
+<StackPanel><TextBlock Text="Ảnh của bạn" Style="{StaticResource Heading}"/><TextBlock Text="{Binding DeliverySummary}" Style="{StaticResource Body}" Margin="0,16"/></StackPanel>
+<ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"><ItemsControl ItemsSource="{Binding Photos}"><ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel><ItemsControl.ItemTemplate><DataTemplate><Border Style="{StaticResource Panel}" Width="185" Height="160" Margin="8"><StackPanel><Image Height="110" Stretch="Uniform"><Image.Source><MultiBinding Converter="{StaticResource CustomerPhoto}"><Binding Path="Number"/><Binding RelativeSource="{RelativeSource AncestorType=Window}"/></MultiBinding></Image.Source></Image><TextBlock Text="{Binding Label}" Style="{StaticResource Body}" Margin="0,8,0,0"/></StackPanel></Border></DataTemplate></ItemsControl.ItemTemplate></ItemsControl></ScrollViewer>
+<Button Grid.Row="2" Content="CHỤP PHIÊN MỚI" Click="OnRestart" Style="{StaticResource Action}" HorizontalAlignment="Center"/>
+</Grid>
       </DataTemplate>
     </ResourceDictionary>
   </Window.Resources>
@@ -460,16 +395,22 @@
           <RowDefinition Height="76"/>
           <RowDefinition/>
         </Grid.RowDefinitions>
+        <Image x:Name="BrandBackdrop" Grid.RowSpan="2" Stretch="UniformToFill" Visibility="Collapsed"/>
+        <Rectangle x:Name="BrandOverlay" Grid.RowSpan="2" Opacity="0.55" Visibility="Collapsed"/>
         <TextBlock x:Name="Brand" Foreground="{StaticResource Ink}" FontFamily="{StaticResource HeadingFont}" FontSize="27" Margin="64,24,0,0" VerticalAlignment="Top">
           <Run Text="Foto " FontStyle="Italic"/>
           <Run Text="Hunter" FontWeight="Bold"/>
         </TextBlock>
+        <Image x:Name="BrandLogoImage" Height="40" Margin="64,18,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Collapsed"/>
         <StackPanel x:Name="ProgressMarks" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,64,0"/>
         <ContentControl x:Name="ScreenContent" Grid.Row="1" Content="{Binding}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
       </Grid>
     </Viewbox>
+    <Button Click="OnAdminUnlock" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,12,16,0" Width="38" Height="38" ToolTip="Mở khóa quản trị" AutomationProperties.Name="Mở khóa quản trị">
+      <Button.Style><Style TargetType="Button"><Setter Property="Opacity" Value="0.3"/><Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button"><Border Background="Transparent" Padding="8"><Path Data="M4 10 H20 V23 H4 Z M7 10 V6 A5 5 0 0 1 17 6 V10 M12 15 V18" Stroke="#888888" StrokeThickness="1.8" Stretch="Uniform"/></Border></ControlTemplate></Setter.Value></Setter><Style.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter Property="Opacity" Value="0.9"/></Trigger><Trigger Property="IsKeyboardFocused" Value="True"><Setter Property="Opacity" Value="0.9"/></Trigger></Style.Triggers></Style></Button.Style>
+    </Button>
     <Border Grid.Row="1" Background="{StaticResource Ink}">
-      <TextBlock x:Name="PreviewNotice" Text="BẢN XEM TRƯỚC UI · Ảnh, thanh toán, in và QR đều mô phỏng · F11: toàn màn hình · Esc: thu nhỏ" Foreground="{StaticResource Cream}" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" AutomationProperties.LiveSetting="Polite"/>
+      <TextBlock x:Name="PreviewNotice" Text="BẢN XEM TRƯỚC UI · Ảnh, làm đẹp, thanh toán và in đều mô phỏng · F11: toàn màn hình · Esc: mở khóa" Foreground="{StaticResource Cream}" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" AutomationProperties.LiveSetting="Polite"/>
     </Border>
   </Grid>
 </Window>

@@ -1,0 +1,62 @@
+{
+  "schema_version": "proposal-1",
+  "status": "example_only_not_trainable",
+  "notes": "Placeholder paths and IDs. No real photos. Importer and validator are not implemented.",
+  "assets": [
+    {
+      "id": "source-a",
+      "path": "images/capture-a/source.jpg",
+      "sha256": null,
+      "capture_group": "capture-a",
+      "session_group": "session-a",
+      "subject_group": "anonymous-subject-a",
+      "camera_model": "Unknown",
+      "input_profile": "Unknown",
+      "normalized_color_space": "sRGB",
+      "rights": { "training_allowed": false, "review_status": "pending", "evidence": null }
+    },
+    {
+      "id": "target-a-look-01",
+      "path": "images/capture-a/look-01.jpg",
+      "sha256": null,
+      "parent_asset": "source-a",
+      "capture_group": "capture-a",
+      "session_group": "session-a",
+      "subject_group": "anonymous-subject-a",
+      "look_id": "look-01",
+      "renderer_version": null,
+      "rights": { "training_allowed": false, "review_status": "pending", "evidence": null }
+    },
+    {
+      "id": "reference-b-look-01",
+      "path": "images/capture-b/look-01.jpg",
+      "sha256": null,
+      "capture_group": "capture-b",
+      "session_group": "session-b",
+      "subject_group": "anonymous-subject-b",
+      "look_id": "look-01",
+      "rights": { "training_allowed": false, "review_status": "pending", "evidence": null }
+    }
+  ],
+  "cases": [
+    {
+      "id": "paired-supervision-example",
+      "source": "source-a",
+      "reference": "reference-b-look-01",
+      "target": "target-a-look-01",
+      "source_target_alignment_verified": false,
+      "split": "unassigned",
+      "eligible_for_training": false
+    },
+    {
+      "id": "unpaired-review-example",
+      "source": "source-a",
+      "reference": "reference-b-look-01",
+      "target": null,
+      "split": "unassigned",
+      "pixel_reference_metrics_allowed": false,
+      "evaluation": "blind_human_review_and_artifact_checks"
+    }
+  ],
+  "split_policy": "Assign connected capture/session/subject groups before augmentation; derivatives follow parents; all cases sharing source stay in one split."
+}

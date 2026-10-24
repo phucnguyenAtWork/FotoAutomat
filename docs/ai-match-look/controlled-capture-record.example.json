@@ -1,0 +1,15 @@
+﻿{
+  "id": "capture-001",
+  "config_id": "booth-config-001",
+  "session_id": "session-001",
+  "burst_id": "burst-001",
+  "partition": "calibration",
+  "subject": "chart",
+  "position_id": "center",
+  "rights_confirmed": false,
+  "continuous_on_during_capture": true,
+  "pairing_verified": false,
+  "raw": {"path": "booth-config-001/session-001/raw/capture-001.RAF", "sha256": null},
+  "jpeg": {"path": "booth-config-001/session-001/jpeg/capture-001.JPG", "sha256": null},
+  "liveview": {"path": "booth-config-001/session-001/liveview/capture-001.PNG", "sha256": null}
+}

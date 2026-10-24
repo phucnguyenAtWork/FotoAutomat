@@ -1,0 +1,17 @@
+{
+  "schema_version": "proposal-1",
+  "status": "not_run",
+  "purpose": "Comparable benchmark plan; not an executable runner or measured results.",
+  "hardware": { "booth": "small_office_pc_expected", "cpu": null, "ram_gb": null, "gpu": null, "training_machine": null },
+  "dataset_manifest_sha256": null,
+  "test_split_locked": false,
+  "experiments": [
+    { "id": "fotoautomat-reference-v2-v3", "role": "statistical_baseline", "status": "not_run_on_shared_ai_benchmark", "commit": null, "results": null },
+    { "id": "canoncgt-pretrained", "role": "first_ai_candidate", "repository": "https://github.com/Jinwon-Ko/CanonCGT", "status": "not_run", "commit": null, "weights_sha256": null, "license_review": "required_before_distribution", "results": null },
+    { "id": "petal-pretrained", "role": "comparison_candidate", "repository": "https://github.com/jiacongfang/PETAL", "status": "not_run", "commit": null, "weights_sha256": null, "license_review": "include_DINOv3_and_checkpoint", "results": null },
+    { "id": "d-lut-per-style", "role": "offline_look_creation_candidate", "repository": "https://github.com/leemojiang/D-LUT", "status": "not_run", "commit": null, "weights_sha256": null, "license_review": "required_before_distribution", "results": null }
+  ],
+  "metrics_to_collect": ["paired_target_delta_e", "paired_target_psnr_ssim", "unpaired_blind_review", "skin_and_neutral_artifacts", "session_consistency", "manual_correction_time", "reference_analysis_cold_and_warm_ms", "per_image_normalize_ms", "cached_recipe_or_lut_apply_ms", "peak_ram_mb", "peak_vram_mb", "python_csharp_parity"],
+  "acceptance_thresholds": null,
+  "notes": "No 90-percent claim until quality definition, independent test set and acceptance thresholds are agreed. Do not compute source-reference pixel similarity for unrelated scenes."
+}

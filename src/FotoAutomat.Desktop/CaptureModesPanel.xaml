@@ -1,0 +1,132 @@
+<UserControl x:Class="FotoAutomat.Desktop.CaptureModesPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:FotoAutomat.Desktop"
+             Background="{DynamicResource PageBrush}"
+             Foreground="{DynamicResource TextBrush}"
+             FontFamily="Segoe UI Variable Text, Segoe UI"
+             FontSize="13"
+             UseLayoutRounding="True"
+             SnapsToDevicePixels="True">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="2026-10-20-AdminDefaults.xaml"/>
+                <ResourceDictionary Source="2026-10-20-ThemeControls.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- CheckBox do mã nguồn tạo trong Fields hiện như công tắc. -->
+            <Style TargetType="CheckBox" BasedOn="{StaticResource SwitchStyle}"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Cài đặt chế độ chụp" Style="{StaticResource TextTitle}" Margin="24,24,24,16"/>
+
+        <!-- Một vùng cuộn duy nhất cho cả trang -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" PanningMode="VerticalOnly">
+            <Grid Margin="24,0,24,24">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MaxWidth="960"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel>
+                    <!-- Phiên chụp: các thông số chung của mọi phiên -->
+                    <Border Style="{StaticResource CardStyle}" Padding="24,20" Margin="0,0,0,16">
+                        <StackPanel>
+                            <TextBlock Text="Phiên chụp" Style="{StaticResource TextSectionTitle}" Margin="0,0,0,12"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="32"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" Grid.Column="0" MinHeight="44" Margin="0,0,0,12">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="Đếm ngược trước mỗi ảnh" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                    <local:NumericStepper x:Name="CountdownStepper" Grid.Column="1" Minimum="1" Maximum="29" Value="3" Unit="giây"
+                                                          VerticalAlignment="Center" ValueChanged="OnSessionChanged"
+                                                          AutomationProperties.Name="Đếm ngược trước mỗi ảnh"/>
+                                </Grid>
+
+                                <Grid Grid.Row="0" Grid.Column="2" MinHeight="44" Margin="0,0,0,12">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="Số ảnh chụp" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                    <local:NumericStepper x:Name="ShotsStepper" Grid.Column="1" Minimum="4" Maximum="10" Value="6"
+                                                          VerticalAlignment="Center" ValueChanged="OnSessionChanged"
+                                                          AutomationProperties.Name="Số ảnh chụp"/>
+                                </Grid>
+
+                                <Grid Grid.Row="1" Grid.Column="0" MinHeight="44">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="Xem lại ảnh" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                    <local:NumericStepper x:Name="ReviewStepper" Grid.Column="1" Minimum="1" Maximum="60" Value="7" Unit="giây"
+                                                          VerticalAlignment="Center" ValueChanged="OnSessionChanged"
+                                                          AutomationProperties.Name="Xem lại ảnh"/>
+                                </Grid>
+
+                                <Grid Grid.Row="1" Grid.Column="2" MinHeight="44">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="Thời gian phiên" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                    <local:NumericStepper x:Name="SessionStepper" Grid.Column="1" Minimum="1" Maximum="60" Value="7" Unit="phút"
+                                                          VerticalAlignment="Center" ValueChanged="OnSessionChanged"
+                                                          AutomationProperties.Name="Thời gian phiên"/>
+                                </Grid>
+
+                                <Grid Grid.Row="2" Grid.Column="0" MinHeight="44" Margin="0,12,0,0">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="Số lần chụp lại" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                    <local:NumericStepper x:Name="RetakeStepper" Grid.Column="1" Minimum="0" Maximum="5" Value="2" Unit="lần"
+                                                          VerticalAlignment="Center" ValueChanged="OnSessionChanged"
+                                                          AutomationProperties.Name="Số lần chụp lại"/>
+                                </Grid>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Chế độ: chọn ở hàng chip, thiết lập của chế độ đang chọn nằm bên dưới -->
+                    <Border Style="{StaticResource CardStyle}" Padding="24,20">
+                        <StackPanel>
+                            <ListBox x:Name="ModesList" Style="{StaticResource ChipListStyle}" SelectionChanged="OnModeChanged"
+                                     AutomationProperties.Name="Chế độ chụp"/>
+
+                            <Border Style="{StaticResource DividerStyle}" Margin="0,8,0,16"/>
+
+                            <DockPanel Margin="0,0,0,16">
+                                <CheckBox x:Name="EnabledMode" DockPanel.Dock="Right" Content="Bật" MinWidth="112"
+                                          Checked="OnEnabled" Unchecked="OnEnabled"/>
+                                <TextBlock x:Name="ModeTitle" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                            </DockPanel>
+
+                            <StackPanel x:Name="Fields"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+        <Border Grid.Row="2" Style="{StaticResource SaveBarStyle}">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <Button Content="Hoàn tác thay đổi" Click="OnRevert" Margin="0,0,8,0"/>
+                    <Button Content="Lưu thiết lập" Click="OnSave" Style="{StaticResource PrimaryButton}" MinHeight="40" MinWidth="128"/>
+                </StackPanel>
+                <TextBlock x:Name="State" Text="Đã lưu" DockPanel.Dock="Left" Style="{StaticResource TextSaveState}" Margin="0,0,16,0"/>
+                <TextBlock x:Name="Feedback" Style="{StaticResource TextCaption}" VerticalAlignment="Center" Margin="0,0,16,0"/>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>

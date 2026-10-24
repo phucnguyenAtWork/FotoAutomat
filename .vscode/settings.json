@@ -1,0 +1,11 @@
+{
+  "dotnet.defaultSolution": "FotoAutomat.slnx",
+  "files.watcherExclude": {
+    "**/*_wpftmp.csproj": true,
+    "**/obj/**": true,
+    "**/bin/**": true
+  },
+  "files.exclude": {
+    "**/*_wpftmp.csproj": true
+  }
+}

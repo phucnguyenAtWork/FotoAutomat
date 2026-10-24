@@ -1,0 +1,24 @@
+﻿{
+  "schema": "fotoautomat-controlled-capture-v1",
+  "configs": [{
+    "id": "booth-config-001",
+    "camera_model": null,
+    "lens": null,
+    "firmware": null,
+    "exposure_mode": "M",
+    "auto_iso": false,
+    "iso": null,
+    "shutter_seconds": null,
+    "aperture": null,
+    "wb_mode": "custom",
+    "wb_value": null,
+    "jpeg_style": null,
+    "color_space": null,
+    "flash_mode": "manual",
+    "flash_power": null,
+    "continuous_light": null,
+    "light_positions": null,
+    "subject_positions": ["center", "left", "right"]
+  }],
+  "captures": []
+}

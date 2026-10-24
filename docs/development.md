@@ -6,6 +6,8 @@ Install .NET SDK 10.0.401 or a compatible patch in the same SDK feature band, as
 
 Use Windows for the WPF UI and hardware work. Use an editor with C# support. macOS and Linux can build and test the portable solution. A cross build of WPF checks compilation only, not desktop behavior.
 
+The desktop targets `net10.0-windows10.0.19041.0` for local WinRT face detection: Windows 10 build 19041 or later. The Windows SDK .NET reference assemblies are restored with the project; the Core and Infrastructure targets remain portable. See [Retouch](retouch-tools.md) for supported tools and manual face selection fallback.
+
 ## Restore and build
 
 From the repository root:
@@ -41,12 +43,14 @@ The default window is the customer UI preview. Follow the reference flow through
 To open the original durable simulator instead:
 
 ```sh
-dotnet run --project src/FotoAutomat.Desktop -- --simulator
+dotnet run --project src/FotoAutomat.Desktop -- --workflow-simulator
 ```
 
 In that simulator, use **New demo session**, **Simulate payment**, **Capture test image**, and **Simulate print**. The image is a generated color gradient. There is no AI processing or real money handling.
 
 ## Local state
+
+Use `--admin` to open the [operator workspace](operator-ui.md). It stores operator draft notes separately under `%LOCALAPPDATA%/FotoAutomat/Operator`; these values do not override customer preview settings.
 
 The customer UI preview holds its state only in memory and clears it on a new session. Settings are deferred. The durable simulator stores its SQLite database and synthetic captures under `%LOCALAPPDATA%/FotoAutomat/Simulator`. Restarting loads the latest session. Interrupted capture or print is marked `NeedsReview`. Starting a new demo after review preserves the old session record; it does not resolve a real payment or print.
 
@@ -55,6 +59,12 @@ The desktop mutex prevents another simulator window within the same Windows logi
 The current database is a disposable development schema. It is not a migrated production ledger. Do not attach it to live hardware or use it for real sales.
 
 ## Troubleshooting
+
+### C# Dev Kit reports missing `_wpftmp.csproj` projects
+
+WPF generates temporary projects during markup compilation and removes them after use. These are not solution projects: `FotoAutomat.slnx` contains five real projects. If C# Dev Kit retains temporary project entries and reports them missing, reload the VS Code window (`Developer: Reload Window`) and open `FotoAutomat.slnx` in Solution Explorer. Workspace settings select that solution explicitly and exclude WPF temporary files from the general VS Code file watcher; the language server may have its own watchers, so this is not a guaranteed fix for every extension version.
+
+Settings are provided in the repository `.vscode/settings.json`; for the current parent `Work` workspace there is also a local `.vscode/settings.json` selecting `FotoAutomat/FotoAutomat.slnx`. Do not recreate missing temporary project files or add them to the solution. A successful solution build verifies the real projects but does not prove that the running IDE has cleared its cached errors.
 
 | Symptom | Check |
 | --- | --- |

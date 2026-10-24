@@ -1,0 +1,5 @@
+{
+  "note": "P3 look split, fixed before training (protocol section 17). Test looks: one per main family, never seen in training. Validation looks select the checkpoint.",
+  "test": ["peach-warm", "portra-like", "cine-green", "retro-70s", "night-neon"],
+  "validation": ["soft-glow", "mint-fresh", "sunny-summer"]
+}

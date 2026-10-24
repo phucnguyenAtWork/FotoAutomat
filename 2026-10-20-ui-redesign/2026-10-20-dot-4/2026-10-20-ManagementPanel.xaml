@@ -1,0 +1,220 @@
+<UserControl x:Class="FotoAutomat.Desktop.ManagementPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:FotoAutomat.Desktop"
+             Language="vi-VN"
+             Background="{DynamicResource PageBrush}"
+             Foreground="{DynamicResource TextBrush}"
+             FontFamily="Segoe UI Variable Text, Segoe UI"
+             FontSize="13"
+             UseLayoutRounding="True"
+             SnapsToDevicePixels="True">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="2026-10-20-AdminDefaults.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <!-- Một panel dùng cho ba mục: Tổng quan, Bảng giá & thanh toán, Phiên chụp & thư viện.
+         ShowSection chỉ đổi Visibility của ReportPanel / PricingPanel / LibraryPanel và đặt TitleText. -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="TitleText" Grid.Row="0" Style="{StaticResource TextTitle}" Margin="24,24,24,16"/>
+
+        <Grid Grid.Row="1">
+
+            <!-- ===== Tổng quan ===== -->
+            <ScrollViewer x:Name="ReportPanel" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel Margin="24,0,24,24" MaxWidth="1120" HorizontalAlignment="Left">
+
+                    <!-- Bộ lọc thời gian -->
+                    <WrapPanel Margin="0,0,0,16">
+                        <ComboBox x:Name="Period" Width="160" SelectedIndex="0" SelectionChanged="OnPeriodChanged" Margin="0,0,16,0">
+                            <ComboBoxItem Content="Ngày"/>
+                            <ComboBoxItem Content="Tháng"/>
+                            <ComboBoxItem Content="Năm"/>
+                            <ComboBoxItem Content="Quý"/>
+                            <ComboBoxItem Content="Tùy chọn"/>
+                        </ComboBox>
+                        <DatePicker x:Name="FromDate" Width="160" SelectedDateChanged="OnRangeChanged"/>
+                        <TextBlock Text="đến" VerticalAlignment="Center" Margin="12,0" Foreground="{StaticResource TextMutedBrush}"/>
+                        <DatePicker x:Name="ToDate" Width="160" SelectedDateChanged="OnRangeChanged"/>
+                    </WrapPanel>
+
+                    <!-- Ba thẻ số liệu -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" Style="{StaticResource CardStyle}" Padding="20">
+                            <StackPanel>
+                                <TextBlock Text="Phiên chụp" Style="{StaticResource TextCaption}"/>
+                                <TextBlock x:Name="SessionCount" Style="{StaticResource TextStatValue}" Margin="0,8,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="2" Style="{StaticResource CardStyle}" Padding="20">
+                            <StackPanel>
+                                <TextBlock Text="Tờ giấy đã in" Style="{StaticResource TextCaption}"/>
+                                <TextBlock x:Name="PaperCount" Style="{StaticResource TextStatValue}" Margin="0,8,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="4" Style="{StaticResource CardStyle}" Padding="20">
+                            <StackPanel>
+                                <DockPanel>
+                                    <Button x:Name="RelockButton" DockPanel.Dock="Right" Content="Khóa doanh thu" Click="OnRelock"
+                                            Style="{StaticResource GhostButton}" MinHeight="28" Padding="8,0" Margin="0,-4,-8,-4"
+                                            Visibility="Collapsed"/>
+                                    <TextBlock Text="Tổng doanh thu" Style="{StaticResource TextCaption}" VerticalAlignment="Center"/>
+                                </DockPanel>
+                                <Grid Margin="0,8,0,0" MinHeight="34">
+                                    <TextBlock x:Name="RevenueText" Style="{StaticResource TextStatValue}"/>
+                                    <Path x:Name="RevenueLock" Stroke="{StaticResource TextDisabledBrush}" StrokeThickness="1.7"
+                                          Data="M4 10 H20 V23 H4 Z M7 10 V6 A5 5 0 0 1 17 6 V10 M12 15 V18"
+                                          Width="24" Height="32" Stretch="Uniform" HorizontalAlignment="Left"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <!-- Mở khóa doanh thu -->
+                    <Border x:Name="PasswordPanel" Style="{StaticResource CardStyle}" Padding="20" Margin="0,16,0,0"
+                            MaxWidth="400" HorizontalAlignment="Left">
+                        <StackPanel>
+                            <TextBlock x:Name="PasswordTitle" Style="{StaticResource TextCardTitle}" Margin="0,0,0,16"/>
+                            <PasswordBox x:Name="RevenuePassword" Margin="0,0,0,8"/>
+                            <PasswordBox x:Name="PasswordConfirm" ToolTip="Nhập lại mật khẩu" Margin="0,0,0,16"/>
+                            <Button x:Name="UnlockButton" Click="OnUnlock" Style="{StaticResource PrimaryButton}"
+                                    MinHeight="40" HorizontalAlignment="Left" MinWidth="128"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ===== Bảng giá & thanh toán ===== -->
+            <ScrollViewer x:Name="PricingPanel" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel Margin="24,0,24,24" MaxWidth="1120" HorizontalAlignment="Left">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" Style="{StaticResource CardStyle}" Padding="20" MinWidth="260">
+                            <StackPanel>
+                                <TextBlock Text="Khổ nhỏ" Style="{StaticResource TextCardTitle}" Margin="0,0,0,16"/>
+                                <local:NumericStepper x:Name="SmallPrice" Minimum="0" Maximum="1000000" Step="5000" Unit="đ" Format="N0"
+                                                      HorizontalAlignment="Left" ValueChanged="OnPriceChanged"
+                                                      AutomationProperties.Name="Giá khổ nhỏ"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="2" Style="{StaticResource CardStyle}" Padding="20" MinWidth="260">
+                            <StackPanel>
+                                <TextBlock Text="Khổ lớn" Style="{StaticResource TextCardTitle}" Margin="0,0,0,16"/>
+                                <local:NumericStepper x:Name="LargePrice" Minimum="0" Maximum="1000000" Step="5000" Unit="đ" Format="N0"
+                                                      HorizontalAlignment="Left" ValueChanged="OnPriceChanged"
+                                                      AutomationProperties.Name="Giá khổ lớn"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ===== Phiên chụp & thư viện ===== -->
+            <ScrollViewer x:Name="LibraryPanel" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel Margin="24,0,24,24" MaxWidth="1120" HorizontalAlignment="Left">
+                    <Button Click="OnRefresh" HorizontalAlignment="Left" Margin="0,0,0,12" Padding="16,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE72C;" Style="{StaticResource TextIcon}" Margin="0,0,8,0"/>
+                            <TextBlock Text="Làm mới" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Border Style="{StaticResource CardStyle}" Padding="0">
+                        <Grid>
+                            <DataGrid x:Name="SessionsGrid" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False"
+                                      MinHeight="200" BorderThickness="0">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Mã phiên" Binding="{Binding Id}" Width="*"/>
+                                    <DataGridTextColumn Header="Thời gian" Binding="{Binding CompletedAt, StringFormat=dd/MM/yyyy HH:mm}" Width="*"/>
+                                    <DataGridTextColumn Header="Liên kết khách" Binding="{Binding ShareUrl}" Width="2*"/>
+                                    <DataGridTemplateColumn Header="Ảnh">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Content="Mở thư mục" Click="OnOpenFolder" MinHeight="32" Padding="12,0"
+                                                        HorizontalAlignment="Left"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <TextBlock x:Name="EmptyLibrary" Text="Chưa có phiên chụp" Foreground="{StaticResource TextMutedBrush}"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,40,0,0" IsHitTestVisible="False"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <!-- Thanh dưới: thông báo (Feedback) và nút Lưu bảng giá. Ẩn khi không có thông báo và không ở mục Bảng giá. -->
+        <Border Grid.Row="2">
+            <Border.Style>
+                <Style TargetType="Border" BasedOn="{StaticResource SaveBarStyle}">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Text, ElementName=Feedback}" Value=""/>
+                                <Condition Binding="{Binding Visibility, ElementName=PricingPanel}" Value="Collapsed"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <DockPanel>
+                <Button DockPanel.Dock="Right" Content="Lưu bảng giá" Click="OnSavePrices" MinHeight="40" MinWidth="128">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Visibility, ElementName=PricingPanel}" Value="Visible">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button x:Name="RevertPricesButton" DockPanel.Dock="Right" Content="Hoàn tác" Click="OnRevertPrices" Margin="0,0,8,0" MinWidth="96">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Visibility, ElementName=PricingPanel}" Value="Visible">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <TextBlock x:Name="DirtyText" DockPanel.Dock="Left" Style="{StaticResource TextSaveState}" Margin="0,0,16,0"/>
+                <TextBlock x:Name="Feedback" Style="{StaticResource TextCaption}" VerticalAlignment="Center" Margin="0,0,16,0"/>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>
+

@@ -1,11 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net10.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../FotoAutomat.Infrastructure/FotoAutomat.Infrastructure.csproj" />
+    <Compile Include="../../2026-10-20-CameraModels.cs" Link="CameraPreview/CameraModels.cs" />
+    <Compile Include="../../2026-10-20-Mvvm.cs" Link="CameraPreview/Mvvm.cs" />
+    <Compile Include="../../2026-10-20-CameraPageViewModel.cs" Link="CameraPreview/CameraPageViewModel.cs" />
+    <Compile Include="../../2026-10-20-CameraPage.xaml.cs" Link="CameraPage.xaml.cs" />
+    <Compile Include="../../tools/FotoAutomat.CameraUiPreview/PreviewServices.cs" Link="CameraPreview/PreviewServices.cs" />
+    <Page Include="../../2026-10-20-CameraPage.xaml" Link="2026-10-20-CameraPage.xaml" />
   </ItemGroup>
 </Project>

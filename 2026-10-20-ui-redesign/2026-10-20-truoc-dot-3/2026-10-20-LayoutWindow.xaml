@@ -1,0 +1,267 @@
+<Window x:Class="FotoAutomat.Desktop.LayoutWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:FotoAutomat.Desktop"
+        PreviewKeyDown="OnEditorKeyDown" Title="FotoAutomat · Quản trị booth" Width="1380" Height="850" MinWidth="1080" MinHeight="680" WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI Variable Text, Segoe UI" FontSize="13" Background="White" Foreground="#111827" UseLayoutRounding="True" SnapsToDevicePixels="True">
+  <Window.Resources><ResourceDictionary><ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="Assets/Editor/Icons.xaml"/>
+    <!-- Style ngầm định của cửa sổ quản trị (Button, TextBox, ComboBox, CheckBox, Slider, ScrollBar, TabControl, DataGrid...). -->
+    <ResourceDictionary Source="2026-10-20-AdminDefaults.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+    <CollectionViewSource x:Key="Navigation" Source="{Binding Sections}">
+      <CollectionViewSource.GroupDescriptions><PropertyGroupDescription PropertyName="Group"/></CollectionViewSource.GroupDescriptions>
+    </CollectionViewSource>
+
+    <!-- Cạnh kéo giữa các cột -->
+    <Style x:Key="PanelEdge" TargetType="Thumb">
+      <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Thumb"><Border Background="Transparent"><Border x:Name="Line" Width="1" Background="{StaticResource LineBrush}"/></Border><ControlTemplate.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Line" Property="Width" Value="3"/><Setter TargetName="Line" Property="Background" Value="{StaticResource AccentBrush}"/></Trigger><Trigger Property="IsDragging" Value="True"><Setter TargetName="Line" Property="Background" Value="{StaticResource AccentBrush}"/></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter>
+    </Style>
+    <BooleanToVisibilityConverter x:Key="Visible"/>
+
+    <!-- Nhãn nhóm viết hoa nhỏ (THÊM, BỐ CỤC, LỚP) -->
+    <Style x:Key="Caption" TargetType="TextBlock" BasedOn="{StaticResource TextCaption}">
+      <Setter Property="FontSize" Value="11"/><Setter Property="FontWeight" Value="SemiBold"/><Setter Property="Margin" Value="0,0,0,8"/>
+    </Style>
+    <!-- Ô chỉ đọc -->
+    <Style x:Key="ReadOnlyBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+      <Setter Property="IsReadOnly" Value="True"/><Setter Property="Background" Value="{StaticResource SurfaceMutedBrush}"/><Setter Property="Foreground" Value="{StaticResource TextMutedBrush}"/>
+    </Style>
+  </ResourceDictionary></Window.Resources>
+
+  <Grid Background="{StaticResource PageBrush}">
+    <Grid.ColumnDefinitions><ColumnDefinition Width="245"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+
+    <!-- ===== Menu trái ===== -->
+    <Border Background="{StaticResource SurfaceBrush}" BorderBrush="{StaticResource LineBrush}" BorderThickness="0,0,1,0" Padding="16,24,16,16">
+      <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Margin="8,0,8,16"><TextBlock Text="FOTOAUTOMAT" FontWeight="SemiBold" FontSize="16"/><TextBlock Text="Không gian quản trị" Style="{StaticResource TextCaption}" Margin="0,4,0,0"/></StackPanel>
+        <StackPanel DockPanel.Dock="Bottom" Margin="0,12,0,0"><Button Content="Khởi động giao diện booth" Click="OnCustomer" Style="{StaticResource PrimaryButton}" MinHeight="40"/><TextBlock Text="Bản xem thử · Thiết bị chưa kết nối" Style="{StaticResource TextCaption}" FontSize="11" Margin="0,12,0,0" TextAlignment="Center"/></StackPanel>
+        <ListBox ItemsSource="{Binding Source={StaticResource Navigation}}" DisplayMemberPath="Title" SelectedValuePath="Title" SelectedValue="{Binding Section}" BorderThickness="0" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+          <ListBox.GroupStyle><GroupStyle><GroupStyle.HeaderTemplate><DataTemplate><TextBlock Text="{Binding Name}" Foreground="{StaticResource TextMutedBrush}" FontSize="11" FontWeight="SemiBold" Margin="12,16,0,6"/></DataTemplate></GroupStyle.HeaderTemplate></GroupStyle></ListBox.GroupStyle>
+        </ListBox>
+      </DockPanel>
+    </Border>
+
+    <Grid Grid.Column="1">
+      <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="36"/></Grid.RowDefinitions>
+
+      <!-- Tiêu đề mục (chỉ hiện khi không ở trình chỉnh bố cục) -->
+      <Border Padding="24,24,24,16"><Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Visible"/><Style.Triggers><DataTrigger Binding="{Binding IsLayout}" Value="True"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></Border.Style><DockPanel VerticalAlignment="Center"><StackPanel><TextBlock Text="{Binding Section}" Style="{StaticResource TextTitle}"/><TextBlock Text="Thiết lập đơn giản. Sẵn sàng cho phiên chụp." Style="{StaticResource TextCaption}" Margin="0,4,0,0"/></StackPanel></DockPanel></Border>
+
+      <!-- ===== Bố cục in ===== -->
+      <Grid x:Name="LayoutEditorRoot" Grid.Row="1" Visibility="{Binding IsLayout, Converter={StaticResource Visible}}">
+        <Grid.RowDefinitions><RowDefinition Height="168"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+
+        <!-- Thư viện mẫu -->
+        <ListBox x:Name="TemplateGallery" ItemsSource="{Binding Gallery}" SelectionChanged="OnGallerySelected" Background="{StaticResource SurfaceBrush}" BorderThickness="0,0,0,1" BorderBrush="{StaticResource LineBrush}" Padding="16,8" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+          <ListBox.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal"/></ItemsPanelTemplate></ListBox.ItemsPanel>
+          <ListBox.ItemContainerStyle><Style TargetType="ListBoxItem" BasedOn="{StaticResource ListItemStyle}"><Setter Property="Padding" Value="8,6"/><Setter Property="Margin" Value="0,0,4,0"/></Style></ListBox.ItemContainerStyle>
+          <ListBox.ItemTemplate><DataTemplate><StackPanel Width="102" ToolTip="{Binding Name}"><Image Source="{Binding Thumbnail}" Height="78" Stretch="Uniform"/><TextBlock Text="{Binding Name}" TextAlignment="Center" FontSize="11" Margin="0,8,0,4" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/></StackPanel></DataTemplate></ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- Thanh công cụ -->
+        <Border Grid.Row="1" Background="{StaticResource SurfaceBrush}" BorderBrush="{StaticResource LineBrush}" BorderThickness="0,0,0,1" Padding="16,8">
+          <WrapPanel VerticalAlignment="Center">
+            <WrapPanel.Resources><Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}"><Setter Property="Margin" Value="0,2,8,2"/></Style></WrapPanel.Resources>
+            <Button Command="{Binding NewLayoutCommand}"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.add}" Width="16" Height="16" Margin="0,0,8,0"/><TextBlock Text="Mẫu mới" VerticalAlignment="Center"/></StackPanel></Button>
+            <Button Content="Nhập khung ảnh..." Click="OnImportArtwork"/>
+            <Button Click="OnScanArtwork"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.smartScan}" Width="18" Height="18" Margin="0,0,8,0"/><TextBlock Text="Quét ô ảnh" VerticalAlignment="Center"/></StackPanel></Button>
+            <Border Width="1" Height="24" Background="{StaticResource LineBrush}" Margin="4,0,12,0"/>
+            <TextBox Text="{Binding TemplateName, UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="0,2,16,2" ToolTip="Tên mẫu"/>
+            <Button Command="{Binding UndoCommand}" IsEnabled="{Binding CanUndo}" ToolTip="Hoàn tác" Style="{StaticResource IconButtonStyle}" Margin="0,2,4,2"><Image Source="{StaticResource Icon.undo}" Width="18" Height="18"/></Button>
+            <Button Command="{Binding RedoCommand}" IsEnabled="{Binding CanRedo}" ToolTip="Làm lại" Style="{StaticResource IconButtonStyle}" Margin="0,2,16,2"><Image Source="{StaticResource Icon.redo}" Width="18" Height="18"/></Button>
+            <Button Click="OnSaveLayout"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.save}" Width="16" Height="16" Margin="0,0,8,0"/><TextBlock Text="Lưu" VerticalAlignment="Center"/></StackPanel></Button>
+            <Button Click="OnDeleteLayout"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.trash}" Width="16" Height="16" Margin="0,0,8,0"/><TextBlock Text="Xóa" VerticalAlignment="Center"/></StackPanel></Button>
+            <Button Content="⋯" Click="OnMore" ToolTip="Thao tác khác" MinWidth="40"><Button.ContextMenu><ContextMenu>
+              <Separator/>
+              <MenuItem Header="Khởi động giao diện booth" Click="OnCustomer"/>
+            </ContextMenu></Button.ContextMenu></Button>
+          </WrapPanel>
+        </Border>
+
+        <!-- Công cụ | Canvas | Thuộc tính -->
+        <Grid Grid.Row="2"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions><Grid.ColumnDefinitions><ColumnDefinition x:Name="ToolsColumn" Width="180"/><ColumnDefinition Width="*"/><ColumnDefinition x:Name="InspectorColumn" Width="250"/></Grid.ColumnDefinitions>
+
+          <!-- Cột công cụ -->
+          <Border x:Name="ToolsPanel" Grid.Row="1" Padding="12" Background="{StaticResource SurfaceBrush}" BorderBrush="{StaticResource LineBrush}" BorderThickness="0,0,1,0">
+<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="0,0,5,0"><StackPanel Margin="0,0,0,12">
+<TextBlock Text="THÊM" Style="{StaticResource Caption}"/>
+<StackPanel IsEnabled="{Binding IsEditing}">
+<StackPanel.Resources><Style TargetType="Button" BasedOn="{StaticResource LeftButtonStyle}"><Setter Property="Margin" Value="0,0,0,4"/><Setter Property="Height" Value="40"/></Style></StackPanel.Resources>
+<Button Command="{Binding AddSlotCommand}"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.add}" Width="20" Height="20" Stretch="Uniform" VerticalAlignment="Center" Margin="0,0,10,0"/><TextBlock Text="Ảnh từ booth" VerticalAlignment="Center"/></StackPanel></Button>
+<Button Click="OnImportDecoration"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.image}" Width="20" Height="20" Stretch="Uniform" VerticalAlignment="Center" Margin="0,0,10,0"/><TextBlock Text="Hình ảnh" VerticalAlignment="Center"/></StackPanel></Button>
+<Button Command="{Binding AddDecorationCommand}" CommandParameter="Text"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.text}" Width="20" Height="20" Stretch="Uniform" VerticalAlignment="Center" Margin="0,0,10,0"/><TextBlock Text="Văn bản" VerticalAlignment="Center"/></StackPanel></Button>
+<Button Command="{Binding AddQrCommand}" ToolTip="QR in tùy chọn · mặc định 0,55 inch"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.grid}" Width="20" Height="20" Stretch="Uniform" VerticalAlignment="Center" Margin="0,0,10,0"/><TextBlock Text="Mã QR in" VerticalAlignment="Center"/></StackPanel></Button>
+<Button Click="OnMore"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.calendar}" Width="20" Height="20" Stretch="Uniform" VerticalAlignment="Center" Margin="0,0,10,0"/><TextBlock Text="Dữ liệu phiên" VerticalAlignment="Center"/></StackPanel><Button.ContextMenu><ContextMenu><MenuItem Header="Ngày / tháng / năm" Command="{Binding AddSessionDateCommand}"/></ContextMenu></Button.ContextMenu></Button>
+</StackPanel>
+<Border Style="{StaticResource DividerStyle}" Margin="0,12,0,16"/>
+<TextBlock Text="BỐ CỤC" Style="{StaticResource Caption}"/>
+<HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Khổ ảnh" Margin="0,0,0,12"><TextBox Style="{StaticResource ReadOnlyBox}" Text="{Binding PaperSizeLabel, Mode=OneWay}" IsReadOnly="True"/></HeaderedContentControl>
+<HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Độ phân giải (DPI)" Margin="0,0,0,12"><ComboBox ItemsSource="{Binding DpiOptions}" SelectedItem="{Binding Dpi}"/></HeaderedContentControl>
+<HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Hướng" Margin="0,0,0,12"><ComboBox ItemsSource="{Binding OrientationOptions}" SelectedIndex="{Binding OrientationIndex}"/></HeaderedContentControl>
+<HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Rộng (px)" Margin="0,0,0,12"><TextBox Style="{StaticResource ReadOnlyBox}" Text="{Binding PagePixelWidth, Mode=OneWay}" IsReadOnly="True"/></HeaderedContentControl>
+<HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Cao (px)"><TextBox Style="{StaticResource ReadOnlyBox}" Text="{Binding PagePixelHeight, Mode=OneWay}" IsReadOnly="True"/></HeaderedContentControl>
+</StackPanel></ScrollViewer></Border>
+
+<Thumb Style="{StaticResource PanelEdge}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="7" Panel.ZIndex="20" Cursor="SizeWE" DragDelta="OnResizeTools" MouseDoubleClick="OnToggleTools" ToolTip="Kéo hoặc nhấp đúp để thu gọn"/>
+<Thumb Style="{StaticResource PanelEdge}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Width="7" Panel.ZIndex="20" Cursor="SizeWE" DragDelta="OnResizeInspector" MouseDoubleClick="OnToggleInspector" ToolTip="Kéo hoặc nhấp đúp để thu gọn"/>
+
+<!-- Canvas -->
+<Grid Grid.Row="1" Grid.Column="1" Background="#EDEFF2"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+
+            <Grid Grid.Row="1"><Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="0"/></Grid.RowDefinitions>
+<ScrollViewer x:Name="CanvasViewport" MouseDown="OnCanvasBackground" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" SizeChanged="OnViewportSized" PreviewMouseWheel="OnZoomWheel">
+<Border x:Name="ZoomPaper" Margin="24" BorderBrush="{StaticResource LineStrongBrush}" BorderThickness="1" Background="{Binding BackgroundColor}" HorizontalAlignment="Center" VerticalAlignment="Center">
+<Grid x:Name="PaperSurface" Width="{Binding PageWidth}" Height="{Binding PageHeight}" ClipToBounds="True">
+
+<StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="180">
+  <StackPanel.Style><Style TargetType="StackPanel"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><MultiDataTrigger><MultiDataTrigger.Conditions><Condition Binding="{Binding Slots.Count}" Value="0"/><Condition Binding="{Binding HasArtwork}" Value="False"/></MultiDataTrigger.Conditions><Setter Property="Visibility" Value="Visible"/></MultiDataTrigger></Style.Triggers></Style></StackPanel.Style>
+  <TextBlock Text="Bắt đầu khung của bạn" FontSize="23" FontWeight="SemiBold" TextAlignment="Center"/>
+  <TextBlock Text="Chọn preset ở trên hoặc thêm ô ảnh." FontSize="16" TextAlignment="Center" Foreground="{StaticResource TextMutedBrush}" Margin="0,14,0,22"/>
+  <Button Command="{Binding AddSlotCommand}" HorizontalAlignment="Center"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.add}" Width="16" Height="16" Margin="0,0,8,0"/><TextBlock Text="Thêm ô ảnh" VerticalAlignment="Center"/></StackPanel></Button>
+</StackPanel>
+<ItemsControl ItemsSource="{Binding Slots}" Visibility="{Binding Preview, Converter={StaticResource Visible}}" IsHitTestVisible="False">
+<ItemsControl.ItemsPanel><ItemsPanelTemplate><Canvas Width="{Binding PageWidth}" Height="{Binding PageHeight}"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+<ItemsControl.ItemContainerStyle><Style TargetType="ContentPresenter"><Setter Property="Visibility" Value="{Binding IsVisible, Converter={StaticResource Visible}}"/><Setter Property="Canvas.Left" Value="{Binding X}"/><Setter Property="Canvas.Top" Value="{Binding Y}"/></Style></ItemsControl.ItemContainerStyle>
+<ItemsControl.ItemTemplate><DataTemplate><Border Width="{Binding Width}" Height="{Binding Height}" ClipToBounds="True" Background="Transparent" BorderBrush="{Binding StrokeColor}" BorderThickness="{Binding StrokeThickness}" RenderTransformOrigin="0.5,0.5">
+<Border.RenderTransform><RotateTransform Angle="{Binding Rotation}"/></Border.RenderTransform>
+<Border.Effect><DropShadowEffect Color="{Binding ShadowColor}" Direction="{Binding ShadowAngle}" ShadowDepth="{Binding ShadowDistance}" BlurRadius="{Binding ShadowBlur}" Opacity="{Binding ShadowOpacity}"/></Border.Effect>
+<local:LayoutElementVisual Element="{Binding DisplayAppearance}" Preview="True"/>
+</Border></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+<Image Panel.ZIndex="{Binding ArtworkZIndex}" Source="{Binding Artwork}" Stretch="Fill" IsHitTestVisible="False"/>
+<ItemsControl Panel.ZIndex="2" ItemsSource="{Binding Slots}" Visibility="{Binding IsEditing, Converter={StaticResource Visible}}">
+<ItemsControl.ItemsPanel><ItemsPanelTemplate><Canvas Width="{Binding PageWidth}" Height="{Binding PageHeight}"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+<ItemsControl.ItemContainerStyle><Style TargetType="ContentPresenter"><Setter Property="Visibility" Value="{Binding IsVisible, Converter={StaticResource Visible}}"/><Setter Property="Canvas.Left" Value="{Binding X}"/><Setter Property="Canvas.Top" Value="{Binding Y}"/></Style></ItemsControl.ItemContainerStyle>
+<ItemsControl.ItemTemplate><DataTemplate>
+<Grid Width="{Binding Width}" Height="{Binding Height}" RenderTransformOrigin="0.5,0.5">
+<Grid.RenderTransform><RotateTransform Angle="{Binding Rotation}"/></Grid.RenderTransform>
+<Grid.Effect><DropShadowEffect Color="{Binding ShadowColor}" Direction="{Binding ShadowAngle}" ShadowDepth="{Binding ShadowDistance}" BlurRadius="{Binding ShadowBlur}" Opacity="{Binding ShadowOpacity}"/></Grid.Effect>
+<Border BorderBrush="{Binding StrokeColor}" BorderThickness="{Binding StrokeThickness}" IsHitTestVisible="False"/>
+
+<Thumb DragStarted="OnSlotDragStarted" DragCompleted="OnSlotDragCompleted" DragDelta="OnSlotMove" Cursor="SizeAll" AutomationProperties.Name="{Binding Label}">
+<Thumb.Template><ControlTemplate TargetType="Thumb">
+<Border BorderThickness="1" CornerRadius="2">
+<Border.Style><Style TargetType="Border"><Setter Property="BorderBrush" Value="{StaticResource TextDisabledBrush}"/><Setter Property="Background" Value="Transparent"/><Style.Triggers><DataTrigger Binding="{Binding IsSelected}" Value="True"><Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/><Setter Property="BorderThickness" Value="2"/></DataTrigger></Style.Triggers></Style></Border.Style>
+<Border BorderBrush="{Binding StrokeColor}" BorderThickness="{Binding StrokeThickness}"><local:LayoutElementVisual Element="{Binding DisplayAppearance}"/></Border>
+</Border></ControlTemplate></Thumb.Template>
+</Thumb>
+
+<Thumb Width="16" Height="16" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="SizeNWSE" DragStarted="OnSlotDragStarted" DragCompleted="OnSlotDragCompleted" DragDelta="OnSlotResize" Visibility="{Binding IsSelected, Converter={StaticResource Visible}}" AutomationProperties.Name="Đổi kích thước ô ảnh">
+<Thumb.Template><ControlTemplate TargetType="Thumb"><Border Background="White" BorderBrush="{StaticResource AccentBrush}" BorderThickness="2" CornerRadius="2"/></ControlTemplate></Thumb.Template>
+</Thumb>
+</Grid></DataTemplate></ItemsControl.ItemTemplate>
+</ItemsControl>
+
+</Grid></Border></ScrollViewer>
+
+            </Grid>
+
+            <!-- Thanh thu phóng -->
+            <Border Grid.Row="2" Background="{StaticResource SurfaceBrush}" Padding="16,8" BorderBrush="{StaticResource LineBrush}" BorderThickness="0,1,0,0">
+              <DockPanel>
+<CheckBox DockPanel.Dock="Right" Content="Xem thử với ảnh mẫu" IsChecked="{Binding Preview}" VerticalAlignment="Center" Margin="16,0,0,0"/>
+<WrapPanel VerticalAlignment="Center">
+<WrapPanel.Resources><Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}"><Setter Property="MinHeight" Value="32"/><Setter Property="Margin" Value="0,2,0,2"/></Style></WrapPanel.Resources>
+<Button Content="−" Click="OnZoomOut" Padding="0" MinWidth="32" ToolTip="Thu nhỏ"/>
+<Slider x:Name="ZoomSlider" Style="{StaticResource CompactSliderStyle}" IsSnapToTickEnabled="False" Minimum="75" Maximum="400" Value="100" ValueChanged="OnZoomChanged" PreviewMouseDown="OnZoomInteraction" PreviewKeyDown="OnZoomKey" Width="120" VerticalAlignment="Center" Margin="8,0"/>
+<Button Content="+" Click="OnZoomIn" Padding="0" MinWidth="32" ToolTip="Phóng to"/>
+<TextBlock x:Name="ZoomLabel" Text="100%" VerticalAlignment="Center" Margin="12,0" MinWidth="40"/>
+<Button Content="Vừa khung" Click="OnFitCanvas" Padding="12,0"/>
+<Button Content="100%" Click="OnActualSize" Padding="12,0" Margin="8,2,0,2"/>
+</WrapPanel>
+              </DockPanel>
+            </Border>
+          </Grid>
+
+          <!-- Cột thuộc tính -->
+          <Border x:Name="InspectorPanel" Grid.Row="1" Grid.Column="2" Background="{StaticResource SurfaceBrush}" BorderBrush="{StaticResource LineBrush}" BorderThickness="1,0,0,0" Padding="16">
+            <Grid><Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="180"/></Grid.RowDefinitions>
+<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="0,0,5,0"><StackPanel Margin="0,0,0,12">
+              <TextBlock Margin="0,0,0,16"><TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource TextCardTitle}"><Setter Property="Text" Value="Chưa chọn"/><Style.Triggers><DataTrigger Binding="{Binding HasSelection}" Value="True"><Setter Property="Text" Value="Đã chọn"/></DataTrigger></Style.Triggers></Style></TextBlock.Style></TextBlock>
+
+              <StackPanel Visibility="{Binding HasSelection, Converter={StaticResource Visible}}" IsEnabled="{Binding IsEditing}">
+                <CheckBox Content="Khóa ô này" IsChecked="{Binding SelectedSlot.Locked}" Margin="0,0,0,12"/>
+                <StackPanel IsEnabled="{Binding SelectedSlot.CanEdit}">
+
+<StackPanel Visibility="{Binding SelectedSlot.IsSessionDate, Converter={StaticResource Visible}}"><HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Cỡ chữ" Margin="0,0,0,12"><TextBox Text="{Binding SelectedSlot.FontSize, ValidatesOnExceptions=True}"/></HeaderedContentControl></StackPanel>
+<StackPanel Visibility="{Binding SelectedSlot.IsText, Converter={StaticResource Visible}}">
+<HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Nội dung" Margin="0,0,0,12"><TextBox Text="{Binding SelectedSlot.Content, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap" MaxLength="1000" MinHeight="72"/></HeaderedContentControl>
+<HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Cỡ chữ" Margin="0,0,0,12"><TextBox Text="{Binding SelectedSlot.FontSize, ValidatesOnExceptions=True}"/></HeaderedContentControl>
+</StackPanel>
+<StackPanel Visibility="{Binding SelectedSlot.HasFillColor, Converter={StaticResource Visible}}">
+<HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Màu chữ / hình" Margin="0,0,0,12"><TextBox Text="{Binding SelectedSlot.FillColor, ValidatesOnExceptions=True}"/></HeaderedContentControl>
+</StackPanel>
+                <Grid><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="12"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                  <StackPanel><HeaderedContentControl Style="{StaticResource FieldStyle}" Header="X" Margin="0,0,0,12"><TextBox Text="{Binding SelectedSlot.PixelX, StringFormat=F0, ValidatesOnExceptions=True}"/></HeaderedContentControl><HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Rộng" Margin="0,0,0,12"><TextBox Text="{Binding SelectedSlot.PixelWidth, StringFormat=F0, ValidatesOnExceptions=True}"/></HeaderedContentControl></StackPanel>
+                  <StackPanel Grid.Column="2"><HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Y" Margin="0,0,0,12"><TextBox Text="{Binding SelectedSlot.PixelY, StringFormat=F0, ValidatesOnExceptions=True}"/></HeaderedContentControl><HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Cao" Margin="0,0,0,12"><TextBox Text="{Binding SelectedSlot.PixelHeight, StringFormat=F0, ValidatesOnExceptions=True}"/></HeaderedContentControl></StackPanel>
+                </Grid>
+                <CheckBox Visibility="{Binding SelectedSlot.CanChooseAspect, Converter={StaticResource Visible}}" Content="Giữ tỉ lệ" IsChecked="{Binding SelectedSlot.KeepAspect}" Margin="0,0,0,12"/>
+                <HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Xoay (độ)" Margin="0,0,0,12"><TextBox KeyDown="OnRotationEnter" Text="{Binding SelectedSlot.Rotation, StringFormat=F1, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True}"/></HeaderedContentControl>
+
+                <UniformGrid Columns="3" Margin="0,0,0,12">
+                  <UniformGrid.Resources><Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}"><Setter Property="MinHeight" Value="36"/><Setter Property="Padding" Value="4,0"/><Setter Property="Margin" Value="0,0,4,4"/></Style></UniformGrid.Resources>
+                  <Button Command="{Binding AlignSlotCommand}" CommandParameter="Left"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.left}" Width="16" Height="16" Margin="0,0,6,0"/><TextBlock Text="Trái" VerticalAlignment="Center"/></StackPanel></Button>
+                  <Button Command="{Binding AlignSlotCommand}" CommandParameter="Center"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.center}" Width="16" Height="16" Margin="0,0,6,0"/><TextBlock Text="Giữa" VerticalAlignment="Center"/></StackPanel></Button>
+                  <Button Command="{Binding AlignSlotCommand}" CommandParameter="Right"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.right}" Width="16" Height="16" Margin="0,0,6,0"/><TextBlock Text="Phải" VerticalAlignment="Center"/></StackPanel></Button>
+                  <Button Command="{Binding AlignSlotCommand}" CommandParameter="Top"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.top}" Width="16" Height="16" Margin="0,0,6,0"/><TextBlock Text="Trên" VerticalAlignment="Center"/></StackPanel></Button>
+                  <Button Command="{Binding AlignSlotCommand}" CommandParameter="Middle"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.middle}" Width="16" Height="16" Margin="0,0,6,0"/><TextBlock Text="Tâm" VerticalAlignment="Center"/></StackPanel></Button>
+                  <Button Command="{Binding AlignSlotCommand}" CommandParameter="Bottom"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.bottom}" Width="16" Height="16" Margin="0,0,6,0"/><TextBlock Text="Dưới" VerticalAlignment="Center"/></StackPanel></Button>
+                </UniformGrid>
+                <WrapPanel Margin="0,0,0,8"><WrapPanel.Resources><Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}"><Setter Property="Margin" Value="0,0,8,8"/></Style></WrapPanel.Resources><Button Content="Nhân đôi" Command="{Binding DuplicateSlotCommand}"/><Button Content="Căn đều dọc" Command="{Binding DistributeSlotsCommand}"/></WrapPanel>
+                <WrapPanel Margin="0,0,0,8"><WrapPanel.Resources><Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}"><Setter Property="Margin" Value="0,0,8,8"/></Style></WrapPanel.Resources><Button Command="{Binding LayerOrderCommand}" CommandParameter="Front"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.front}" Width="16" Height="16" Margin="0,0,6,0"/><TextBlock Text="Lên lớp" VerticalAlignment="Center"/></StackPanel></Button><Button Command="{Binding LayerOrderCommand}" CommandParameter="Back"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.back}" Width="16" Height="16" Margin="0,0,6,0"/><TextBlock Text="Xuống lớp" VerticalAlignment="Center"/></StackPanel></Button></WrapPanel>
+                <Button Command="{Binding RemoveSlotCommand}" HorizontalAlignment="Left" Margin="0,0,0,20"><StackPanel Orientation="Horizontal"><Image Source="{StaticResource Icon.trash}" Width="16" Height="16" Margin="0,0,6,0"/><TextBlock Text="Xóa ô ảnh" VerticalAlignment="Center"/></StackPanel></Button>
+              </StackPanel>
+              </StackPanel>
+              </StackPanel></ScrollViewer>
+
+<!-- Danh sách lớp -->
+<DockPanel Grid.Row="1" Margin="0,12,0,0">
+<TextBlock DockPanel.Dock="Top" Text="{Binding Slots.Count, StringFormat='LỚP ({0})'}" Style="{StaticResource Caption}"/>
+<ListBox ItemsSource="{Binding Slots}" SelectedItem="{Binding SelectedSlot}" BorderThickness="0" Background="Transparent" IsEnabled="{Binding IsEditing}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+<ListBox.ItemContainerStyle><Style TargetType="ListBoxItem" BasedOn="{StaticResource ListItemStyle}"><Setter Property="Padding" Value="4,4"/></Style></ListBox.ItemContainerStyle>
+<ListBox.ItemTemplate><DataTemplate><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="28"/><ColumnDefinition Width="*"/><ColumnDefinition Width="28"/></Grid.ColumnDefinitions>
+<CheckBox IsChecked="{Binding IsVisible}" ToolTip="Hiện / ẩn lớp" VerticalAlignment="Center"><CheckBox.Template><ControlTemplate TargetType="CheckBox"><Border Background="Transparent" Padding="3"><Grid><Path Data="M1 8 Q9 0 17 8 Q9 16 1 8 M11 8 A2 2 0 1 1 7 8 A2 2 0 1 1 11 8" Stroke="{StaticResource TextMutedBrush}" StrokeThickness="1.2"/><Path x:Name="Slash" Data="M1 1 L17 15" Stroke="{StaticResource TextMutedBrush}" StrokeThickness="1.4" Visibility="Collapsed"/></Grid></Border><ControlTemplate.Triggers><Trigger Property="IsChecked" Value="False"><Setter TargetName="Slash" Property="Visibility" Value="Visible"/><Setter Property="Opacity" Value="0.45"/></Trigger></ControlTemplate.Triggers></ControlTemplate></CheckBox.Template></CheckBox>
+<TextBlock Grid.Column="1" Text="{Binding Label}" VerticalAlignment="Center" Margin="6,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+<CheckBox Grid.Column="2" IsChecked="{Binding Locked}" ToolTip="Khóa lớp" VerticalAlignment="Center"/>
+</Grid></DataTemplate></ListBox.ItemTemplate></ListBox>
+</DockPanel></Grid>
+          </Border>
+        </Grid>
+      </Grid>
+
+      <!-- ===== Nội dung dự phòng (mục chưa có panel riêng) ===== -->
+      <Border Grid.Row="1" Padding="24"><Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding IsLayout}" Value="False"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+        <ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel>
+          <TextBlock Text="{Binding SectionGroup}" Style="{StaticResource Caption}"/>
+          <TextBlock Text="{Binding Section}" FontSize="28" Margin="0,0,0,20"/>
+          <TextBlock Text="{Binding SectionDescription}" Foreground="{StaticResource TextMutedBrush}" FontSize="15" LineHeight="26" MaxWidth="760" HorizontalAlignment="Left"/>
+          <StackPanel Visibility="{Binding IsPrinterSettings, Converter={StaticResource Visible}}" MaxWidth="560" HorizontalAlignment="Left" Margin="0,24,0,0">
+<TextBlock Text="Chỉ bố trí hai bản khi chuẩn bị tờ in. Bố cục thiết kế và màn hình khách luôn giữ một mẫu." Style="{StaticResource TextCaption}" Margin="0,0,0,16"/>
+<HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Số tờ" Margin="0,0,0,16"><TextBox Text="{Binding PrintCopies}" Width="100" HorizontalAlignment="Left"/></HeaderedContentControl>
+<WrapPanel><Button Content="Lưu cài đặt in" Command="{Binding SavePrinterCommand}" Style="{StaticResource PrimaryButton}" MinHeight="40" Margin="0,0,8,0"/><Button Content="Kiểm tra kế hoạch in" Command="{Binding PreviewPrintPlanCommand}"/></WrapPanel>
+<TextBlock Text="Đã lưu cấu hình và kiểm tra cách ghép tờ. Chưa kết nối driver, gửi lệnh in hay điều khiển dao cắt." Style="{StaticResource TextCaption}" Margin="0,16,0,0"/>
+</StackPanel>
+          <ItemsControl ItemsSource="{Binding FeatureAreas}" Margin="0,24,0,0"><ItemsControl.ItemTemplate><DataTemplate><Border Style="{StaticResource CardStyle}" Padding="20" Margin="0,0,0,12"><StackPanel><TextBlock Text="{Binding Title}" FontSize="16" FontWeight="SemiBold"/><TextBlock Text="{Binding Description}" Foreground="{StaticResource TextMutedBrush}" Margin="0,8,0,0" LineHeight="22"/></StackPanel></Border></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+        </StackPanel></ScrollViewer>
+      </Border>
+
+      <!-- ===== Các trang cài đặt ===== -->
+      <local:CaptureModesPanel Grid.Row="0" Grid.RowSpan="2" Visibility="{Binding IsCaptureSettings, Converter={StaticResource Visible}}"/>
+      <local:FrameLibraryPanel x:Name="FrameLibrary" Grid.Row="0" Grid.RowSpan="2" EditRequested="OnFrameEditRequested" Deleted="OnFrameDeleted">
+        <local:FrameLibraryPanel.Style>
+          <Style TargetType="local:FrameLibraryPanel">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers><DataTrigger Binding="{Binding Section}" Value="Thư viện khung"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers>
+          </Style>
+        </local:FrameLibraryPanel.Style>
+      </local:FrameLibraryPanel>
+      <local:PrinterSettingsPanel Grid.Row="0" Grid.RowSpan="2" Visibility="{Binding IsPrinterSettings, Converter={StaticResource Visible}}"/>
+      <local:GeneralSettingsPanel Grid.Row="0" Grid.RowSpan="2" Visibility="{Binding IsGeneralSettings, Converter={StaticResource Visible}}"/>
+      <local:ManagementPanel x:Name="Management" Grid.Row="0" Grid.RowSpan="2" Visibility="{Binding IsManagement, Converter={StaticResource Visible}}"/>
+      <local:WorkspaceToolsPanel x:Name="WorkspaceTools" Grid.Row="0" Grid.RowSpan="2" Visibility="{Binding IsWorkspaceTools, Converter={StaticResource Visible}}"/>
+
+      <!-- Thanh trạng thái -->
+      <Border Grid.Row="2" Background="{StaticResource SurfaceBrush}" BorderBrush="{StaticResource LineBrush}" BorderThickness="0,1,0,0" Padding="24,0"><TextBlock Text="{Binding Status}" FontSize="11" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"><TextBlock.Style><Style TargetType="TextBlock"><Setter Property="Foreground" Value="{StaticResource TextMutedBrush}"/><Style.Triggers><DataTrigger Binding="{Binding StatusIsWarning}" Value="True"><Setter Property="Foreground" Value="{StaticResource DangerBrush}"/></DataTrigger></Style.Triggers></Style></TextBlock.Style></TextBlock></Border>
+    </Grid>
+
+    <Border x:Name="ScanLoading" Grid.ColumnSpan="2" Panel.ZIndex="100" Background="#BFFFFFFF" Visibility="Collapsed"><Border Style="{StaticResource CardStyle}" Padding="32" HorizontalAlignment="Center" VerticalAlignment="Center"><StackPanel Width="260"><Image Source="{StaticResource Icon.smartScan}" Width="36" Height="36" Margin="0,0,0,16"/><TextBlock Text="Đang quét ô ảnh…" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center"/><ProgressBar IsIndeterminate="True" Height="4" Margin="0,20,0,0" AutomationProperties.Name="Đang quét ô ảnh"/></StackPanel></Border></Border>
+  </Grid>
+</Window>

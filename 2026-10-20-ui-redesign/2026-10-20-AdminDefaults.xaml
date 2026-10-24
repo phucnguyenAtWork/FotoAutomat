@@ -1,0 +1,65 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--
+        AdminDefaults: style ngầm định cho cửa sổ quản trị (LayoutWindow).
+        Chỉ merge vào LayoutWindow.Resources, KHÔNG merge vào App.xaml để không ảnh hưởng giao diện khách.
+        Control nào có Style tường minh (ví dụ Switch, Primary) vẫn giữ style đó.
+    -->
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="2026-10-20-ThemeExtras.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="TextBlock">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style TargetType="ScrollViewer">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    </Style>
+
+    <Style TargetType="ScrollBar" BasedOn="{StaticResource SlimScrollBarStyle}"/>
+
+    <Style TargetType="Button" BasedOn="{StaticResource SecondaryButton}">
+        <Setter Property="MinHeight" Value="40"/>
+    </Style>
+
+    <Style TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle}">
+        <Setter Property="Height" Value="NaN"/>
+        <Setter Property="MinHeight" Value="40"/>
+        <Style.Triggers>
+            <Trigger Property="AcceptsReturn" Value="True">
+                <Setter Property="VerticalContentAlignment" Value="Top"/>
+                <Setter Property="Padding" Value="12,10"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="PasswordBox" BasedOn="{StaticResource PasswordBoxStyle}"/>
+
+    <Style TargetType="ComboBox" BasedOn="{StaticResource ComboBoxStyle}">
+        <Setter Property="Height" Value="NaN"/>
+        <Setter Property="MinHeight" Value="40"/>
+    </Style>
+
+    <Style TargetType="DatePicker" BasedOn="{StaticResource DatePickerStyle}"/>
+
+    <Style TargetType="CheckBox" BasedOn="{StaticResource CheckBoxStyle}"/>
+
+    <!-- Mặc định không snap (giữ hành vi slider cũ). Trang nào cần snap theo tick (Chế độ chụp) tự khai báo lại. -->
+    <Style TargetType="Slider" BasedOn="{StaticResource SliderStyle}">
+        <Setter Property="IsSnapToTickEnabled" Value="False"/>
+    </Style>
+
+    <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListItemStyle}"/>
+
+    <Style TargetType="Expander" BasedOn="{StaticResource AccordionExpanderStyle}"/>
+
+    <Style TargetType="TabControl" BasedOn="{StaticResource TabControlStyle}"/>
+
+    <Style TargetType="TabItem" BasedOn="{StaticResource TabItemStyle}"/>
+
+    <Style TargetType="DataGrid" BasedOn="{StaticResource DataGridStyle}"/>
+
+</ResourceDictionary>

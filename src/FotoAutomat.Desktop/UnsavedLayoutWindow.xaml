@@ -1,0 +1,16 @@
+<Window x:Class="FotoAutomat.Desktop.UnsavedLayoutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Bố cục chưa lưu" Width="490" Height="220" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False" Background="White"
+        Foreground="#242424" FontFamily="Segoe UI" FontSize="13">
+  <Border Background="White" Padding="24"><StackPanel>
+    <TextBlock Text="Lưu thay đổi bố cục?" FontSize="20" FontWeight="SemiBold"/>
+    <TextBlock Text="Khung PNG và vị trí các ô ảnh có thay đổi chưa lưu." TextWrapping="Wrap" Margin="0,12,0,24" Foreground="#666666"/>
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+      <Button Content="Tiếp tục chỉnh" IsCancel="True" Padding="12,9" Margin="0,0,8,0"/>
+      <Button Content="Không lưu" Click="OnDiscard" Padding="12,9" Margin="0,0,8,0"/>
+      <Button Content="Lưu" Click="OnSave" Padding="20,9" IsDefault="True"/>
+    </StackPanel>
+  </StackPanel></Border>
+</Window>

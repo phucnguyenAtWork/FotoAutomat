@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewed_on": "2026-10-05",
+  "selected_foundation": "CanonCGT",
+  "downloaded": false,
+  "weights": [
+    { "name": "SSL.pth", "priority": 1, "url": "https://github.com/Jinwon-Ko/CanonCGT/tree/main/pretrained", "declared_license": "Apache-2.0", "commit": null, "sha256": null, "bytes": null, "inference_tested": false },
+    { "name": "E2E.pth", "priority": 2, "url": "https://github.com/Jinwon-Ko/CanonCGT/tree/main/pretrained", "declared_license": "Apache-2.0", "commit": null, "sha256": null, "bytes": null, "inference_tested": false }
+  ],
+  "datasets": [
+    { "id": "owned-booth", "role": "finetune_and_held_out_evaluation", "commercial_training_approved": false, "gate": "per_asset_rights_and_group_split" },
+    { "id": "owned-camera-raw-jpeg", "role": "camera_look_validation", "commercial_training_approved": false, "gate": "per_asset_rights_and_style_provenance" },
+    { "id": "PST50", "url": "https://huggingface.co/datasets/zrgong/PST50", "declared_license": "CC-BY-4.0", "role": "benchmark_only", "commercial_training_approved": false, "gate": "verify_package_attribution_and_color_space" },
+    { "id": "PPR10K", "url": "https://github.com/csjliang/PPR10K#agreement", "declared_dataset_terms": "noncommercial_research_only", "commercial_training_approved": false, "gate": "separate_permission_required_for_commercial_use" },
+    { "id": "FiveK", "url": "https://data.csail.mit.edu/graphics/fivek/", "commercial_training_approved": false, "gate": "full_dataset_and_preset_terms_review_pending" },
+    { "id": "raw-pixls", "url": "https://raw.pixls.us/", "role": "decoder_metadata_tests", "commercial_training_approved": false, "gate": "per_file_license_check_not_camera_style_ground_truth" }
+  ],
+  "asset_review_states": ["quarantine", "accepted", "rejected"],
+  "required_separate_permissions": ["commercial_training", "evaluation", "redistribution", "public_preview"],
+  "notes": "Discovery registry only; approvals remain false until actual assets and evidence are reviewed. No dataset or weights ingested."
+}

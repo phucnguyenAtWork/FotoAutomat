@@ -42,13 +42,13 @@ Changes under `.agents/skills` do not need application linting, but normal appli
 
 ## Customer UI preview checks
 
-Portable tests cover both payment branches, six capture samples before selection, four filled slots before printing, print completion, four retakes, clearing slots on retake, preserving choices on back navigation, and clearing choices on a new session. These tests verify UI state, not WPF rendering or device behavior.
+Portable tests cover both payment branches, 3/5/10-second countdowns, seven-second reviews, the five-minute warning boundary, expiry during countdown versus review, delayed callbacks, validated configuration persistence, favorites before frame selection, filled slots before printing, and fresh-session reset. These tests verify UI state, not WPF rendering or device behavior.
 
-Run the customer UI on Windows and compare all 11 reference pages in `docs/screenshot/FotoAutomat.pdf`. Verify pointer and keyboard selection, disabled action states, F11/Escape, the persistent simulation notice, and 100%, 125%, 150% display scaling.
+Run the customer UI on Windows using the updated flow in `docs/desktop-ui.md`; the original PDF is a visual reference, not the current timing/ordering specification. Verify pointer and keyboard selection, disabled action states, F11/Escape, the persistent simulation notice, and 100%, 125%, 150% display scaling.
 
 ## Windows desktop checks
 
-The following checks refer to the durable simulator, opened with `--simulator`.
+The following checks refer to the durable simulator, opened with `--workflow-simulator`.
 
 Before marking the desktop runtime verified:
 

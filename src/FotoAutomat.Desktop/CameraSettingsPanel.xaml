@@ -1,0 +1,62 @@
+<UserControl x:Class="FotoAutomat.Desktop.CameraSettingsPanel" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="#F5F6F6" Foreground="#243333" FontSize="13">
+ <UserControl.Resources>
+  <Style TargetType="Button"><Setter Property="MinHeight" Value="42"/><Setter Property="Padding" Value="14,8"/><Setter Property="Background" Value="White"/><Setter Property="BorderBrush" Value="#D7DFDE"/><Setter Property="Cursor" Value="Hand"/></Style>
+  <Style TargetType="ComboBox"><Setter Property="MinHeight" Value="38"/><Setter Property="Padding" Value="8"/></Style>
+  <Style TargetType="TextBox"><Setter Property="MinHeight" Value="38"/><Setter Property="Padding" Value="8"/><Setter Property="BorderBrush" Value="#D7DFDE"/></Style>
+  <Style x:Key="Label" TargetType="TextBlock"><Setter Property="Margin" Value="0,12,0,6"/><Setter Property="Foreground" Value="#667575"/></Style>
+  <Style x:Key="Card" TargetType="Border"><Setter Property="Padding" Value="16"/><Setter Property="CornerRadius" Value="8"/><Setter Property="BorderBrush" Value="#DFE5E4"/><Setter Property="BorderThickness" Value="1"/><Setter Property="Background" Value="White"/></Style>
+ </UserControl.Resources>
+ <Grid Margin="22,18">
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <DockPanel Margin="0,0,0,16">
+   <Button DockPanel.Dock="Right" Content="Hướng dẫn" Click="OnHelp"/>
+   <StackPanel><TextBlock Text="Máy ảnh" FontSize="26"/><TextBlock x:Name="ConnectionStatus" Text="Chưa kết nối camera" Foreground="#637875" Margin="0,5,0,0"/></StackPanel>
+  </DockPanel>
+  <Grid Grid.Row="1">
+   <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="16"/><ColumnDefinition Width="*"/><ColumnDefinition Width="16"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+   <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+  <Border Style="{StaticResource Card}" VerticalAlignment="Top">
+   <Expander Header="Kết nối thiết bị" IsExpanded="True">
+    <StackPanel Margin="0,10,0,0">
+      <ComboBox x:Name="Brand" SelectionChanged="OnBrandChanged" Margin="0,0,0,10"/>
+      <ComboBox x:Name="Model" IsEditable="True" Margin="0,0,0,10"/>
+      <UniformGrid Columns="2">
+       <Button x:Name="ConnectButton" Content="Kết nối USB" Click="OnConnect" Margin="0,0,8,0"/>
+       <Button x:Name="DisconnectButton" Content="Ngắt" Click="OnDisconnect" IsEnabled="False"/>
+      </UniformGrid>
+     <Expander Header="Đường dẫn SDK" Margin="0,10,0,0">
+      <StackPanel Margin="0,8,0,0"><TextBox x:Name="SdkPath"/><Button x:Name="SdkBrowseButton" Content="Chọn thư mục…" Click="OnSelectSdk" Margin="0,8,0,0"/>
+      </StackPanel>
+     </Expander>
+    </StackPanel>
+   </Expander>
+  </Border>
+   </ScrollViewer>
+   <Grid Grid.Column="2"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <StackPanel Margin="0,0,0,10"><TextBlock Text="Kiểm tra khung hình" FontWeight="SemiBold"/><TextBlock x:Name="PreviewLabel" Text="Chưa có tín hiệu" Foreground="#667575" Margin="0,6,0,0" TextWrapping="Wrap"/></StackPanel>
+    <Border Grid.Row="1" Background="#202727" CornerRadius="8" Padding="12" ClipToBounds="True">
+     <Grid ClipToBounds="True"><Image x:Name="Preview" Stretch="Uniform"/><StackPanel x:Name="EmptyState" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="290"><TextBlock Text="Chưa có live view" Foreground="#E5EAEA" FontSize="20" HorizontalAlignment="Center"/></StackPanel></Grid>
+    </Border>
+    <WrapPanel Grid.Row="2" Margin="0,12,0,0"><Button x:Name="CaptureButton" Content="Chụp thử" Background="#DDECE9" BorderBrush="#92B4AC" Click="OnCapture" IsEnabled="False" Margin="0,0,8,8"/><Button x:Name="LiveButton" Content="Trở lại live view" Click="OnLive" IsEnabled="False" Margin="0,0,8,8"/><Button x:Name="SampleButton" Content="Mở ảnh…" Click="OnOpenSample" Margin="0,0,0,8"/></WrapPanel>
+   </Grid>
+   <ScrollViewer Grid.Column="4" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+    <StackPanel>
+     <Border Style="{StaticResource Card}"><StackPanel>
+      <TextBlock Text="Thông số máy ảnh" FontWeight="SemiBold" FontSize="16"/>
+      <TextBlock x:Name="SettingsStatus" Text="Chưa đọc thông số" TextWrapping="Wrap" Foreground="#667575" Margin="0,8,0,0"/>
+      <StackPanel x:Name="ParameterFields" IsEnabled="False"/>
+      <UniformGrid Columns="2" Margin="0,14,0,0"><Button x:Name="ReadSettingsButton" Content="Đọc từ máy" Click="OnReadSettings" IsEnabled="False" Margin="0,0,8,0"/><Button x:Name="ApplySettingsButton" Content="Áp lên máy" Click="OnApplySettings" IsEnabled="False" Background="#DDECE9"/></UniformGrid>
+     </StackPanel></Border>
+     <Border Style="{StaticResource Card}" Margin="0,12,0,0"><Expander Header="Hiển thị live view" IsExpanded="False"><StackPanel>
+      <CheckBox x:Name="Mirror" Content="Lật gương để căn dáng" MinHeight="40" VerticalContentAlignment="Center" Checked="OnDisplayChanged" Unchecked="OnDisplayChanged"/>
+      <TextBlock Text="Xoay khung xem trước" Style="{StaticResource Label}"/><ComboBox x:Name="Rotation" SelectionChanged="OnDisplayChanged"/>
+      <TextBlock Text="Chiều rộng preview (px)" Style="{StaticResource Label}"/><ComboBox x:Name="Quality" SelectionChanged="OnDisplayChanged"/>
+     </StackPanel></Expander></Border>
+    </StackPanel>
+   </ScrollViewer>
+  </Grid>
+  <DockPanel Grid.Row="2" Margin="0,16,0,0"><StackPanel DockPanel.Dock="Right" Orientation="Horizontal"><Button x:Name="RevertButton" Content="Hoàn tác" Click="OnRevert" Margin="0,0,8,0"/><Button Content="Lưu cấu hình PC" Click="OnSave"/></StackPanel><TextBlock x:Name="Feedback" Text="" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,16,0" Foreground="#667575"/></DockPanel>
+ </Grid>
+</UserControl>
+
+

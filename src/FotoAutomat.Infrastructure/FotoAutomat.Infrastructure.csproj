@@ -2,5 +2,10 @@
   <ItemGroup>
     <ProjectReference Include="../FotoAutomat.Core/FotoAutomat.Core.csproj" />
     <PackageReference Include="Microsoft.Data.Sqlite" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" />
+  </ItemGroup>
+  <!-- Model MediaPipe (Apache 2.0) kèm giấy phép, chép ra models/mediapipe cạnh ứng dụng. -->
+  <ItemGroup>
+    <None Include="../../models/mediapipe/*" Link="models/mediapipe/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

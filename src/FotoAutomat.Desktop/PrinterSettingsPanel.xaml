@@ -1,0 +1,275 @@
+<UserControl x:Class="FotoAutomat.Desktop.PrinterSettingsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:FotoAutomat.Desktop"
+             Background="{DynamicResource PageBrush}"
+             Foreground="{DynamicResource TextBrush}"
+             FontFamily="Segoe UI Variable Text, Segoe UI"
+             FontSize="13"
+             UseLayoutRounding="True"
+             SnapsToDevicePixels="True"
+             Loaded="OnPanelLoaded">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="2026-10-20-AdminDefaults.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Icon nét 24 × 24, cùng độ dày nét. Màu lấy theo chữ của nút chứa nó. -->
+            <Geometry x:Key="IconPrinter">M7 9 V3 H17 V9 M7 18 H5 A2 2 0 0 1 3 16 V11 A2 2 0 0 1 5 9 H19 A2 2 0 0 1 21 11 V16 A2 2 0 0 1 19 18 H17 M7 14 H17 V21 H7 Z</Geometry>
+            <Geometry x:Key="IconTune">M4 7 H13 M17 7 H20 M15 5 V9 M4 17 H7 M11 17 H20 M9 15 V19</Geometry>
+            <Geometry x:Key="IconRefresh">M20 12 A8 8 0 1 1 17.66 6.34 M20 4 V8 H16</Geometry>
+            <Geometry x:Key="IconReset">M4 12 A8 8 0 1 0 6.34 6.34 M4 4 V8 H8</Geometry>
+            <Geometry x:Key="IconExternal">M14 4 H20 V10 M20 4 L11 13 M18 14 V19 A1 1 0 0 1 17 20 H5 A1 1 0 0 1 4 19 V7 A1 1 0 0 1 5 6 H10</Geometry>
+            <Geometry x:Key="IconCheck">M5 12.5 L9.5 17 L19 7</Geometry>
+            <Geometry x:Key="IconAlign">M12 3 V21 M3 12 H21 M8 8 H16 V16 H8 Z</Geometry>
+
+            <Style x:Key="Icon" TargetType="Path">
+                <Setter Property="Width" Value="16"/>
+                <Setter Property="Height" Value="16"/>
+                <Setter Property="Stretch" Value="Uniform"/>
+                <Setter Property="StrokeThickness" Value="1.8"/>
+                <Setter Property="StrokeStartLineCap" Value="Round"/>
+                <Setter Property="StrokeEndLineCap" Value="Round"/>
+                <Setter Property="StrokeLineJoin" Value="Round"/>
+                <Setter Property="Stroke" Value="{Binding (TextElement.Foreground), RelativeSource={RelativeSource Self}}"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="CardHeaderIcon" TargetType="Path" BasedOn="{StaticResource Icon}">
+                <Setter Property="Stroke" Value="{StaticResource AccentBrush}"/>
+                <Setter Property="Margin" Value="0,0,8,0"/>
+            </Style>
+            <Style x:Key="RowLabel" TargetType="TextBlock">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="0,0,12,0"/>
+            </Style>
+            <Style x:Key="ProfileName" TargetType="TextBlock" BasedOn="{StaticResource TextCaption}">
+                <Setter Property="Margin" Value="8,0,0,0"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Máy in &amp; căn chỉnh" Style="{StaticResource TextTitle}" Margin="24,24,24,16"/>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <!-- SettingsContent giữ DataContext = cấu hình in (mã nguồn gán DataContext cho phần tử này) -->
+            <Grid x:Name="SettingsContent" Margin="24,0,24,24" MaxWidth="1180" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MinWidth="440"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="*" MinWidth="440"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Cột trái: máy in, tùy chọn in -->
+                <StackPanel Grid.Column="0">
+                    <Border Style="{StaticResource CardStyle}" Padding="20,16">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                                <Path Data="{StaticResource IconPrinter}" Style="{StaticResource CardHeaderIcon}"/>
+                                <TextBlock Text="Máy in" Style="{StaticResource TextCardTitle}"/>
+                            </StackPanel>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="84"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="8"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Text="Máy chính" Style="{StaticResource RowLabel}"/>
+                                <ComboBox x:Name="MainQueue" Grid.Row="0" Grid.Column="1" Tag="main" SelectionChanged="OnQueueChanged" AutomationProperties.Name="Máy in chính"/>
+                                <Button Grid.Row="0" Grid.Column="2" Tag="main" Click="OnConfigure" Margin="8,0,0,0" AutomationProperties.Name="Thông số driver máy chính">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Path Data="{StaticResource IconTune}" Style="{StaticResource Icon}" Margin="0,0,6,0"/>
+                                        <TextBlock Text="Thông số" VerticalAlignment="Center"/>
+                                        <Path x:Name="MainTicketSaved" Data="{StaticResource IconCheck}" Style="{StaticResource Icon}" Stroke="{StaticResource SuccessBrush}" Width="14" Height="14" Margin="6,0,0,0" Visibility="Collapsed"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <TextBlock Grid.Row="2" Text="Máy phụ" Style="{StaticResource RowLabel}"/>
+                                <ComboBox x:Name="SecondaryQueue" Grid.Row="2" Grid.Column="1" Tag="secondary" SelectionChanged="OnQueueChanged" AutomationProperties.Name="Máy in phụ"/>
+                                <Button Grid.Row="2" Grid.Column="2" Tag="secondary" Click="OnConfigure" Margin="8,0,0,0" AutomationProperties.Name="Thông số driver máy phụ">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Path Data="{StaticResource IconTune}" Style="{StaticResource Icon}" Margin="0,0,6,0"/>
+                                        <TextBlock Text="Thông số" VerticalAlignment="Center"/>
+                                        <Path x:Name="SecondaryTicketSaved" Data="{StaticResource IconCheck}" Style="{StaticResource Icon}" Stroke="{StaticResource SuccessBrush}" Width="14" Height="14" Margin="6,0,0,0" Visibility="Collapsed"/>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                                <Button Click="OnRescan" Style="{StaticResource GhostButton}" Margin="0,0,8,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Path Data="{StaticResource IconRefresh}" Style="{StaticResource Icon}" Margin="0,0,6,0"/>
+                                        <TextBlock Text="Dò lại máy in" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Click="OnWindowsPrinters" Style="{StaticResource GhostButton}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Path Data="{StaticResource IconExternal}" Style="{StaticResource Icon}" Margin="0,0,6,0"/>
+                                        <TextBlock Text="Máy in Windows" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource CardStyle}" Padding="20,12,20,16" Margin="0,16,0,0">
+                        <StackPanel>
+                            <CheckBox Style="{StaticResource SwitchStyle}" Content="Tự động in sau phiên chụp" IsChecked="{Binding AutomaticPrint}"/>
+                            <Border Style="{StaticResource DividerStyle}"/>
+                            <CheckBox Style="{StaticResource SwitchStyle}" Content="Hiện nút in thêm" IsChecked="{Binding ShowPrintButton}"/>
+                            <Border Style="{StaticResource DividerStyle}"/>
+                            <CheckBox Style="{StaticResource SwitchStyle}" Content="In luân phiên hai máy" IsChecked="{Binding AlternatePrinters}"/>
+                            <Border Style="{StaticResource DividerStyle}"/>
+                            <CheckBox x:Name="Pair" Style="{StaticResource SwitchStyle}" Content="Ghép hai dải 2 × 6 trên tờ 4 × 6"/>
+                            <Border Style="{StaticResource DividerStyle}"/>
+
+                            <DockPanel MinHeight="44">
+                                <local:NumericStepper x:Name="Copies" DockPanel.Dock="Right" Minimum="1" Maximum="10" Step="1" Format="0"
+                                                      ValueChanged="OnStepperChanged" AutomationProperties.Name="Số tờ mỗi lượt"/>
+                                <TextBlock Text="Số tờ mỗi lượt" Style="{StaticResource RowLabel}"/>
+                            </DockPanel>
+                            <Border Style="{StaticResource DividerStyle}"/>
+
+                            <CheckBox Style="{StaticResource SwitchStyle}" Content="Giới hạn in" IsChecked="{Binding LimitsEnabled}"/>
+                            <StackPanel IsEnabled="{Binding LimitsEnabled}">
+                                <DockPanel MinHeight="44" Margin="0,4,0,0">
+                                    <local:NumericStepper DockPanel.Dock="Right" Minimum="1" Maximum="100000" Step="50" Format="0"
+                                                          Value="{Binding EventLimit, Mode=TwoWay}" ValueChanged="OnStepperChanged" AutomationProperties.Name="Số tờ tối đa mỗi sự kiện"/>
+                                    <TextBlock Text="Tối đa mỗi sự kiện" Style="{StaticResource RowLabel}" Foreground="{StaticResource TextMutedBrush}"/>
+                                </DockPanel>
+                                <DockPanel MinHeight="44" Margin="0,8,0,0">
+                                    <local:NumericStepper DockPanel.Dock="Right" Minimum="1" Maximum="100" Step="1" Format="0"
+                                                          Value="{Binding SessionLimit, Mode=TwoWay}" ValueChanged="OnStepperChanged" AutomationProperties.Name="Số tờ tối đa mỗi phiên"/>
+                                    <TextBlock Text="Tối đa mỗi phiên" Style="{StaticResource RowLabel}" Foreground="{StaticResource TextMutedBrush}"/>
+                                </DockPanel>
+                            </StackPanel>
+                            <Border Style="{StaticResource DividerStyle}"/>
+
+                            <Expander Header="Nhãn trên màn hình khách">
+                                <StackPanel>
+                                    <HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Nút in" Margin="0,0,0,12">
+                                        <TextBox Text="{Binding PrintLabel}"/>
+                                    </HeaderedContentControl>
+                                    <HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Trạng thái đang in" Margin="0,0,0,12">
+                                        <TextBox Text="{Binding PrintingLabel}"/>
+                                    </HeaderedContentControl>
+                                    <HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Số bản in">
+                                        <TextBox Text="{Binding CopiesLabel}"/>
+                                    </HeaderedContentControl>
+                                </StackPanel>
+                            </Expander>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- Cột phải: căn chỉnh từng máy -->
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}" Padding="20,16" VerticalAlignment="Top">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                            <Path Data="{StaticResource IconAlign}" Style="{StaticResource CardHeaderIcon}"/>
+                            <TextBlock Text="Căn chỉnh in" Style="{StaticResource TextCardTitle}"/>
+                        </StackPanel>
+
+                        <!-- Máy chính -->
+                        <Grid DataContext="{Binding Main}" Margin="0,8,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="8"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="8"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <DockPanel Grid.ColumnSpan="5" MinHeight="40">
+                                <Button DockPanel.Dock="Right" Tag="main" Click="OnReset" Style="{StaticResource IconButtonStyle}" AutomationProperties.Name="Đặt lại căn chỉnh máy chính">
+                                    <Path Data="{StaticResource IconReset}" Style="{StaticResource Icon}"/>
+                                </Button>
+                                <TextBlock Text="Máy chính" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="MainName" Style="{StaticResource ProfileName}"/>
+                            </DockPanel>
+                            <TextBlock Grid.Row="2" Text="Tỉ lệ" Style="{StaticResource RowLabel}"/>
+                            <local:NumericStepper Grid.Row="2" Grid.Column="1" Minimum="50" Maximum="150" Step="0.5" Format="0.0" Unit="%"
+                                                  Value="{Binding Scale, Mode=TwoWay}" ValueChanged="OnStepperChanged" AutomationProperties.Name="Tỉ lệ máy chính"/>
+                            <TextBlock Grid.Row="4" Text="Ngang" Style="{StaticResource RowLabel}"/>
+                            <local:NumericStepper Grid.Row="4" Grid.Column="1" Minimum="-20" Maximum="20" Step="0.1" Format="0.0" Unit="mm"
+                                                  Value="{Binding OffsetX, Mode=TwoWay}" ValueChanged="OnStepperChanged" AutomationProperties.Name="Vị trí ngang máy chính"/>
+                            <TextBlock Grid.Row="4" Grid.Column="3" Text="Dọc" Style="{StaticResource RowLabel}" Margin="16,0,12,0"/>
+                            <local:NumericStepper Grid.Row="4" Grid.Column="4" Minimum="-20" Maximum="20" Step="0.1" Format="0.0" Unit="mm"
+                                                  Value="{Binding OffsetY, Mode=TwoWay}" ValueChanged="OnStepperChanged" AutomationProperties.Name="Vị trí dọc máy chính"/>
+                        </Grid>
+
+                        <Border Style="{StaticResource DividerStyle}" Margin="0,16,0,8"/>
+
+                        <!-- Máy phụ -->
+                        <Grid DataContext="{Binding Secondary}" Margin="0,8,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="8"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="8"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <DockPanel Grid.ColumnSpan="5" MinHeight="40">
+                                <Button DockPanel.Dock="Right" Tag="secondary" Click="OnReset" Style="{StaticResource IconButtonStyle}" AutomationProperties.Name="Đặt lại căn chỉnh máy phụ">
+                                    <Path Data="{StaticResource IconReset}" Style="{StaticResource Icon}"/>
+                                </Button>
+                                <TextBlock Text="Máy phụ" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="SecondaryName" Style="{StaticResource ProfileName}"/>
+                            </DockPanel>
+                            <TextBlock Grid.Row="2" Text="Tỉ lệ" Style="{StaticResource RowLabel}"/>
+                            <local:NumericStepper Grid.Row="2" Grid.Column="1" Minimum="50" Maximum="150" Step="0.5" Format="0.0" Unit="%"
+                                                  Value="{Binding Scale, Mode=TwoWay}" ValueChanged="OnStepperChanged" AutomationProperties.Name="Tỉ lệ máy phụ"/>
+                            <TextBlock Grid.Row="4" Text="Ngang" Style="{StaticResource RowLabel}"/>
+                            <local:NumericStepper Grid.Row="4" Grid.Column="1" Minimum="-20" Maximum="20" Step="0.1" Format="0.0" Unit="mm"
+                                                  Value="{Binding OffsetX, Mode=TwoWay}" ValueChanged="OnStepperChanged" AutomationProperties.Name="Vị trí ngang máy phụ"/>
+                            <TextBlock Grid.Row="4" Grid.Column="3" Text="Dọc" Style="{StaticResource RowLabel}" Margin="16,0,12,0"/>
+                            <local:NumericStepper Grid.Row="4" Grid.Column="4" Minimum="-20" Maximum="20" Step="0.1" Format="0.0" Unit="mm"
+                                                  Value="{Binding OffsetY, Mode=TwoWay}" ValueChanged="OnStepperChanged" AutomationProperties.Name="Vị trí dọc máy phụ"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </ScrollViewer>
+
+        <Border Grid.Row="2" Style="{StaticResource SaveBarStyle}">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <Button x:Name="RevertButton" Content="Hoàn tác" Click="OnRevert" Margin="0,0,8,0" MinWidth="96"/>
+                    <Button x:Name="SaveButton" Content="Lưu cài đặt in" Click="OnSave" Style="{StaticResource PrimaryButton}" MinHeight="40" MinWidth="128"/>
+                </StackPanel>
+                <TextBlock x:Name="DirtyText" DockPanel.Dock="Left" Style="{StaticResource TextSaveState}" Margin="0,0,16,0"/>
+                <TextBlock x:Name="Feedback" Style="{StaticResource TextCaption}" VerticalAlignment="Center" Margin="0,0,16,0"/>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>

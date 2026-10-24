@@ -20,6 +20,11 @@ Thumbs.db
 .tools/
 artifacts/
 TestResults/
+*_wpftmp.csproj
+
+# Python
+__pycache__/
+*.pyc
 
 # Local booth data and vendor SDKs
 .local/

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup>
+  <OutputType>WinExe</OutputType><TargetFramework>net10.0-windows10.0.19041.0</TargetFramework><UseWPF>true</UseWPF><EnableWindowsTargeting>true</EnableWindowsTargeting>
+ </PropertyGroup>
+ <ItemGroup>
+  <Compile Include="../../2026-10-20-CameraModels.cs" Link="CameraModels.cs"/>
+  <Compile Include="../../2026-10-20-Mvvm.cs" Link="Mvvm.cs"/>
+  <Compile Include="../../2026-10-20-CameraPageViewModel.cs" Link="CameraPageViewModel.cs"/>
+  <Compile Include="../../2026-10-20-CameraPage.xaml.cs" Link="CameraPage.xaml.cs"/>
+  <Page Include="../../2026-10-20-CameraPage.xaml" Link="2026-10-20-CameraPage.xaml"/>
+  <Page Include="../../2026-10-20-Theme.xaml" Link="2026-10-20-Theme.xaml"/>
+  <Page Include="../../src/FotoAutomat.Desktop/2026-10-20-ThemeExtras.xaml" Link="2026-10-20-ThemeExtras.xaml"/>
+ </ItemGroup>
+</Project>

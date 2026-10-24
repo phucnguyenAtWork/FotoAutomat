@@ -31,10 +31,12 @@ For a development machine that does not need to build WPF, use `FotoAutomat.Port
 
 ## What is ready
 
+Open the new [operator workspace](docs/operator-ui.md) with `dotnet run --project src/FotoAutomat.Desktop --configuration Release --no-build -- --admin`. It provides device and branding sections, local draft notes and simulated camera capture; real device configuration is not yet integrated.
+
 | Capability | Status |
 | --- | --- |
 | Customer UI preview, 11 reference screens | Implemented with sample data; Windows visual verification required |
-| Durable workflow simulator | Available with `--simulator`; physical devices are not connected |
+| Durable workflow simulator | Available with `--workflow-simulator`; physical devices are not connected |
 | SQLite session state and duplicate demo receipt handling | Implemented and covered by automated tests |
 | Simulated capture and print | Implemented; no physical device calls |
 | Interrupted or uncertain print handling | Held for review; no automatic reprint |

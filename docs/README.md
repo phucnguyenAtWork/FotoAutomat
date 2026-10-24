@@ -13,6 +13,13 @@ Use this index to find the current source of truth. Distinguish implemented simu
 | [Hardware validation](hardware-validation.md) | Physical test procedures and evidence requirements |
 | [Hardware research](hardware-research.md) | Manufacturer evidence and compatibility unknowns |
 | [Performance](performance.md) | Low specification hardware constraints and measurement plan |
+| [Match Look in Adjust](reference-match.md) | Implemented reference matching to editable recipes: v4 Color Balance, multiple references, look-gram |
+| [LUT export](lut-export.md) | Bake an edited recipe into a `.cube`; accuracy and tools that cannot be baked |
+| [Match Look direction 14/10/2026](ai-match-look/match-look-direction-2026-10-14.md) | Parameters-first direction, what was kept from CanonCGT research, next steps |
+| [AI Match Look research](ai-match-look/research-2026-10-05.md) | Primary sources, model candidates, licensing and integration proposal; not an implemented AI engine |
+| [AI Match Look training plan](ai-match-look/training-plan.md) | Dataset collection, split, experiments, CPU booth constraints and training readiness |
+| [CanonCGT implementation and manual workflow](ai-match-look/implementation-and-manual-workflow.md) | Ordered implementation, portrait/scene evaluation, percentage definitions and manual data preparation |
+| [CanonCGT phase status](ai-match-look/phase-status.md) | Implemented inventory command, verification and remaining phase gates |
 | [Operations](operations.md) | Simulator operation and future booth recovery requirements |
 | [Security and privacy](security.md) | Device, customer photo, update, and agent boundaries |
 | [Roadmap](roadmap.md) | Next engineering milestones, without an issue tracker |

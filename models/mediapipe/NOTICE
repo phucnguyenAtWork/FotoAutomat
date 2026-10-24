@@ -1,0 +1,9 @@
+FotoAutomat includes machine learning models from MediaPipe by Google LLC:
+- BlazeFace (Full Range) face detection model
+- Face Mesh V2 face landmarks model (from the MediaPipe Face Landmarker task)
+
+Licensed under the Apache License, Version 2.0 (see LICENSE in this folder).
+Source: https://github.com/google-ai-edge/mediapipe
+
+Modifications: the original TensorFlow Lite models were converted to ONNX format
+with tf2onnx (opset 13). Weights and architecture are otherwise unchanged.

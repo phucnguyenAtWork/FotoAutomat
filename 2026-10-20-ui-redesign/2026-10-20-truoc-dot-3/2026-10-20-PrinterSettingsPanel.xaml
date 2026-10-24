@@ -1,0 +1,149 @@
+<UserControl x:Class="FotoAutomat.Desktop.PrinterSettingsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource PageBrush}"
+             Foreground="{StaticResource TextBrush}"
+             FontFamily="Segoe UI Variable Text, Segoe UI"
+             FontSize="13"
+             UseLayoutRounding="True"
+             SnapsToDevicePixels="True"
+             Loaded="OnPanelLoaded">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="2026-10-20-AdminDefaults.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Cài đặt in" Style="{StaticResource TextTitle}" Margin="24,24,24,16"/>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <!-- SettingsContent giữ DataContext = cấu hình in (mã nguồn gán DataContext cho phần tử này) -->
+            <Grid x:Name="SettingsContent" Margin="24,0,24,24" MaxWidth="1120" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Cột trái: máy in, căn chỉnh -->
+                <StackPanel Grid.Column="0">
+                    <Border Style="{StaticResource CardStyle}" Padding="20">
+                        <StackPanel>
+                            <TextBlock Text="Máy in" Style="{StaticResource TextCardTitle}" Margin="0,0,0,16"/>
+                            <ComboBox x:Name="PrinterRole" SelectedIndex="0" SelectionChanged="OnRoleChanged" Margin="0,0,0,16">
+                                <ComboBoxItem Content="Máy in chính"/>
+                                <ComboBoxItem Content="Máy in phụ"/>
+                            </ComboBox>
+                            <Border Background="{StaticResource SurfaceMutedBrush}" CornerRadius="6" Padding="12,10" Margin="0,0,0,16">
+                                <TextBlock x:Name="QueueLabel" Text="Chưa chọn máy in" TextWrapping="Wrap" FontWeight="SemiBold"/>
+                            </Border>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Cấu hình máy in…" Click="OnConfigure" Margin="0,0,8,0"/>
+                                <Button Content="Thêm máy in trong Windows" Click="OnWindowsPrinters"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource CardStyle}" Padding="20" Margin="0,16,0,0">
+                        <StackPanel>
+                            <TextBlock Text="Căn chỉnh bản in" Style="{StaticResource TextCardTitle}" Margin="0,0,0,16"/>
+                            <StackPanel x:Name="Alignment">
+                                <DockPanel Margin="0,0,0,4">
+                                    <TextBox DockPanel.Dock="Right" Width="88" TextAlignment="Right" Margin="12,0,0,0"
+                                             Text="{Binding Scale, StringFormat=F1, ValidatesOnExceptions=True}"/>
+                                    <TextBlock Text="Tỉ lệ (%)" VerticalAlignment="Center"/>
+                                </DockPanel>
+                                <Slider Minimum="50" Maximum="150" Value="{Binding Scale}" Margin="0,0,0,12"/>
+
+                                <DockPanel Margin="0,0,0,4">
+                                    <TextBox DockPanel.Dock="Right" Width="88" TextAlignment="Right" Margin="12,0,0,0"
+                                             Text="{Binding OffsetX, StringFormat=F1, ValidatesOnExceptions=True}"/>
+                                    <TextBlock Text="Vị trí ngang (mm)" VerticalAlignment="Center"/>
+                                </DockPanel>
+                                <Slider Minimum="-20" Maximum="20" Value="{Binding OffsetX}" Margin="0,0,0,12"/>
+
+                                <DockPanel Margin="0,0,0,4">
+                                    <TextBox DockPanel.Dock="Right" Width="88" TextAlignment="Right" Margin="12,0,0,0"
+                                             Text="{Binding OffsetY, StringFormat=F1, ValidatesOnExceptions=True}"/>
+                                    <TextBlock Text="Vị trí dọc (mm)" VerticalAlignment="Center"/>
+                                </DockPanel>
+                                <Slider Minimum="-20" Maximum="20" Value="{Binding OffsetY}" Margin="0,0,0,16"/>
+                            </StackPanel>
+                            <Button Content="Đặt lại căn chỉnh" Click="OnReset" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- Cột phải: tùy chọn in, giới hạn -->
+                <StackPanel Grid.Column="2">
+                    <Border Style="{StaticResource CardStyle}" Padding="20">
+                        <StackPanel>
+                            <TextBlock Text="Tùy chọn in" Style="{StaticResource TextCardTitle}" Margin="0,0,0,8"/>
+                            <CheckBox Style="{StaticResource SwitchStyle}" Content="Tự động in sau phiên chụp" IsChecked="{Binding AutomaticPrint}"/>
+                            <Border Style="{StaticResource DividerStyle}"/>
+                            <CheckBox Style="{StaticResource SwitchStyle}" Content="Hiện nút in thêm" IsChecked="{Binding ShowPrintButton}"/>
+                            <Border Style="{StaticResource DividerStyle}"/>
+                            <CheckBox Style="{StaticResource SwitchStyle}" Content="In luân phiên hai máy" IsChecked="{Binding AlternatePrinters}"/>
+                            <Border Style="{StaticResource DividerStyle}"/>
+                            <CheckBox x:Name="Pair" Style="{StaticResource SwitchStyle}" Content="Ghép hai dải 2 × 6 trên tờ 4 × 6"/>
+                            <Border Style="{StaticResource DividerStyle}" Margin="0,0,0,16"/>
+
+                            <HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Số tờ mỗi lượt" Margin="0,0,0,16">
+                                <TextBox x:Name="Copies"/>
+                            </HeaderedContentControl>
+
+                            <Expander Header="Nhãn trên màn hình khách">
+                                <StackPanel>
+                                    <HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Nút in" Margin="0,0,0,12">
+                                        <TextBox Text="{Binding PrintLabel}"/>
+                                    </HeaderedContentControl>
+                                    <HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Trạng thái đang in" Margin="0,0,0,12">
+                                        <TextBox Text="{Binding PrintingLabel}"/>
+                                    </HeaderedContentControl>
+                                    <HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Số bản in">
+                                        <TextBox Text="{Binding CopiesLabel}"/>
+                                    </HeaderedContentControl>
+                                </StackPanel>
+                            </Expander>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource CardStyle}" Padding="20" Margin="0,16,0,0">
+                        <StackPanel>
+                            <CheckBox Style="{StaticResource SwitchStyle}" Content="Giới hạn in" FontWeight="SemiBold" IsChecked="{Binding LimitsEnabled}"/>
+                            <StackPanel IsEnabled="{Binding LimitsEnabled}" Margin="0,8,0,0">
+                                <HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Số tờ tối đa mỗi sự kiện" Margin="0,0,0,16">
+                                    <TextBox Text="{Binding EventLimit, ValidatesOnExceptions=True}"/>
+                                </HeaderedContentControl>
+                                <HeaderedContentControl Style="{StaticResource FieldStyle}" Header="Số tờ tối đa mỗi phiên">
+                                    <TextBox Text="{Binding SessionLimit, ValidatesOnExceptions=True}"/>
+                                </HeaderedContentControl>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+        <Border Grid.Row="2" Style="{StaticResource SaveBarStyle}">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <Button x:Name="RevertButton" Content="Hoàn tác" Click="OnRevert" Margin="0,0,8,0" MinWidth="96"/>
+                    <Button x:Name="SaveButton" Content="Lưu cài đặt in" Click="OnSave" Style="{StaticResource PrimaryButton}" MinHeight="40" MinWidth="128"/>
+                </StackPanel>
+                <TextBlock x:Name="DirtyText" DockPanel.Dock="Left" Style="{StaticResource TextSaveState}" Margin="0,0,16,0"/>
+                <TextBlock x:Name="Feedback" Style="{StaticResource TextCaption}" VerticalAlignment="Center" Margin="0,0,16,0"/>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,39 @@
+{
+  "status": "draft_do_not_train",
+  "training_allowed": false,
+  "notify_user_before_training": true,
+  "initialization": "official_SSL_updated_251111",
+  "trainable_scope": "Restyler.generate_lut.outc",
+  "optimizer": {
+    "name": "Adam",
+    "learning_rate": 0.0001,
+    "gradient_norm_clip": 1.0
+  },
+  "seed": 17,
+  "max_epochs": 30,
+  "early_stopping": {
+    "patience": 5,
+    "metric": "validation_macro_look_rgb_mae",
+    "min_delta_255": 0.1
+  },
+  "loss_weights": {
+    "reconstruction": 1.0,
+    "skin": 0.5,
+    "neutral": 0.5,
+    "monochrome": 0.25,
+    "highlights": 0.1,
+    "gamut": 0.1,
+    "smoothness": 0.01
+  },
+  "selection": "validation_only_with_per_look_and_region_regression_review",
+  "final_test": "new_locked_manifest_required",
+  "note": "Provisional starting values, not optimized hyperparameters. No trainer consumes this draft yet.",
+  "quality_policy": {
+    "range_tolerance": 1e-06,
+    "max_out_of_range_fraction": 0.001,
+    "max_range_excursion": 0.01,
+    "max_neutral_mae_255": 3.0,
+    "max_monochrome_chroma_255": 2.0
+  },
+  "quality_policy_status": "provisional_engineering_limits_not_calibrated_or_user_approved"
+}

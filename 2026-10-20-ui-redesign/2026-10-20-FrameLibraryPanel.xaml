@@ -1,0 +1,86 @@
+<UserControl x:Class="FotoAutomat.Desktop.FrameLibraryPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource PageBrush}"
+             Foreground="{StaticResource TextBrush}"
+             FontFamily="Segoe UI Variable Text, Segoe UI"
+             FontSize="13"
+             UseLayoutRounding="True"
+             SnapsToDevicePixels="True"
+             IsVisibleChanged="OnVisibleChanged">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="2026-10-20-AdminDefaults.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="Visible"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Tiêu đề + tạo khung mới -->
+        <DockPanel Grid.Row="0" Margin="24,24,24,16">
+            <Button DockPanel.Dock="Right" Content="Tạo khung mới" Click="OnNew" Style="{StaticResource PrimaryButton}" MinHeight="40" VerticalAlignment="Center"/>
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Thư viện khung" Style="{StaticResource TextTitle}"/>
+                <TextBlock x:Name="CountText" Style="{StaticResource TextNote}" Margin="0,4,0,0"/>
+            </StackPanel>
+        </DockPanel>
+
+        <!-- Lưới thẻ: các mẫu đã lưu từ Bố cục in -->
+        <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" PanningMode="VerticalOnly">
+                <ItemsControl x:Name="Cards" Margin="24,0,8,24" Button.Click="OnCardAction">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource CardStyle}" Width="224" Padding="12" Margin="0,0,16,16">
+                                <StackPanel>
+                                    <Border Background="#EDEFF2" CornerRadius="6" Height="208">
+                                        <Grid>
+                                            <Image Source="{Binding Thumbnail}" Margin="12" Stretch="Uniform"/>
+                                            <Border Style="{StaticResource StatusBadgeStyle}" Tag="Success"
+                                                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8"
+                                                    Visibility="{Binding InUse, Converter={StaticResource Visible}}">
+                                                <TextBlock Text="Đang dùng" FontSize="11" FontWeight="SemiBold" TextWrapping="NoWrap"/>
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" Margin="0,12,0,0"
+                                               TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Text="{Binding Meta}" Style="{StaticResource TextCaption}" Margin="0,2,0,0"
+                                               TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+                                    <Button Content="Dùng cho khách" Tag="use" IsEnabled="{Binding CanUse}"
+                                            Style="{StaticResource PrimaryButton}" MinHeight="40" Margin="0,12,0,8"/>
+                                    <UniformGrid Columns="2">
+                                        <Button Content="Sửa" Tag="edit" Margin="0,0,4,0"/>
+                                        <Button Content="Xóa" Tag="delete" Margin="4,0,0,0"/>
+                                    </UniformGrid>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <TextBlock x:Name="EmptyText" Text="Chưa có khung nào được lưu." Style="{StaticResource TextCaption}"
+                       Margin="24,0" VerticalAlignment="Top" Visibility="Collapsed"/>
+        </Grid>
+
+        <!-- Thông báo -->
+        <Border x:Name="FeedbackBar" Grid.Row="2" Style="{StaticResource SaveBarStyle}" Visibility="Collapsed">
+            <TextBlock x:Name="Feedback" Style="{StaticResource TextCaption}" VerticalAlignment="Center"/>
+        </Border>
+    </Grid>
+</UserControl>

@@ -8,6 +8,8 @@
   <SolidColorBrush x:Key="Blush" Color="#F7E0E7" />
   <SolidColorBrush x:Key="Line" Color="#E5D3C4" />
   <SolidColorBrush x:Key="Card" Color="#FFFFFF" />
+  <!-- Vầng sáng màn chào; MainWindow đổi theo màu nhấn của thương hiệu. -->
+  <Color x:Key="BrandGlowColor">#F3D2DF</Color>
   <FontFamily x:Key="HeadingFont">Georgia</FontFamily>
   <FontFamily x:Key="BodyFont">Segoe UI</FontFamily>
   <Style x:Key="Heading" TargetType="TextBlock">
