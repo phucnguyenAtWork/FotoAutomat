@@ -21,10 +21,18 @@ Thumbs.db
 artifacts/
 TestResults/
 *_wpftmp.csproj
+.idea/
+*.DotSettings.user
+[Pp]ublish/
+*.pubxml.user
+.claude/settings.local.json
 
 # Python
 __pycache__/
 *.pyc
+.venv/
+venv/
+.pytest_cache/
 
 # Local booth data and vendor SDKs
 .local/
